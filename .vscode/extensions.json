@@ -1,0 +1,6 @@
+{
+    "recommendations": [
+        "digitalbrainstem.javascript-ejs-support",
+        "esbenp.prettier-vscode"
+    ],
+  }

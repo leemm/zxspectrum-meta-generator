@@ -1,0 +1,3198 @@
+{
+    "took": 33,
+    "timed_out": false,
+    "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 980,
+            "relation": "eq"
+        },
+        "max_score": 896.6953,
+        "hits": [
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0009335",
+                "_score": 896.6953,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Fantasy World Dizzy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "Code Masters Ltd",
+                                    "labelType": "Company: Publisher/Manager",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        },
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "EDOS",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 8.22,
+                        "votes": 131
+                    },
+                    "genreType": "Arcade Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/games-adverts/f/FantasyWorldDizzy.jpg",
+                            "size": 200568,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Advertisement"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/f/FantasyWorldDizzy.gif",
+                            "size": 149987,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/f/FantasyWorldDizzy_2.jpg",
+                            "size": 368328,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/f/FantasyWorldDizzy_3.jpg",
+                            "size": 532444,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/f/FantasyWorldDizzy_4.jpg",
+                            "size": 113722,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/f/FantasyWorldDizzy_5.jpg",
+                            "size": 543377,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0009335/FantasyWorldDizzy_Back.jpg",
+                            "size": 451600,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Back"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0009335/FantasyWorldDizzy.jpg",
+                            "size": 691598,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Front"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-info/f/FantasyWorldDizzy.txt",
+                            "size": 3326,
+                            "format": "Document (TXT)",
+                            "language": "English",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-info/f/FantasyWorldDizzy_multi.txt",
+                            "size": 2849,
+                            "format": "Document (TXT)",
+                            "language": null,
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/load/f/scr/FantasyWorldDizzy.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/pokes/f/Fantasy World Dizzy (1989)(Code Masters).pok",
+                            "size": 265,
+                            "format": "Pokes (POK)",
+                            "language": null,
+                            "type": "POK pokes file"
+                        },
+                        {
+                            "path": "/pub/sinclair/music/ay/games/f/FantasyWorldDizzy.ay.zip",
+                            "size": 2796,
+                            "format": "Music (AY)",
+                            "language": null,
+                            "type": "Ripped in-game/theme music in AY format"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/f/FantasyWorldDizzy.gif",
+                            "size": 6006,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "FantasyWorldDizzy-load.png",
+                            "size": 9147,
+                            "scrUrl": "/pub/sinclair/screens/load/f/scr/FantasyWorldDizzy.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0009335/FantasyWorldDizzy-load.png"
+                        },
+                        {
+                            "filename": "FantasyWorldDizzy.gif",
+                            "size": 6006,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/f/FantasyWorldDizzy.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1989,
+                    "genre": "Arcade Game: Adventure",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": "A",
+                                    "text": "2nd Best Software House - 1990 Crash Readers Awards."
+                                },
+                                {
+                                    "noteType": "R",
+                                    "text": "SPOT name: \"Digital Computers\""
+                                }
+                            ],
+                            "name": "Code Masters Ltd",
+                            "labelType": "Company: Publisher/Manager",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Adventure",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K/128K",
+                    "authors": [
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": "R",
+                                    "text": "SPOT name: \"Philip Oliver & Andrew Oliver\""
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "The Oliver Twins",
+                            "labelType": "Company: User group",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 2,
+                            "roles": [],
+                            "name": "Neil Adamson",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 3,
+                            "roles": [
+                                {
+                                    "roleName": "Music",
+                                    "roleType": "M"
+                                }
+                            ],
+                            "name": "David Whittaker",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": null,
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 4,
+                            "roles": [
+                                {
+                                    "roleName": "Inlay/Poster Art",
+                                    "roleType": "A"
+                                }
+                            ],
+                            "name": "Alastair Graham",
+                            "labelType": "Person",
+                            "type": "Contributor"
+                        }
+                    ]
+                },
+                "sort": [
+                    896.6953,
+                    "Fantasy World Dizzy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0020122",
+                "_score": 697.6126,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "MIA",
+                    "title": "Fantasy World",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "Basic Software",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": null,
+                        "votes": null
+                    },
+                    "genreType": "Adventure Game",
+                    "additionalDownloads": [],
+                    "screens": [],
+                    "originalYearOfRelease": 1984,
+                    "genre": "Adventure Game: Text-Only",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Basic Software",
+                            "labelType": "Company",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Text-Only",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {}
+                    ]
+                },
+                "sort": [
+                    697.6126,
+                    "Fantasy World"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0027971",
+                "_score": 518.345,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Worlds of Fantasy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "Steve Westwood",
+                                    "labelType": "Person",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 5,
+                        "votes": 3
+                    },
+                    "genreType": "Adventure Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/games-inlays/w/WorldsOfFantasy.jpg",
+                            "size": 72243,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Front"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/w/WorldsOfFantasy.gif",
+                            "size": 3536,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "WorldsOfFantasy.gif",
+                            "size": 3536,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/w/WorldsOfFantasy.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 2012,
+                    "genre": "Adventure Game: Dungeon Crawl",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Steve Westwood",
+                            "labelType": "Person",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Dungeon Crawl",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Steve Westwood",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    518.345,
+                    "Worlds of Fantasy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0001730",
+                "_score": 493.62872,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Fantasy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "R'n'H Microtec",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 7.5,
+                        "votes": 2
+                    },
+                    "genreType": "Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/games-adverts/f/Fantasy_2.jpg",
+                            "size": 14909,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Advertisement"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-inlays/f/Fantasy_2.jpg",
+                            "size": 428162,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Front"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/load/f/scr/Fantasy_2.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/f/Fantasy_2.gif",
+                            "size": 3563,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "Fantasy_2-load.png",
+                            "size": 4215,
+                            "scrUrl": "/pub/sinclair/screens/load/f/scr/Fantasy_2.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0001730/Fantasy_2-load.png"
+                        },
+                        {
+                            "filename": "Fantasy_2.gif",
+                            "size": 3563,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/f/Fantasy_2.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1987,
+                    "genre": "Game: Puzzle",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "R'n'H Microtec",
+                            "labelType": "Company",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Puzzle",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {}
+                    ]
+                },
+                "sort": [
+                    493.62872,
+                    "Fantasy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0007401",
+                "_score": 493.62872,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Fantasy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Poland",
+                                    "name": "Rafii Soft",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 7,
+                        "votes": 2
+                    },
+                    "genreType": "Scene Demo",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/screens/load/f/scr/Fantasy.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/f/Fantasy.gif",
+                            "size": 5333,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "Fantasy-load.png",
+                            "size": 1421,
+                            "scrUrl": "/pub/sinclair/screens/load/f/scr/Fantasy.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0007401/Fantasy-load.png"
+                        },
+                        {
+                            "filename": "Fantasy.gif",
+                            "size": 5333,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/f/Fantasy.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1990,
+                    "genre": "Scene Demo",
+                    "publishers": [
+                        {
+                            "country": "Poland",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Rafii Soft",
+                            "labelType": "Company",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 128K",
+                    "authors": [
+                        {}
+                    ]
+                },
+                "sort": [
+                    493.62872,
+                    "Fantasy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0009729",
+                "_score": 437.30103,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "The Fantasy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "Mediandroid",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 5,
+                        "votes": 2
+                    },
+                    "genreType": "Adventure Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/screens/load/f/scr/FantasyThe.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/f/FantasyThe.gif",
+                            "size": 4732,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "FantasyThe-load.png",
+                            "size": 462,
+                            "scrUrl": "/pub/sinclair/screens/load/f/scr/FantasyThe.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0009729/FantasyThe-load.png"
+                        },
+                        {
+                            "filename": "FantasyThe.gif",
+                            "size": 4732,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/f/FantasyThe.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1987,
+                    "genre": "Adventure Game: Text-Only",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Mediandroid",
+                            "labelType": "Company",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Text-Only",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Simon Jones",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    437.30103,
+                    "The Fantasy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0009332",
+                "_score": 433.09763,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Dizzy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "Code Masters Ltd",
+                                    "labelType": "Company: Publisher/Manager",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        },
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "EDOS",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        },
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Spain",
+                                    "name": "Serma Software",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 8.13,
+                        "votes": 156
+                    },
+                    "genreType": "Arcade Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/games-maps/d/Dizzy.gif",
+                            "size": 146670,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/d/Dizzy-TheCrashEdition.jpg",
+                            "size": 124439,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/d/Dizzy_2.jpg",
+                            "size": 207634,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/d/Dizzy_3.jpg",
+                            "size": 578705,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/d/Dizzy_5.jpg",
+                            "size": 318952,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0009332/Dizzy_Back.jpg",
+                            "size": 242406,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Back"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0009332/Dizzy.jpg",
+                            "size": 459144,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Front"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-info/d/Dizzy.pdf",
+                            "size": 12238,
+                            "format": "Document (PDF)",
+                            "language": null,
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-info/d/Dizzy.txt",
+                            "size": 1848,
+                            "format": "Document (TXT)",
+                            "language": "English",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/load/d/scr/Dizzy.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/pokes/d/Dizzy (1987)(Code Masters).pok",
+                            "size": 159,
+                            "format": "Pokes (POK)",
+                            "language": null,
+                            "type": "POK pokes file"
+                        },
+                        {
+                            "path": "/pub/sinclair/music/ay/games/d/Dizzy.ay.zip",
+                            "size": 2259,
+                            "format": "Music (AY)",
+                            "language": null,
+                            "type": "Ripped in-game/theme music in AY format"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/d/Dizzy.gif",
+                            "size": 5452,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        },
+                        {
+                            "path": "/pub/sinclair/music/mp3/Dizzy.mp3.zip",
+                            "size": 2067727,
+                            "format": "Music (MP3)",
+                            "language": null,
+                            "type": "Sampled in-game/theme music in MP3 format"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "Dizzy-load.png",
+                            "size": 9007,
+                            "scrUrl": "/pub/sinclair/screens/load/d/scr/Dizzy.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0009332/Dizzy-load.png"
+                        },
+                        {
+                            "filename": "Dizzy.gif",
+                            "size": 5452,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/d/Dizzy.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1987,
+                    "genre": "Arcade Game: Adventure",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": "A",
+                                    "text": "2nd Best Software House - 1990 Crash Readers Awards."
+                                },
+                                {
+                                    "noteType": "R",
+                                    "text": "SPOT name: \"Digital Computers\""
+                                }
+                            ],
+                            "name": "Code Masters Ltd",
+                            "labelType": "Company: Publisher/Manager",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Adventure",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": "R",
+                                    "text": "SPOT name: \"Philip Oliver & Andrew Oliver\""
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "The Oliver Twins",
+                            "labelType": "Company: User group",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 2,
+                            "roles": [],
+                            "name": "Jon Paul Eldridge",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 3,
+                            "roles": [
+                                {
+                                    "roleName": "Inlay/Poster Art",
+                                    "roleType": "A"
+                                }
+                            ],
+                            "name": "Nigel Fletcher",
+                            "labelType": "Person",
+                            "type": "Contributor"
+                        }
+                    ]
+                },
+                "sort": [
+                    433.09763,
+                    "Dizzy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0025197",
+                "_score": 433.09763,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Dizzy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Russia",
+                                    "name": "AER",
+                                    "labelType": null,
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 3.4,
+                        "votes": 5
+                    },
+                    "genreType": "Arcade Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/screens/load/d/scr/Dizzy_2.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/d/Dizzy_2.gif",
+                            "size": 765,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "Dizzy_2-load.png",
+                            "size": 6118,
+                            "scrUrl": "/pub/sinclair/screens/load/d/scr/Dizzy_2.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0025197/Dizzy_2-load.png"
+                        },
+                        {
+                            "filename": "Dizzy_2.gif",
+                            "size": 765,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/d/Dizzy_2.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 2009,
+                    "genre": "Arcade Game: Platform",
+                    "publishers": [
+                        {
+                            "country": "Russia",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "AER",
+                            "labelType": null,
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Platform",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {}
+                    ]
+                },
+                "sort": [
+                    433.09763,
+                    "Dizzy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0025385",
+                "_score": 433.09763,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Dizzy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Czech",
+                                    "name": "J.H.C.S.",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 5,
+                        "votes": 1
+                    },
+                    "genreType": "Adventure Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/games-info/d/Dizzy_2.txt",
+                            "size": 1225,
+                            "format": "Document (TXT)",
+                            "language": "Czech",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/load/d/scr/Dizzy_3.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/d/Dizzy_3.gif",
+                            "size": 4026,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "Dizzy_3-load.png",
+                            "size": 3650,
+                            "scrUrl": "/pub/sinclair/screens/load/d/scr/Dizzy_3.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0025385/Dizzy_3-load.png"
+                        },
+                        {
+                            "filename": "Dizzy_3.gif",
+                            "size": 4026,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/d/Dizzy_3.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1992,
+                    "genre": "Adventure Game: Text-Only",
+                    "publishers": [
+                        {
+                            "country": "Czech",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "J.H.C.S.",
+                            "labelType": "Company",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Text-Only",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {
+                            "country": "Czech",
+                            "groupName": "Gama Software",
+                            "groupType": "Company",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": "Czech",
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Jiří Doležal",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    433.09763,
+                    "Dizzy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0015952",
+                "_score": 425.33884,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Maze Fantasy",
+                    "releases": [
+                        {
+                            "publishers": []
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": null,
+                        "votes": null
+                    },
+                    "genreType": "Arcade Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/screens/in-game/m/MazeFantasy.gif",
+                            "size": 898,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "MazeFantasy.gif",
+                            "size": 898,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/m/MazeFantasy.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": null,
+                    "genre": "Arcade Game: Maze",
+                    "publishers": [
+                        {}
+                    ],
+                    "genreSubType": "Maze",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {}
+                    ]
+                },
+                "sort": [
+                    425.33884,
+                    "Maze Fantasy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0000367",
+                "_score": 424.25568,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Back to the Future Part III",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "Image Works",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        },
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Spain",
+                                    "name": "MCM Software S.A.",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 7.22,
+                        "votes": 20
+                    },
+                    "genreType": "Arcade Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/games-adverts/b/BackToTheFuturePartIII(RegresoAlFuturo-ParteIII)(MCMSoftwareS.A.).jpg",
+                            "size": 322208,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Advertisement"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-adverts/b/BackToTheFuturePartIII.jpg",
+                            "size": 139427,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Advertisement"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/b/BackToTheFuturePartIII.png",
+                            "size": 804685,
+                            "format": "Picture (PNG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-inlays/Rereleases/b/BackToTheFuturePartIII(RegresoAlFuturo-ParteIII)(MCMSoftwareS.A.)_Back.jpg",
+                            "size": 171940,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Back"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0000367/BackToTheFuturePartIII_Back.jpg",
+                            "size": 415336,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Back"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-inlays/Rereleases/b/BackToTheFuturePartIII(RegresoAlFuturo-ParteIII)(MCMSoftwareS.A.)_Front.jpg",
+                            "size": 138909,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Front"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0000367/BackToTheFuturePartIII_Front.jpg",
+                            "size": 266239,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Front"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-info/b/BackToTheFuturePartIII(RegresoAlFuturo-ParteIII)(MCMSoftwareS.A.).pdf",
+                            "size": 116439,
+                            "format": "Document (PDF)",
+                            "language": "Spanish",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-info/b/BackToTheFuturePartIII(RegresoAlFuturo-ParteIII)(MCMSoftwareS.A.).txt",
+                            "size": 15650,
+                            "format": "Document (TXT)",
+                            "language": "Spanish",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-info/b/BackToTheFuturePartIII.txt",
+                            "size": 12335,
+                            "format": "Document (TXT)",
+                            "language": "English",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/load/b/scr/BackToTheFuturePartIII.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/pub/sinclair/magazines/YourSinclair/Issue63/YSPoster63.jpg",
+                            "size": 448899,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Magazine poster"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/pokes/b/Back to the Future Part III (1991)(Image Works).pok",
+                            "size": 253,
+                            "format": "Pokes (POK)",
+                            "language": null,
+                            "type": "POK pokes file"
+                        },
+                        {
+                            "path": "/pub/sinclair/music/ay/games/b/BackToTheFuturePartIII.ay.zip",
+                            "size": 8400,
+                            "format": "Music (AY)",
+                            "language": null,
+                            "type": "Ripped in-game/theme music in AY format"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/b/BackToTheFuturePartIII.gif",
+                            "size": 6219,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "BackToTheFuturePartIII-load.png",
+                            "size": 2999,
+                            "scrUrl": "/pub/sinclair/screens/load/b/scr/BackToTheFuturePartIII.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0000367/BackToTheFuturePartIII-load.png"
+                        },
+                        {
+                            "filename": "BackToTheFuturePartIII.gif",
+                            "size": 6219,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/b/BackToTheFuturePartIII.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1991,
+                    "genre": "Arcade Game: Action",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Image Works",
+                            "labelType": "Company",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Action",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K/128K",
+                    "authors": [
+                        {
+                            "country": "UK",
+                            "groupName": "Probe Software Ltd",
+                            "groupType": "Company: Publisher/Manager",
+                            "notes": [
+                                {
+                                    "noteType": "A",
+                                    "text": "2nd Best Programmer - 1986 Crash Readers Awards."
+                                }
+                            ],
+                            "groupCountry": "UK",
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Keith Burkhill",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "UK",
+                            "groupName": "Probe Software Ltd",
+                            "groupType": "Company: Publisher/Manager",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": "UK",
+                            "authorSeq": 2,
+                            "roles": [],
+                            "name": "Flights of Fantasy",
+                            "labelType": null,
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "USA",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 3,
+                            "roles": [
+                                {
+                                    "roleName": "Inlay/Poster Art",
+                                    "roleType": "A"
+                                }
+                            ],
+                            "name": "Drew Struzan",
+                            "labelType": "Person",
+                            "type": "Contributor"
+                        }
+                    ]
+                },
+                "sort": [
+                    424.25568,
+                    "Back to the Future Part III"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0013184",
+                "_score": 414.54095,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Dance Fantasy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "USA",
+                                    "name": "Fisher-Price Learning Software",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                },
+                                {
+                                    "country": "USA",
+                                    "name": "Spinnaker Software Corporation",
+                                    "labelType": "Company: Publisher/Manager",
+                                    "publisherSeq": 2
+                                }
+                            ]
+                        },
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Spain",
+                                    "name": "Idealogic S.A.",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 5,
+                        "votes": 1
+                    },
+                    "genreType": "General",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/games-inlays/d/DanceFantasy.jpg",
+                            "size": 72848,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Front"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-info/d/DanceFantasy(Bailemos)(IdealogicS.A.).pdf",
+                            "size": 15637,
+                            "format": "Document (PDF)",
+                            "language": "Spanish",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/load/d/scr/DanceFantasy.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/d/DanceFantasy.gif",
+                            "size": 2925,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "DanceFantasy-load.gif",
+                            "size": 2514,
+                            "scrUrl": "/pub/sinclair/screens/load/d/scr/DanceFantasy.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0013184/DanceFantasy-load.gif"
+                        },
+                        {
+                            "filename": "DanceFantasy.gif",
+                            "size": 2925,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/d/DanceFantasy.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1984,
+                    "genre": "General: Education",
+                    "publishers": [
+                        {
+                            "country": "USA",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                },
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Fisher-Price Learning Software",
+                            "labelType": "Company",
+                            "publisherSeq": 1
+                        },
+                        {
+                            "country": "USA",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Spinnaker Software Corporation",
+                            "labelType": "Company: Publisher/Manager",
+                            "publisherSeq": 2
+                        }
+                    ],
+                    "genreSubType": "Education",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {}
+                    ]
+                },
+                "sort": [
+                    414.54095,
+                    "Dance Fantasy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0035915",
+                "_score": 395.81857,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": null,
+                    "title": "Fantasy Mansion",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "Interface Publications Ltd",
+                                    "labelType": "Company: Books/Magazines",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": null,
+                        "votes": null
+                    },
+                    "genreType": "Adventure Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/zxdb/sinclair/entries/0035915/0035915-run-1.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Running screen"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0035915/FantasyMansion_SourceCode.zip",
+                            "size": 2994,
+                            "format": "Source code package",
+                            "language": null,
+                            "type": "Source code"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "0035915-run-1.gif",
+                            "size": 2441,
+                            "scrUrl": "/zxdb/sinclair/entries/0035915/0035915-run-1.scr",
+                            "format": "Picture",
+                            "type": "Running screen",
+                            "title": "",
+                            "url": "/zxscreens/0035915/0035915-run-1.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1983,
+                    "genre": "Adventure Game: Text-Only",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Interface Publications Ltd",
+                            "labelType": "Company: Books/Magazines",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Text-Only",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Peter Shaw",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    395.81857,
+                    "Fantasy Mansion"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0009387",
+                "_score": 376.81567,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Panic Dizzy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "Code Masters Ltd",
+                                    "labelType": "Company: Publisher/Manager",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 6.62,
+                        "votes": 16
+                    },
+                    "genreType": "Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/games-maps/p/PanicDizzy.png",
+                            "size": 43115,
+                            "format": "Picture (PNG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0009387/PanicDizzy_Back.jpg",
+                            "size": 334555,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Back"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0009387/PanicDizzy.jpg",
+                            "size": 675672,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Front"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-info/p/PanicDizzy.txt",
+                            "size": 2557,
+                            "format": "Document (TXT)",
+                            "language": "English",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/load/p/scr/PanicDizzy.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0009387/PanicDizzy_Tape.jpg",
+                            "size": 73448,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Media scan"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/pokes/p/Panic Dizzy (1991)(Code Masters).pok",
+                            "size": 110,
+                            "format": "Pokes (POK)",
+                            "language": null,
+                            "type": "POK pokes file"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/p/PanicDizzy.gif",
+                            "size": 6271,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "PanicDizzy-load.png",
+                            "size": 8898,
+                            "scrUrl": "/pub/sinclair/screens/load/p/scr/PanicDizzy.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0009387/PanicDizzy-load.png"
+                        },
+                        {
+                            "filename": "PanicDizzy.gif",
+                            "size": 6271,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/p/PanicDizzy.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1991,
+                    "genre": "Game: Puzzle",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": "A",
+                                    "text": "2nd Best Software House - 1990 Crash Readers Awards."
+                                },
+                                {
+                                    "noteType": "R",
+                                    "text": "SPOT name: \"Digital Computers\""
+                                }
+                            ],
+                            "name": "Code Masters Ltd",
+                            "labelType": "Company: Publisher/Manager",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Puzzle",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K/128K",
+                    "authors": [
+                        {
+                            "country": "UK",
+                            "groupName": "Big Red Software Ltd",
+                            "groupType": "Company",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": "UK",
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Paul Ranson",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "UK",
+                            "groupName": "Big Red Software Ltd",
+                            "groupType": "Company",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": "UK",
+                            "authorSeq": 2,
+                            "roles": [],
+                            "name": "Peter J. Ranson",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "UK",
+                            "groupName": "Big Red Software Ltd",
+                            "groupType": "Company",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": "UK",
+                            "authorSeq": 3,
+                            "roles": [],
+                            "name": "Chris Graham",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": "R",
+                                    "text": "SPOT name: \"Philip Oliver & Andrew Oliver\""
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 4,
+                            "roles": [],
+                            "name": "The Oliver Twins",
+                            "labelType": "Company: User group",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    376.81567,
+                    "Panic Dizzy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0009753",
+                "_score": 373.2312,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "MIA",
+                    "title": "Frightened Fantasy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "Dented Designs",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": null,
+                        "votes": null
+                    },
+                    "genreType": "Adventure Game",
+                    "additionalDownloads": [],
+                    "screens": [],
+                    "originalYearOfRelease": 1987,
+                    "genre": "Adventure Game: Text/Illustrated",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Dented Designs",
+                            "labelType": "Company",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Text/Illustrated",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Michael Eacrett",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "UK",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 2,
+                            "roles": [],
+                            "name": "Howard Church",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    373.2312,
+                    "Frightened Fantasy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0026518",
+                "_score": 370.03467,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Never released",
+                    "title": "Dizzy Dash",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Russia",
+                                    "name": "Artice",
+                                    "labelType": null,
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 3,
+                        "votes": 1
+                    },
+                    "genreType": "Arcade Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/screens/in-game/d/DizzyDash.gif",
+                            "size": 4704,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "DizzyDash.gif",
+                            "size": 4704,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/d/DizzyDash.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1995,
+                    "genre": "Arcade Game: Maze",
+                    "publishers": [
+                        {
+                            "country": "Russia",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Artice",
+                            "labelType": null,
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Maze",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {
+                            "country": "Russia",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Artice",
+                            "labelType": null,
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    370.03467,
+                    "Dizzy Dash"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0001406",
+                "_score": 370.03467,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Dizzy Dice",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "Players Software",
+                                    "labelType": "Company: Publisher/Manager",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        },
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Spain",
+                                    "name": "Compulogical S.A.",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        },
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Spain",
+                                    "name": "Serma Software",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 7.58,
+                        "votes": 12
+                    },
+                    "genreType": "Casual Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/zxdb/sinclair/entries/0001406/DizzyDice_Back.jpg",
+                            "size": 139427,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Back"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-inlays/Rereleases/d/DizzyDice(CompulogicalS.A.).jpg",
+                            "size": 200543,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Front"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0001406/DizzyDice.jpg",
+                            "size": 491604,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Front"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-info/d/DizzyDice.txt",
+                            "size": 1648,
+                            "format": "Document (TXT)",
+                            "language": "English",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/load/d/scr/DizzyDice.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/d/DizzyDice.gif",
+                            "size": 5865,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "DizzyDice-load.png",
+                            "size": 8646,
+                            "scrUrl": "/pub/sinclair/screens/load/d/scr/DizzyDice.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0001406/DizzyDice-load.png"
+                        },
+                        {
+                            "filename": "DizzyDice.gif",
+                            "size": 5865,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/d/DizzyDice.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1986,
+                    "genre": "Casual Game: Gambling",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Players Software",
+                            "labelType": "Company: Publisher/Manager",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Gambling",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {
+                            "country": "Netherlands",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Paul van der Meer",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    370.03467,
+                    "Dizzy Dice"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0001407",
+                "_score": 370.03467,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Dizzy Help",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Russia",
+                                    "name": "Aleksandr Belousov",
+                                    "labelType": "Person",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 9.33,
+                        "votes": 3
+                    },
+                    "genreType": "Educational (Misc)",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/screens/in-game/d/DizzyHelpPart1-4.gif",
+                            "size": 4999,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "DizzyHelpPart1-4.gif",
+                            "size": 4999,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/d/DizzyHelpPart1-4.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1992,
+                    "genre": "Educational (Misc)",
+                    "publishers": [
+                        {
+                            "country": "Russia",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Aleksandr Belousov",
+                            "labelType": "Person",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {
+                            "country": "Russia",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Aleksandr Belousov",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    370.03467,
+                    "Dizzy Help"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0017623",
+                "_score": 370.03467,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Dizzy Lord",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Hungary",
+                                    "name": "Konczolsoft",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        },
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Slovakia",
+                                    "name": "Softhouse Ltd",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 6,
+                        "votes": 6
+                    },
+                    "genreType": "Arcade Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/games-maps/d/DizzyLord.png",
+                            "size": 431092,
+                            "format": "Picture (PNG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/d/DizzyLord_2.png",
+                            "size": 140841,
+                            "format": "Picture (PNG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/load/d/scr/DizzyLord.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/pokes/d/Dizzy Lord (1990)(Konczolsoft).pok",
+                            "size": 56,
+                            "format": "Pokes (POK)",
+                            "language": null,
+                            "type": "POK pokes file"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/d/DizzyLord.gif",
+                            "size": 5439,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "DizzyLord-load.png",
+                            "size": 7305,
+                            "scrUrl": "/pub/sinclair/screens/load/d/scr/DizzyLord.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0017623/DizzyLord-load.png"
+                        },
+                        {
+                            "filename": "DizzyLord.gif",
+                            "size": 5439,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/d/DizzyLord.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1990,
+                    "genre": "Arcade Game: Adventure",
+                    "publishers": [
+                        {
+                            "country": "Hungary",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Konczolsoft",
+                            "labelType": "Company",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Adventure",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {
+                            "country": "Hungary",
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Laszlo Konczol",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    370.03467,
+                    "Dizzy Lord"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0001731",
+                "_score": 361.90817,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "The Fantasy Zone 2",
+                    "releases": [
+                        {
+                            "publishers": []
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": null,
+                        "votes": null
+                    },
+                    "genreType": "Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/screens/load/f/scr/FantasyZone2The.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/f/FantasyZone2The.gif",
+                            "size": 1552,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "FantasyZone2The-load.gif",
+                            "size": 932,
+                            "scrUrl": "/pub/sinclair/screens/load/f/scr/FantasyZone2The.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0001731/FantasyZone2The-load.gif"
+                        },
+                        {
+                            "filename": "FantasyZone2The.gif",
+                            "size": 1552,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/f/FantasyZone2The.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": null,
+                    "genre": "Game: Puzzle",
+                    "publishers": [
+                        {}
+                    ],
+                    "genreSubType": "Puzzle",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 128K",
+                    "authors": [
+                        {}
+                    ]
+                },
+                "sort": [
+                    361.90817,
+                    "The Fantasy Zone 2"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0000580",
+                "_score": 360.16394,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Block-Dizzy",
+                    "releases": [
+                        {
+                            "publishers": []
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 7.95,
+                        "votes": 55
+                    },
+                    "genreType": "Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/games-info/b/Block-Dizzy.txt",
+                            "size": 1500,
+                            "format": "Document (TXT)",
+                            "language": "English",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/load/b/scr/Block-Dizzy.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/b/Block-Dizzy.gif",
+                            "size": 7596,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "Block-Dizzy-load.png",
+                            "size": 6608,
+                            "scrUrl": "/pub/sinclair/screens/load/b/scr/Block-Dizzy.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0000580/Block-Dizzy-load.png"
+                        },
+                        {
+                            "filename": "Block-Dizzy.gif",
+                            "size": 7596,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/b/Block-Dizzy.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": null,
+                    "genre": "Game: Puzzle",
+                    "publishers": [
+                        {}
+                    ],
+                    "genreSubType": "Puzzle",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {
+                            "country": "Netherlands",
+                            "groupName": "Banzai Programming",
+                            "groupType": "Company",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": "Netherlands",
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Arno van der Hulst",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    360.16394,
+                    "Block-Dizzy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0012659",
+                "_score": 360.16394,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Dizzy Music",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": null,
+                                    "name": "Rus",
+                                    "labelType": "Person",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": null,
+                        "votes": null
+                    },
+                    "genreType": "Scene Demo",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/screens/in-game/d/DizzyMusic.gif",
+                            "size": 2296,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "DizzyMusic.gif",
+                            "size": 2296,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/d/DizzyMusic.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1991,
+                    "genre": "Scene Demo",
+                    "publishers": [
+                        {
+                            "country": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Rus",
+                            "labelType": "Person",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K",
+                    "authors": [
+                        {}
+                    ]
+                },
+                "sort": [
+                    360.16394,
+                    "Dizzy Music"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0012825",
+                "_score": 360.16394,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "MIA",
+                    "title": "Drunk Dizzy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "Russia",
+                                    "name": "Black Eagle Company",
+                                    "labelType": "Company",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 4.5,
+                        "votes": 4
+                    },
+                    "genreType": "Arcade Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/screens/load/d/scr/DrunkDizzyDemo.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/pokes/d/Drunk Dizzy (1995)(Black Eagle Company).pok",
+                            "size": 32,
+                            "format": "Pokes (POK)",
+                            "language": null,
+                            "type": "POK pokes file"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/d/DrunkDizzy.gif",
+                            "size": 5375,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "DrunkDizzy.gif",
+                            "size": 5375,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/d/DrunkDizzy.gif"
+                        },
+                        {
+                            "filename": "DrunkDizzyDemo-load.png",
+                            "size": 7398,
+                            "scrUrl": "/pub/sinclair/screens/load/d/scr/DrunkDizzyDemo.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0012825/DrunkDizzyDemo-load.png"
+                        }
+                    ],
+                    "originalYearOfRelease": 1995,
+                    "genre": "Arcade Game: Adventure",
+                    "publishers": [
+                        {
+                            "country": "Russia",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "Black Eagle Company",
+                            "labelType": "Company",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Adventure",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K/128K",
+                    "authors": [
+                        {}
+                    ]
+                },
+                "sort": [
+                    360.16394,
+                    "Drunk Dizzy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0035210",
+                "_score": 357.42416,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Available",
+                    "title": "Dragon Tale Fantasy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": null,
+                                    "name": "+3code",
+                                    "labelType": "Nickname",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": 1,
+                    "score": {
+                        "score": null,
+                        "votes": null
+                    },
+                    "genreType": "Adventure Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/zxdb/sinclair/entries/0035210/DragonTaleFantasy.txt",
+                            "size": 750,
+                            "format": "Document (TXT)",
+                            "language": "Spanish",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0035210/0035210-run-1.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Running screen"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0035210/0035210-run-2.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Running screen"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0035210/DragonTaleFantasy_SourceCode.zip",
+                            "size": 129889,
+                            "format": "Source code package",
+                            "language": null,
+                            "type": "Source code"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "0035210-run-1.gif",
+                            "size": 10413,
+                            "scrUrl": "/zxdb/sinclair/entries/0035210/0035210-run-1.scr",
+                            "format": "Picture",
+                            "type": "Running screen",
+                            "title": "",
+                            "url": "/zxscreens/0035210/0035210-run-1.gif"
+                        },
+                        {
+                            "filename": "0035210-run-2.png",
+                            "size": 3416,
+                            "scrUrl": "/zxdb/sinclair/entries/0035210/0035210-run-2.scr",
+                            "format": "Picture",
+                            "type": "Running screen",
+                            "title": "",
+                            "url": "/zxscreens/0035210/0035210-run-2.png"
+                        }
+                    ],
+                    "originalYearOfRelease": 2020,
+                    "genre": "Adventure Game: Dungeon Crawl",
+                    "publishers": [
+                        {
+                            "country": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "name": "+3code",
+                            "labelType": "Nickname",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Dungeon Crawl",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 128 +3",
+                    "authors": [
+                        {
+                            "country": null,
+                            "groupName": null,
+                            "groupType": null,
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": null,
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "+3code",
+                            "labelType": "Nickname",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    357.42416,
+                    "Dragon Tale Fantasy"
+                ]
+            },
+            {
+                "_index": "zxinfo-20220131-220157",
+                "_type": "_doc",
+                "_id": "0009317",
+                "_score": 351.3031,
+                "_source": {
+                    "originalDayOfRelease": null,
+                    "isbn": null,
+                    "zxinfoVersion": "1.0.118",
+                    "availability": "Distribution denied",
+                    "title": "Bubble Dizzy",
+                    "releases": [
+                        {
+                            "publishers": [
+                                {
+                                    "country": "UK",
+                                    "name": "Code Masters Ltd",
+                                    "labelType": "Company: Publisher/Manager",
+                                    "publisherSeq": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "originalMonthOfRelease": null,
+                    "score": {
+                        "score": 5.96,
+                        "votes": 26
+                    },
+                    "genreType": "Arcade Game",
+                    "additionalDownloads": [
+                        {
+                            "path": "/pub/sinclair/games-maps/b/BubbleDizzy.jpg",
+                            "size": 112404,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-maps/b/BubbleDizzy_2.png",
+                            "size": 98054,
+                            "format": "Picture (PNG)",
+                            "language": null,
+                            "type": "Game map"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0009317/BubbleDizzy_Back.jpg",
+                            "size": 407382,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Back"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/entries/0009317/BubbleDizzy.jpg",
+                            "size": 706342,
+                            "format": "Picture (JPG)",
+                            "language": null,
+                            "type": "Inlay - Front"
+                        },
+                        {
+                            "path": "/pub/sinclair/games-info/b/BubbleDizzy.txt",
+                            "size": 1715,
+                            "format": "Document (TXT)",
+                            "language": "English",
+                            "type": "Instructions"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/load/b/scr/BubbleDizzy.scr",
+                            "size": 6912,
+                            "format": "Screen dump (SCR)",
+                            "language": null,
+                            "type": "Loading screen"
+                        },
+                        {
+                            "path": "/zxdb/sinclair/pokes/b/Bubble Dizzy (1991)(Code Masters).pok",
+                            "size": 106,
+                            "format": "Pokes (POK)",
+                            "language": null,
+                            "type": "POK pokes file"
+                        },
+                        {
+                            "path": "/pub/sinclair/music/ay/games/b/BubbleDizzy.ay.zip",
+                            "size": 2766,
+                            "format": "Music (AY)",
+                            "language": null,
+                            "type": "Ripped in-game/theme music in AY format"
+                        },
+                        {
+                            "path": "/pub/sinclair/screens/in-game/b/BubbleDizzy.gif",
+                            "size": 5599,
+                            "format": "Picture (GIF)",
+                            "language": null,
+                            "type": "Running screen"
+                        }
+                    ],
+                    "screens": [
+                        {
+                            "filename": "BubbleDizzy-load.png",
+                            "size": 7855,
+                            "scrUrl": "/pub/sinclair/screens/load/b/scr/BubbleDizzy.scr",
+                            "format": "Picture",
+                            "type": "Loading screen",
+                            "title": "",
+                            "url": "/zxscreens/0009317/BubbleDizzy-load.png"
+                        },
+                        {
+                            "filename": "BubbleDizzy.gif",
+                            "size": 5599,
+                            "format": "Picture (GIF)",
+                            "type": "Running screen",
+                            "title": null,
+                            "url": "/pub/sinclair/screens/in-game/b/BubbleDizzy.gif"
+                        }
+                    ],
+                    "originalYearOfRelease": 1991,
+                    "genre": "Arcade Game: Platform",
+                    "publishers": [
+                        {
+                            "country": "UK",
+                            "notes": [
+                                {
+                                    "noteType": "A",
+                                    "text": "2nd Best Software House - 1990 Crash Readers Awards."
+                                },
+                                {
+                                    "noteType": "R",
+                                    "text": "SPOT name: \"Digital Computers\""
+                                }
+                            ],
+                            "name": "Code Masters Ltd",
+                            "labelType": "Company: Publisher/Manager",
+                            "publisherSeq": 1
+                        }
+                    ],
+                    "genreSubType": "Platform",
+                    "contentType": "SOFTWARE",
+                    "machineType": "ZX-Spectrum 48K/128K",
+                    "authors": [
+                        {
+                            "country": "UK",
+                            "groupName": "W.A.S.P. (We Are Spectrum Programmers)",
+                            "groupType": "Company",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": "UK",
+                            "authorSeq": 1,
+                            "roles": [],
+                            "name": "Lyndon Sharp",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "UK",
+                            "groupName": "W.A.S.P. (We Are Spectrum Programmers)",
+                            "groupType": "Company",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": "UK",
+                            "authorSeq": 2,
+                            "roles": [],
+                            "name": "Michael A. Sanderson",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        },
+                        {
+                            "country": "UK",
+                            "groupName": "W.A.S.P. (We Are Spectrum Programmers)",
+                            "groupType": "Company",
+                            "notes": [
+                                {
+                                    "noteType": null,
+                                    "text": null
+                                }
+                            ],
+                            "groupCountry": "UK",
+                            "authorSeq": 3,
+                            "roles": [
+                                {
+                                    "roleName": "Music",
+                                    "roleType": "M"
+                                }
+                            ],
+                            "name": "David Whittaker",
+                            "labelType": "Person",
+                            "type": "Creator"
+                        }
+                    ]
+                },
+                "sort": [
+                    351.3031,
+                    "Bubble Dizzy"
+                ]
+            }
+        ]
+    }
+}
