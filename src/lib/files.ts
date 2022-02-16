@@ -1,6 +1,5 @@
 import { getAllFilesSync } from 'get-all-files';
-import { existsSync, statSync } from 'fs';
-import { exec, which } from 'shelljs';
+import { exec } from 'shelljs';
 import { lookup } from 'mime-types';
 import { parse, join } from 'path';
 import os from 'os';
@@ -83,27 +82,16 @@ const _extractArchiveAndCheckForValidFile = (file: File): File => {
 };
 
 /**
- * Validate tools to ensure they're set up
- * @param {string} path - Root path of games
- * @private
- */
-const _validateTooling = (path: string) => {
-    if (!which('7z')) {
-        throw new Error('7z not found in PATH, please refer to README');
-    } else if (!existsSync(path)) {
-        throw new Error('Directory does not exist');
-    } else if (!statSync(path).isDirectory()) {
-        throw new Error('Supplied path is not a directory');
-    }
-};
-
-/**
  * Loops each file in specified path and returns all spectrum games found
- * @param {string} path - Root path of games
+ * @param {string | undefined} path - Root path of games
  * @returns {File[]}
  */
-export const findGames = async (path: string): Promise<File[]> => {
-    _validateTooling(path);
+export const findGames = async (
+    path: string | undefined
+): Promise<File[] | undefined> => {
+    if (!path) {
+        return;
+    }
 
     const progress = new cliProgress.Bar({
         format: `Processing files | ${chalk.cyan('{bar}')} | ${chalk.blueBright(
@@ -135,7 +123,7 @@ export const findGames = async (path: string): Promise<File[]> => {
 
         file = _extractArchiveAndCheckForValidFile(file);
 
-        await new Promise((r) => setTimeout(r, 1000));
+        //await new Promise((r) => setTimeout(r, 1000));
 
         games.push(file);
     }

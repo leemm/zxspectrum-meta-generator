@@ -95,12 +95,12 @@ export interface Publisher {
     publisherSeq?: number;
 }
 
-export interface Info {
+export interface Game {
     originalDayOfRelease?: string;
     isbn?: string;
     zxinfoVersion?: string;
-    availability: string;
-    title: string;
+    availability?: string;
+    title?: string;
     releases?: {
         publishers?: Publisher[];
     }[];
@@ -119,6 +119,8 @@ export interface Info {
     contentType?: string;
     machineType?: string;
     authors?: Author[];
+    _localPath?: string | undefined;
+    _md5: string | undefined;
 }
 
 export interface Hit {
@@ -126,7 +128,7 @@ export interface Hit {
     _type: string;
     _id: string;
     _score: number;
-    _source: Info;
+    _source: Game;
     sort?: string[] | number[];
 }
 
@@ -137,4 +139,26 @@ export interface Hits {
     };
     max_score?: number;
     hits: Hit[];
+}
+
+export interface IDHit {
+    _index: string;
+    _type: string;
+    _id: string;
+    _version?: number;
+    _seq_no?: number;
+    _primary_term?: number;
+    found?: boolean;
+    _source: Game;
+}
+
+// MD5 Search
+export interface MD5Result {
+    entry_id: string;
+    title: string;
+    file: {
+        filename: string;
+        sha512?: string;
+        md5?: string;
+    };
 }
