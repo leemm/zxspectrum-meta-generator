@@ -119,6 +119,7 @@ export interface Game {
     contentType?: string;
     machineType?: string;
     authors?: Author[];
+    numberOfPlayers?: string;
     _localPath?: string | undefined;
     _md5: string | undefined;
 }

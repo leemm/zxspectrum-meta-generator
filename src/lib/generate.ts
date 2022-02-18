@@ -1,3 +1,32 @@
+import { Game } from '../types/api.v3';
+import { parse, stringify } from 'js-ini';
+import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
+
+/**
+ * Parses API game json into a smaller object
+ * @param {Game} game - JSON result from API
+ * @returns {IIniObject}
+ */
+export const embiggen = (game: Game): IIniObject => {
+    return {
+        game: game.title || '',
+        file: game._localPath || '',
+        rating: ((game.score?.score || 0) * 10).toFixed() + '%',
+        description: '',
+        release: game.originalYearOfRelease?.toString() || '',
+        developers: (game.authors ?? [])
+            .filter((author) => author.type === 'Creator')
+            .map((author) => author.name as string)
+            .join(', '),
+        publishers: (game.publishers ?? [])
+            .filter((publisher) => publisher.publisherSeq === 1)
+            .map((publisher) => publisher.name)
+            .join(', '),
+        genre: game.genre ?? '',
+        players: game.numberOfPlayers ?? '',
+    };
+};
+
 // import { DefaultGame } from '../types/pegasus';
 
 // const parseGame = (game) => {

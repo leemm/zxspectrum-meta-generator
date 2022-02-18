@@ -2,12 +2,15 @@ import boxen from 'boxen';
 import chalk from 'chalk';
 import { init as initArgs, help, version } from './lib/args';
 import { Config } from './types/app';
+import './lib/cache';
 
 // import { request } from './lib/request';
 import { findGames } from './lib/files';
 import { validate, tooling as toolingValidate } from './lib/validate';
 import { gameByMD5 } from './lib/request';
 import { Game } from './types/api.v3';
+import { load as loadCache, save as saveCache } from './lib/cache';
+import { embiggen } from './lib/generate';
 
 declare global {
     namespace NodeJS {
@@ -72,23 +75,39 @@ const start = async () => {
     // Parse files in supplied src directory
     const files = await findGames((globalOptions.Config as Config).src);
 
-    // If files exist then let's find them in the api!
-    let processedFiles: Game[] = [];
+    // If files exist then let's find them in the api, via a cached version!
     if (files) {
-        processedFiles = await Promise.all(
+        await Promise.all(
             files.map(async (file) => {
                 try {
-                    const game = await (await gameByMD5(file.md5))._source;
-                    game._localPath = file.path;
-                    game._md5 = file.md5;
-                    return game;
+                    const cachedIniFile = loadCache(
+                        file.path || '',
+                        file.md5 || ''
+                    );
+
+                    if (!cachedIniFile) {
+                        const processedImage: Game = await (
+                            await gameByMD5(file.md5)
+                        )._source;
+                        processedImage._localPath = file.path;
+
+                        const entry = embiggen(processedImage);
+
+                        saveCache(entry, file.path || '', file.md5 || '');
+
+                        console.log('cache not hit');
+                    } else {
+                        console.log(cachedIniFile);
+                        console.log('cache hit');
+                    }
+
+                    // TO DO: WRITE TO CONFIG
                 } catch (err) {
-                    return await { _localPath: file.path, _md5: file.md5 };
+                    // TO DO: NOT FOUND
                 }
             })
         );
     }
-    console.log(processedFiles);
 
     process.exit();
 };
