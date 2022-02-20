@@ -1,6 +1,6 @@
 import { Game } from '../types/api.v3';
-import { parse, stringify } from 'js-ini';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
+import fs from 'fs';
 
 /**
  * Parses API game json into a smaller object
@@ -27,37 +27,66 @@ export const embiggen = (game: Game): IIniObject => {
     };
 };
 
-// import { DefaultGame } from '../types/pegasus';
+/**
+ * Build Pegasus meta file header
+ * @returns {string}
+ */
+export const pegasusHeader = (): string => {
+    return `collection: ZX Spectrum
+shortname: zxspectrum
+command: ${globalThis.config.launch} "{file.path}"`;
+};
 
-// const parseGame = (game) => {
+/**
+ * Converts IIniObject to a pegasus meta config
+ * @param {IIniObject} entry - Final object
+ * @returns {string}
+ */
+export const pegasusEntry = (entry: IIniObject): string => {
+    return `game: ${entry['game']}
+file: ${entry['file']}
+developers: 
+${(entry['developers'] as string)
+    .split(', ')
+    .map((i) => '  ' + i)
+    .join('\n')}
+publishers: 
+${(entry['publishers'] as string)
+    .split(', ')
+    .map((i) => '  ' + i)
+    .join('\n')}
+genre: ${entry['genre']}
+players: ${entry['players']}
+summary:
+description:
+rating: ${entry['rating']}
+x-source: ${process.env.npm_package_name}`;
+};
 
-//     console.log(game);
+/**
+ * Save meta file to disk
+ * @param {string[]} meta - Array of meta data ready to building meta file
+ * @returns {boolean}
+ */
+export const save = (meta: string[]): boolean => {
+    try {
+        console.log('globalThis.config.output', globalThis.config.output);
+        if (globalThis.config.output) {
+            if (fs.existsSync(globalThis.config.output)) {
+                fs.unlinkSync(globalThis.config.output);
+            }
+            fs.writeFileSync(globalThis.config.output, meta.join('\n\n'), {
+                encoding: 'utf8',
+            });
+            return true;
+        }
+        return false;
+    } catch (err) {
+        return false;
+    }
+};
 
-// }
-
-// `game: Alien Hominid
-// file: Alien Hominid (Europe) (En,Fr,De,Es,It).gba
-// developer: Zoo Digital
-// genre: Shooter
-// players: 1
-// summary: You're a little yellow alien.  The FBI has shot down your ship
-//   while flying over planet Earth. And it, quite literally, lands right on their
-//   doorstep. After a series of FBI Agents swipe your ship, what option do you have
-//   other than to blow up everything in your path to get it back?
-// description:
-//   Alien Hominid is a 2D side-scrolling shooter with heavy references to the Metal
-//   Slug series of games - from the hand-drawn graphics, huge explosions, right down
-//   to the ability to eviscerate FBI Agents when you get up close to them. The
-//   graphics are by featured artist Dan Paladin.
-//   .
-//   Your goal, is quite simply, to get to the end of the stage, and die as little as
-//   possible. Which is made difficult due to the fact that any bullet is an instant
-//   kill. To help you out, you can grab a range of power-ups, such as lasers, spread
-//   shots, shotguns and more.
-// rating: 50%
-// x-id: 4149
-// x-source: ScreenScraper`
-
+// Pegasus
 // game	Creates a new game with the value as title. The properties after this line will modify this game. This is a required field.	T
 // sort-by	An alternate title that should be used for sorting. Can be useful when the title contains eg. roman numerals or special symbols. sort_title and sort_name are also accepted.	T
 // file, files	The file or list of files (eg. disks) that belong to this game. Paths can be either absolute or relative to the metadata file. If there are multiple files, you'll be able to select which one to launch when you start the game.

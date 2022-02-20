@@ -10,14 +10,15 @@ import { validate, tooling as toolingValidate } from './lib/validate';
 import { gameByMD5 } from './lib/request';
 import { Game } from './types/api.v3';
 import { load as loadCache, save as saveCache } from './lib/cache';
-import { embiggen } from './lib/generate';
+import {
+    embiggen,
+    pegasusEntry,
+    pegasusHeader,
+    save as saveMeta,
+} from './lib/generate';
 
 declare global {
-    namespace NodeJS {
-        interface Global {
-            config: Config;
-        }
-    }
+    var config: Config;
 }
 
 const start = async () => {
@@ -36,17 +37,19 @@ const start = async () => {
     }
 
     // Parse arguments
-    const globalOptions = global as any;
-    globalOptions.Config = initArgs();
+    globalThis.config = initArgs();
+    if (Object.keys(globalThis.config).length === 0) {
+        process.exit(1);
+    }
 
     // Display help if requested
-    if ((globalOptions.Config as Config).help) {
+    if (globalThis.config.help) {
         help();
         process.exit();
     }
 
     // Display version if requested
-    if ((globalOptions.Config as Config).version) {
+    if (globalThis.config.version) {
         version();
         process.exit();
     }
@@ -66,21 +69,24 @@ const start = async () => {
     );
 
     // Validate arguments
-    const check = validate(globalOptions.Config as Config);
+    const check = validate(globalThis.config);
     if (check) {
         console.error(check + '\n');
         process.exit(1);
     }
 
     // Parse files in supplied src directory
-    const files = await findGames((globalOptions.Config as Config).src);
+    const files = await findGames(globalThis.config.src);
 
-    // If files exist then let's find them in the api, via a cached version!
+    // If files exist then let's find them in the api, via a cached version, and build the output!
+    let meta = [];
     if (files) {
+        meta.push(pegasusHeader());
+
         await Promise.all(
             files.map(async (file) => {
                 try {
-                    const cachedIniFile = loadCache(
+                    let cachedIniFile = loadCache(
                         file.path || '',
                         file.md5 || ''
                     );
@@ -91,9 +97,13 @@ const start = async () => {
                         )._source;
                         processedImage._localPath = file.path;
 
-                        const entry = embiggen(processedImage);
+                        cachedIniFile = embiggen(processedImage);
 
-                        saveCache(entry, file.path || '', file.md5 || '');
+                        saveCache(
+                            cachedIniFile,
+                            file.path || '',
+                            file.md5 || ''
+                        );
 
                         console.log('cache not hit');
                     } else {
@@ -101,12 +111,19 @@ const start = async () => {
                         console.log('cache hit');
                     }
 
-                    // TO DO: WRITE TO CONFIG
+                    meta.push(pegasusEntry(cachedIniFile));
                 } catch (err) {
                     // TO DO: NOT FOUND
                 }
             })
         );
+    }
+
+    if (!saveMeta(meta)) {
+        console.error(
+            'Error saving meta file, check you have permission to write to the directory.'
+        );
+        process.exit(1);
     }
 
     process.exit();

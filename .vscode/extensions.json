@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "digitalbrainstem.javascript-ejs-support",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "mkloubert.vscode-kanban"
     ],
   }
