@@ -28,4 +28,5 @@ export interface Config {
     verbose?: boolean;
     version?: boolean;
     help?: boolean;
+    clear?: boolean;
 }

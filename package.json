@@ -1,6 +1,6 @@
 {
     "name": "zxspectrum-frontend-meta-generator",
-    "version": "0.1.5",
+    "version": "0.2.0",
     "description": "ZXSpectrum Game Frontend Config Generator using ZXInfo API",
     "main": "./dist/start.js",
     "scripts": {
@@ -35,6 +35,7 @@
         "cli-progress": "^3.10.0",
         "command-line-args": "^5.2.1",
         "command-line-usage": "^6.1.1",
+        "del": "^6.0.0",
         "eslint": "^8.9.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^4.0.0",

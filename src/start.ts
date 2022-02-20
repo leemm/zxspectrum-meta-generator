@@ -9,13 +9,8 @@ import { findGames } from './lib/files';
 import { validate, tooling as toolingValidate } from './lib/validate';
 import { gameByMD5 } from './lib/request';
 import { Game } from './types/api.v3';
-import { load as loadCache, save as saveCache } from './lib/cache';
-import {
-    embiggen,
-    pegasusEntry,
-    pegasusHeader,
-    save as saveMeta,
-} from './lib/generate';
+import { clear, load as loadCache, save as saveCache } from './lib/cache';
+import { embiggen, save as saveMeta, Generators } from './lib/generate';
 
 declare global {
     var config: Config;
@@ -45,6 +40,12 @@ const start = async () => {
     // Display help if requested
     if (globalThis.config.help) {
         help();
+        process.exit();
+    }
+
+    // Clear local cache if requested
+    if (globalThis.config.clear) {
+        await clear();
         process.exit();
     }
 
@@ -79,9 +80,12 @@ const start = async () => {
     const files = await findGames(globalThis.config.src);
 
     // If files exist then let's find them in the api, via a cached version, and build the output!
-    let meta = [];
+    let meta: string[] = [];
     if (files) {
-        meta.push(pegasusHeader());
+        const generateHeader: keyof Generators = ((globalThis.config.platform ||
+            '') + 'Header') as keyof Generators;
+        // @ts-ignore-line
+        meta.push(Generators[generateHeader]());
 
         await Promise.all(
             files.map(async (file) => {
@@ -99,7 +103,7 @@ const start = async () => {
 
                         cachedIniFile = embiggen(processedImage);
 
-                        saveCache(
+                        await saveCache(
                             cachedIniFile,
                             file.path || '',
                             file.md5 || ''
@@ -111,7 +115,10 @@ const start = async () => {
                         console.log('cache hit');
                     }
 
-                    meta.push(pegasusEntry(cachedIniFile));
+                    const generateEntry: keyof Generators = ((globalThis.config
+                        .platform || '') + 'Entry') as keyof Generators;
+                    // @ts-ignore-line
+                    meta.push(Generators[generateEntry](cachedIniFile));
                 } catch (err) {
                     // TO DO: NOT FOUND
                 }
@@ -126,6 +133,11 @@ const start = async () => {
         process.exit(1);
     }
 
+    console.log(
+        `Success! File created at ${globalThis.config.output}, containing ${
+            meta.length + ' file' + (meta.length !== 1 ? 's' : '')
+        }`
+    );
     process.exit();
 };
 
