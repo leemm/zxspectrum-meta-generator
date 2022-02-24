@@ -24,9 +24,15 @@ export interface Config {
     launch?: string;
     src?: string;
     output?: string;
+    assets?: string;
     platform?: string;
     verbose?: boolean;
     version?: boolean;
     help?: boolean;
     clear?: boolean;
+}
+
+export interface MediaFolders {
+    titles?: string;
+    screens?: string;
 }

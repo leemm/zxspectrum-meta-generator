@@ -9,6 +9,13 @@ import fs from 'fs';
  * @returns {IIniObject}
  */
 export const embiggen = (game: Game): IIniObject => {
+    const loadingScreen =
+            game.screens?.find((screen) => screen.type === 'Loading screen') ||
+            {},
+        runningScreen =
+            game.screens?.find((screen) => screen.type === 'Running screen') ||
+            {};
+
     return {
         game: game.title || '',
         file: game._localPath || '',
@@ -25,6 +32,11 @@ export const embiggen = (game: Game): IIniObject => {
             .join(', '),
         genre: game.genre ?? '',
         players: game.numberOfPlayers ?? '',
+        ['assets.titlescreen']: loadingScreen?.url || '',
+        ['assets.titlescreen.size']: loadingScreen?.size || 0,
+        ['assets.screenshot']: runningScreen?.url || '',
+        ['assets.screenshot.size']: runningScreen?.size || 0,
+        //['assets.boxFront']: '',
     };
 };
 

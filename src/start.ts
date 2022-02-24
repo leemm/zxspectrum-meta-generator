@@ -11,6 +11,7 @@ import { gameByMD5 } from './lib/request';
 import { Game } from './types/api.v3';
 import { clear, load as loadCache, save as saveCache } from './lib/cache';
 import { embiggen, save as saveMeta, Generators } from './lib/generate';
+import { save as saveAssets } from './lib/assets';
 
 declare global {
     var config: Config;
@@ -96,13 +97,20 @@ const start = async () => {
                     );
 
                     if (!cachedIniFile) {
-                        const processedImage: Game = await (
+                        const processedFile: Game = await (
                             await gameByMD5(file.md5)
                         )._source;
-                        processedImage._localPath = file.path;
+                        processedFile._localPath = file.path;
 
-                        cachedIniFile = embiggen(processedImage);
+                        cachedIniFile = embiggen(processedFile);
 
+                        // Download remote assets
+                        cachedIniFile = await saveAssets(
+                            file.md5 || '',
+                            cachedIniFile
+                        );
+
+                        // Save cached data to disk
                         await saveCache(
                             cachedIniFile,
                             file.path || '',
@@ -111,7 +119,7 @@ const start = async () => {
 
                         console.log('cache not hit');
                     } else {
-                        console.log(cachedIniFile);
+                        //console.log(cachedIniFile);
                         console.log('cache hit');
                     }
 
@@ -120,7 +128,7 @@ const start = async () => {
                     // @ts-ignore-line
                     meta.push(Generators[generateEntry](cachedIniFile));
                 } catch (err) {
-                    // TO DO: NOT FOUND
+                    console.error('Fatal error processing ' + file.path);
                 }
             })
         );

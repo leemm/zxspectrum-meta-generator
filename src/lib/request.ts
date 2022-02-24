@@ -1,4 +1,5 @@
 import axios from 'axios';
+import fs from 'fs';
 import * as APITypes from '../types/api.v3';
 import { Hits } from '../types/api.v3';
 
@@ -52,8 +53,6 @@ export const search = async (
     }).then((res) => res?.data?.hits as Hits);
 };
 
-//https://zxinfo.dk/media/zxscreens/0009335/FantasyWorldDizzy-load.png
-
 /**
  * Return game from API, by ID
  * @param {string} id - API Entry ID
@@ -84,4 +83,50 @@ export const gameByMD5 = async (
     })
         .then((res) => res?.data as APITypes.MD5Result)
         .then((res) => gameByID(res.entry_id));
+};
+
+/**
+ * Stream remote file to disk
+ * @param {string} url - Remote location of file
+ * @param {path} path - Location to save to on disk
+ * @returns {boolean}
+ */
+export const download = async (url: string, path: string): Promise<boolean> => {
+    if (fs.existsSync(path)) {
+        fs.unlinkSync(path);
+    }
+
+    await new Promise((r) => setTimeout(r, 100));
+
+    try {
+        await axios({
+            method: 'get',
+            url: url,
+            responseType: 'stream',
+            headers: _defaultHeaders,
+        }).then(function (response) {
+            const writer = fs.createWriteStream(path);
+
+            return new Promise((resolve, reject) => {
+                response.data.pipe(writer);
+                let error: Error;
+
+                writer.on('error', (err) => {
+                    error = err;
+                    writer.close();
+                    reject(err);
+                });
+
+                writer.on('close', () => {
+                    if (!error) {
+                        resolve(true);
+                    }
+                });
+            });
+        });
+
+        return true;
+    } catch (err) {
+        return false;
+    }
 };
