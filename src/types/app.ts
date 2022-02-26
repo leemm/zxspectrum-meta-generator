@@ -35,4 +35,11 @@ export interface Config {
 export interface MediaFolders {
     titles?: string;
     screens?: string;
+    covers?: string;
+}
+
+export interface Descriptions {
+    summary?: string;
+    description?: string;
+    boxart?: string;
 }

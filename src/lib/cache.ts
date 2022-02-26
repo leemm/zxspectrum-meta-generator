@@ -35,6 +35,9 @@ export const load = (
             const cache = fs.readFileSync(gameConfigPath, 'utf-8');
             return parse(cache);
         } catch (err) {
+            console.error(
+                'Failed to read cache: ' + (err as string).toString()
+            );
             return;
         }
     }

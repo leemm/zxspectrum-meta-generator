@@ -30,10 +30,11 @@ ${(entry['publishers'] as string)
     .join('\n')}
 genre: ${entry['genre']}
 players: ${entry['players']}
-summary:
-description:
+summary: ${decodeURIComponent(entry['summary'] as string)}
+description: ${decodeURIComponent(entry['description'] as string)}
 rating: ${entry['rating']}
 x-source: ${process.env.npm_package_name}
 assets.titlescreen: ${entry['assets.titlescreen.local']}
-assets.screenshot: ${entry['assets.screenshot.local']}`;
+assets.screenshot: ${entry['assets.screenshot.local']}
+assets.boxFront: ${entry['assets.boxFront.local']}`;
 };

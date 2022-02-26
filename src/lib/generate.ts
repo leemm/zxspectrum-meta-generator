@@ -20,6 +20,7 @@ export const embiggen = (game: Game): IIniObject => {
         game: game.title || '',
         file: game._localPath || '',
         rating: ((game.score?.score || 0) * 10).toFixed() + '%',
+        summary: '',
         description: '',
         release: game.originalYearOfRelease?.toString() || '',
         developers: (game.authors ?? [])

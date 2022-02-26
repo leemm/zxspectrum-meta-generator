@@ -12,6 +12,7 @@ import { Game } from './types/api.v3';
 import { clear, load as loadCache, save as saveCache } from './lib/cache';
 import { embiggen, save as saveMeta, Generators } from './lib/generate';
 import { save as saveAssets } from './lib/assets';
+import { get as descriptions } from './lib/description';
 
 declare global {
     var config: Config;
@@ -104,10 +105,18 @@ const start = async () => {
 
                         cachedIniFile = embiggen(processedFile);
 
+                        // Find a description (if available)
+                        const desc = await descriptions(
+                            processedFile.title || ''
+                        );
+                        cachedIniFile['summary'] = desc.summary || '';
+                        cachedIniFile['description'] = desc.description || '';
+
                         // Download remote assets
                         cachedIniFile = await saveAssets(
                             file.md5 || '',
-                            cachedIniFile
+                            cachedIniFile,
+                            desc
                         );
 
                         // Save cached data to disk

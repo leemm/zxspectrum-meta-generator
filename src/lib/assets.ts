@@ -4,7 +4,7 @@ import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
 import { Game } from '../types/api.v3';
 import { download } from './request';
 import { directoryExists } from './helpers';
-import { MediaFolders } from '../types/app';
+import { Descriptions, MediaFolders } from '../types/app';
 
 const root = 'https://zxinfo.dk';
 
@@ -14,7 +14,8 @@ const root = 'https://zxinfo.dk';
  */
 const _makeAssetDirectories = (): MediaFolders => {
     const titles = path.join(globalThis.config.assets || '', 'assets/titles'),
-        screens = path.join(globalThis.config.assets || '', 'assets/screens');
+        screens = path.join(globalThis.config.assets || '', 'assets/screens'),
+        covers = path.join(globalThis.config.assets || '', 'assets/covers');
 
     if (!directoryExists(titles)) {
         fs.mkdirSync(titles, { recursive: true });
@@ -24,9 +25,14 @@ const _makeAssetDirectories = (): MediaFolders => {
         fs.mkdirSync(screens, { recursive: true });
     }
 
+    if (!directoryExists(covers)) {
+        fs.mkdirSync(covers, { recursive: true });
+    }
+
     return {
         titles,
         screens,
+        covers,
     };
 };
 
@@ -40,10 +46,13 @@ const _makeAssetDirectories = (): MediaFolders => {
 const _downloadSpecificFile = async (
     cachedIniFile: IIniObject,
     path: string,
-    key: string
+    key: string,
+    url?: string
 ): Promise<IIniObject> => {
     if (!fs.existsSync(path)) {
-        const url = root + '/media' + cachedIniFile[key]?.toString();
+        if (!url) {
+            url = root + '/media' + cachedIniFile[key]?.toString();
+        }
         console.log(`Downloading: ${url}`);
 
         if (!(await download(url, path))) {
@@ -66,7 +75,8 @@ const _downloadSpecificFile = async (
  */
 export const save = async (
     md5: string,
-    cachedIniFile: IIniObject
+    cachedIniFile: IIniObject,
+    desc: Descriptions
 ): Promise<IIniObject> => {
     const assets = _makeAssetDirectories();
 
@@ -96,5 +106,34 @@ export const save = async (
         );
     }
 
+    if (desc.boxart) {
+        const ext = path.extname(desc.boxart);
+        const boxartPath = path.join(assets.covers || '', md5 + ext);
+
+        cachedIniFile = await _downloadSpecificFile(
+            cachedIniFile,
+            boxartPath,
+            'assets.boxFront',
+            desc.boxart
+        );
+    }
+
     return cachedIniFile;
+};
+
+/**
+ * Download cover and stream to disk
+ * @param {string} md5 - File hash
+ * @param {IIniObject} cachedIniFile - Current cache meta for this game
+ * @returns {Promise<IIniObject>}
+ */
+export const saveCover = async (md5: string, cachedIniFile: IIniObject) => {
+    const assets = _makeAssetDirectories();
+
+    if (cachedIniFile['assets.titlescreen']) {
+        const ext = path.extname(
+            cachedIniFile['assets.titlescreen']?.toString() || ''
+        );
+        const loadingScreenPath = path.join(assets.covers || '', md5 + ext);
+    }
 };
