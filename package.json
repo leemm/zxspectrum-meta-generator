@@ -1,12 +1,13 @@
 {
     "name": "zxspectrum-frontend-meta-generator",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "ZXSpectrum Game Frontend Config Generator using ZXInfo API",
     "main": "./dist/start.js",
     "scripts": {
-        "start": "ts-node ./src/start.ts",
-        "build": "rm -rf ./dist && npx tsc -p ./tsconfig.build.json && npx nexe ./dist/start.js -o ./dist/zxgenerator --build",
+        "start": "npx ts-node ./src/start.ts",
+        "build": "npm run cleanup && npx tsc -p ./tsconfig.build.json && npx nexe ./dist/start.js -o ./dist/zxgenerator --build",
         "install": "sudo cp ./dist/zxgenerator /usr/local/bin && sudo chmod +x /usr/local/bin/zxgenerator",
+        "cleanup": "rm -rf ./dist && sudo rm -f /usr/local/bin/zxgenerator",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [

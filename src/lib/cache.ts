@@ -7,15 +7,22 @@ import del from 'del';
 import { directoryExists } from './helpers';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
 
-const config = path.join(
-    getAppDataPath(),
-    '/',
-    process.env.npm_package_name ?? ''
-);
+let config: string;
 
-if (!directoryExists(config)) {
-    fs.mkdirSync(config, { recursive: true });
-}
+/**
+ * Init caching
+ */
+export const init = () => {
+    config = path.join(
+        getAppDataPath(),
+        '/',
+        globalThis.version.APP_DISPLAY_NAME ?? ''
+    );
+
+    if (!directoryExists(config)) {
+        fs.mkdirSync(config, { recursive: true });
+    }
+};
 
 /**
  * Load ini cache for specific game

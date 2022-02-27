@@ -1,30 +1,29 @@
 import boxen from 'boxen';
 import chalk from 'chalk';
 import { init as initArgs, help, version } from './lib/args';
-import { Config } from './types/app';
-import './lib/cache';
+import { Config, Version } from './types/app';
+import { init as initCache } from './lib/cache';
 
-// import { request } from './lib/request';
 import { findGames } from './lib/files';
 import { validate, tooling as toolingValidate } from './lib/validate';
 import { gameByMD5 } from './lib/request';
 import { Game } from './types/api.v3';
-import { clear, load as loadCache, save as saveCache } from './lib/cache';
+import { clear, init, load as loadCache, save as saveCache } from './lib/cache';
 import { embiggen, save as saveMeta, Generators } from './lib/generate';
 import { save as saveAssets } from './lib/assets';
 import { get as descriptions } from './lib/description';
 
+import { version as versionInfo } from './version';
+
 declare global {
     var config: Config;
+    var version: Version;
 }
 
+globalThis.version = versionInfo;
+
 const start = async () => {
-    // try {
-    //     const results = await search('Fantasy World Dizzy');
-    //     require('fs').writeFileSync('./result2.json', JSON.stringify(results.hits[0]._source, null, 4));
-    // } catch (err) {
-    //     console.error(err);
-    // }
+    initCache();
 
     // Validate required tooling
     const checkTooling = toolingValidate();
@@ -60,8 +59,8 @@ const start = async () => {
     // Header
     console.log(
         boxen(
-            `${chalk.magenta(process.env.npm_package_name)} ${chalk.cyan(
-                'v' + process.env.npm_package_version
+            `${chalk.magenta(globalThis.version.APP_DISPLAY_NAME)} ${chalk.cyan(
+                'v' + globalThis.version.APP_DISPLAY_VERSION
             )}`,
             {
                 padding: 1,

@@ -32,6 +32,11 @@ export interface Config {
     clear?: boolean;
 }
 
+export interface Version {
+    APP_DISPLAY_NAME: string;
+    APP_DISPLAY_VERSION: string;
+}
+
 export interface MediaFolders {
     titles?: string;
     screens?: string;

@@ -15,7 +15,7 @@ const header = ` __________________________________________________
 | __\ ||  ||__|__|--|||                             |
 | ZX Spectrum                                      |
 |                                                  |        ${chalk.bold.underline(
-    process.env.npm_package_name
+    'APP_DISPLAY_NAME'
 )}
 | ________________________________________________ |
 |/________________________________________________\ |
@@ -121,29 +121,34 @@ const optionDefinitions: OptionDefinition[] = [
     },
 ];
 
-const sections = [
-    {
-        content: header,
-        raw: true,
-    },
-    {
-        header: 'Options',
-        optionList: optionDefinitions.map((option) => {
-            return {
-                name: option.name,
-                alias: option.alias,
-                description:
-                    option.description +
-                    (option.default ? ' Defaults to ' + option.default : ''),
-            };
-        }),
-    },
-];
-
 /**
  * Display help
  */
 export const help = () => {
+    const sections = [
+        {
+            content: header.replace(
+                'APP_DISPLAY_NAME',
+                globalThis.version.APP_DISPLAY_NAME
+            ),
+            raw: true,
+        },
+        {
+            header: 'Options',
+            optionList: optionDefinitions.map((option) => {
+                return {
+                    name: option.name,
+                    alias: option.alias,
+                    description:
+                        option.description +
+                        (option.default
+                            ? ' Defaults to ' + option.default
+                            : ''),
+                };
+            }),
+        },
+    ];
+
     console.log(commandLineUsage(sections));
 };
 
@@ -152,7 +157,7 @@ export const help = () => {
  */
 export const version = () => {
     console.log(
-        `${process.env.npm_package_name} v${process.env.npm_package_version}\n`
+        `${globalThis.version.APP_DISPLAY_NAME} v${globalThis.version.APP_DISPLAY_VERSION}\n`
     );
 };
 
