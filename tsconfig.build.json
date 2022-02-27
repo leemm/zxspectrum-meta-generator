@@ -6,9 +6,11 @@
         "outDir": "./dist",
         "moduleResolution": "node",
         "strict": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "downlevelIteration": true,
+        "removeComments": true
     },
-    "exclude":[
-        "./node_modules"
+    "include": [
+        "./**/*.ts"
     ]
 }

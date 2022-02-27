@@ -5,12 +5,10 @@ import { parse, join } from 'path';
 import os from 'os';
 import fs from 'fs';
 import { File } from '../types/app';
-import USID from 'usid';
+import { nanoid } from 'nanoid';
 import md5 from 'md5';
 import chalk from 'chalk';
 import cliProgress from 'cli-progress';
-
-const usid = new USID();
 
 const _archiveMimeTypes = [
     'application/zip',
@@ -52,7 +50,7 @@ const _extractArchiveAndCheckForValidFile = (file: File): File => {
         file.md5 = file.md5 = md5(fs.readFileSync(file.path || ''));
     } else {
         // Create temp folder
-        const extractFolder = `${os.tmpdir()}/${usid.uuid()}`;
+        const extractFolder = `${os.tmpdir()}/${nanoid()}`;
         fs.mkdirSync(extractFolder, { recursive: true });
 
         // Extract archive via 7z command to temp folder
