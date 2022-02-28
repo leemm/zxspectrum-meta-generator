@@ -36,5 +36,5 @@ rating: ${entry['rating']}
 x-source: ${globalThis.version.APP_DISPLAY_NAME}
 assets.titlescreen: ${entry['assets.titlescreen.local']}
 assets.screenshot: ${entry['assets.screenshot.local']}
-assets.boxFront: ${entry['assets.boxFront.local']}`;
+assets.boxFront: ${entry['assets.boxFront.local'] || ''}`;
 };

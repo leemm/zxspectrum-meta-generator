@@ -7,7 +7,7 @@ import { OptionDefinition, Config } from '../types/app';
 export const validPlatforms = ['pegasus'];
 
 const description =
-    'Parse your tape/disk images and generate a metafile for your emulator frontend using ZXInfo API';
+    'Parse your tape/disk images and generate a metafile|for your emulator frontend using ZXInfo API';
 const usage = 'Usage: `zxgenerator [options ...]`';
 
 const header = ` __________________________________________________
@@ -26,8 +26,10 @@ const header = ` __________________________________________________
     '[6]'
 )} ${chalk.bgGrey('[7]')} ${chalk.bgGrey('[8]')} ${chalk.bgGrey(
     '[9]'
-)} ${chalk.bgGrey('[0]')}          |        ${description}
-|     _   _   _   _   _   _   _   _   _   _        |
+)} ${chalk.bgGrey('[0]')}          |        ${description.split('|')[0]}
+|     _   _   _   _   _   _   _   _   _   _        |        ${
+    description.split('|')[1]
+}
 |    ${chalk.bgGrey('[Q]')} ${chalk.bgGrey('[W]')} ${chalk.bgGrey(
     '[E]'
 )} ${chalk.bgGrey('[R]')} ${chalk.bgGrey('[T]')} ${chalk.bgGrey(
