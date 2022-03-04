@@ -1,14 +1,15 @@
 import boxen from 'boxen';
 import chalk from 'chalk';
 import { init as initArgs, help, version } from './lib/args';
-import { Config, Version } from './types/app';
+import { Config, LogType, Version } from './types/app';
 import { init as initCache } from './lib/cache';
+import { log } from './lib/log';
 
 import { findGames } from './lib/files';
 import { validate, tooling as toolingValidate } from './lib/validate';
 import { gameByMD5 } from './lib/request';
 import { Game } from './types/api.v3';
-import { clear, init, load as loadCache, save as saveCache } from './lib/cache';
+import { clear, load as loadCache, save as saveCache } from './lib/cache';
 import { embiggen, save as saveMeta, Generators } from './lib/generate';
 import { save as saveAssets } from './lib/assets';
 import { get as descriptions } from './lib/description';
@@ -23,39 +24,53 @@ declare global {
 globalThis.version = versionInfo;
 
 const start = async () => {
-    initCache();
-
-    // Validate required tooling
-    const checkTooling = toolingValidate();
-    if (checkTooling) {
-        console.error(checkTooling + '\n');
-        process.exit(1);
-    }
-
     // Parse arguments
     globalThis.config = initArgs();
     if (Object.keys(globalThis.config).length === 0) {
         process.exit(1);
     }
 
+    // Validate required tooling
+    log(LogType.Info, 'Tools', 'Validate');
+    const checkTooling = toolingValidate();
+    if (checkTooling) {
+        log(
+            LogType.Error,
+            'Tools',
+            'Validation Error',
+            new Error(checkTooling)
+        );
+        console.error(checkTooling + '\n');
+        process.exit(1);
+    }
+
+    log(LogType.Info, 'Cache', 'Init');
+    initCache();
+
+    log(LogType.Info, 'Config', 'Value', globalThis.config);
+
     // Display help if requested
     if (globalThis.config.help) {
+        log(LogType.Info, 'Help', 'Display');
         help();
         process.exit();
     }
 
     // Clear local cache if requested
     if (globalThis.config.clear) {
+        log(LogType.Warn, 'Cache', 'Local cache now cleared');
         await clear();
         process.exit();
     }
 
     // Display version if requested
     if (globalThis.config.version) {
+        log(LogType.Info, 'Version', 'Display');
         version();
         process.exit();
     }
 
+    log(LogType.Info, 'Output', 'Header');
     // Header
     console.log(
         boxen(
@@ -71,14 +86,24 @@ const start = async () => {
     );
 
     // Validate arguments
+    log(LogType.Info, 'Arguments', 'Validate');
     const check = validate(globalThis.config);
     if (check) {
+        log(
+            LogType.Error,
+            'Arguments',
+            'Validation error',
+            new Error(checkTooling)
+        );
         console.error(check + '\n');
         process.exit(1);
     }
 
     // Parse files in supplied src directory
     const files = await findGames(globalThis.config.src);
+
+    // Track files that can't be found
+    const failedFiles: string[] = [];
 
     // If files exist then let's find them in the api, via a cached version, and build the output!
     let meta: string[] = [];
@@ -97,9 +122,17 @@ const start = async () => {
                     );
 
                     if (!cachedIniFile) {
-                        const processedFile: Game = await (
-                            await gameByMD5(file.md5)
-                        )._source;
+                        log(LogType.Info, 'Cache', 'No cache available');
+
+                        const result = await gameByMD5(
+                            file.md5,
+                            file.name + file.ext
+                        );
+                        if (result instanceof Error) {
+                            throw result;
+                        }
+
+                        let processedFile: Game = result._source;
                         processedFile._localPath = file.path;
 
                         cachedIniFile = embiggen(processedFile);
@@ -110,6 +143,21 @@ const start = async () => {
                         );
                         cachedIniFile['summary'] = desc.summary || '';
                         cachedIniFile['description'] = desc.description || '';
+
+                        if (desc.description?.length || 0 > 0) {
+                            log(
+                                LogType.Info,
+                                'Description',
+                                'Description found',
+                                desc
+                            );
+                        } else {
+                            log(
+                                LogType.Info,
+                                'Description',
+                                'Description not found'
+                            );
+                        }
 
                         // Download remote assets
                         cachedIniFile = await saveAssets(
@@ -124,11 +172,8 @@ const start = async () => {
                             file.path || '',
                             file.md5 || ''
                         );
-
-                        console.log('cache not hit');
                     } else {
-                        //console.log(cachedIniFile);
-                        console.log('cache hit');
+                        log(LogType.Info, 'Cache', 'Loaded', cachedIniFile);
                     }
 
                     const generateEntry: keyof Generators = ((globalThis.config
@@ -136,24 +181,36 @@ const start = async () => {
                     // @ts-ignore-line
                     meta.push(Generators[generateEntry](cachedIniFile));
                 } catch (err) {
-                    console.error('Fatal error processing ' + file.path);
+                    failedFiles.push(file.path || '');
+                    log(LogType.Error, 'Process File', 'Fatal Error', { err });
                 }
             })
         );
     }
 
     if (!saveMeta(meta)) {
-        console.error(
-            'Error saving meta file, check you have permission to write to the directory.'
-        );
+        if (!globalThis.config.verbose) {
+            console.error(
+                'Error saving meta file, check you have permission to write to the directory.'
+            );
+        }
         process.exit(1);
     }
 
-    console.log(
-        `Success! File created at ${globalThis.config.output}, containing ${
-            meta.length + ' file' + (meta.length !== 1 ? 's' : '')
-        }`
-    );
+    if (!globalThis.config.verbose) {
+        console.log(
+            `${chalk.green('Success!')} File created at ${chalk.gray.italic(
+                globalThis.config.output
+            )}, containing ${
+                chalk.green(meta.length - failedFiles.length) +
+                ' file' +
+                (meta.length - failedFiles.length !== 1 ? 's' : '')
+            }\n`
+        );
+    }
+    log(LogType.Info, 'Complete', 'Generated', {
+        value: globalThis.config.output,
+    });
     process.exit();
 };
 

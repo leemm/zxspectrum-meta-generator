@@ -6,6 +6,8 @@ import md5 from 'md5';
 import del from 'del';
 import { directoryExists } from './helpers';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
+import { log } from './log';
+import { LogType } from '../types/app';
 
 let config: string;
 
@@ -39,12 +41,12 @@ export const load = (
 
     if (fs.existsSync(gameConfigPath)) {
         try {
+            log(LogType.Info, 'Cache', 'Load', { value: gameConfigPath });
+
             const cache = fs.readFileSync(gameConfigPath, 'utf-8');
             return parse(cache);
         } catch (err) {
-            console.error(
-                'Failed to read cache: ' + (err as string).toString()
-            );
+            log(LogType.Error, 'Cache', 'Error', { err });
             return;
         }
     }
@@ -63,8 +65,6 @@ export const save = async (
 ): Promise<boolean> => {
     const gameConfigPath = path.join(config, `${md5(gamePath)}-${hash}.ini`);
 
-    console.log('gameConfigPath', gameConfigPath);
-
     if (fs.existsSync(gameConfigPath)) {
         await del(config, { force: true });
         fs.mkdirSync(config, { recursive: true });
@@ -74,10 +74,12 @@ export const save = async (
         fs.writeFileSync(gameConfigPath, stringify(entry), {
             encoding: 'utf8',
         });
-        console.log('written');
+
+        log(LogType.Info, 'Cache', 'Save', { value: gameConfigPath });
         return true;
     } catch (err) {
-        console.log('failed');
+        log(LogType.Error, 'Cache', 'Save failed', err);
+
         return false;
     }
 };

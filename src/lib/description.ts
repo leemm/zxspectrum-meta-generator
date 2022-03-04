@@ -1,5 +1,6 @@
 import wiki from 'wikipedia';
-import { Descriptions } from '../types/app';
+import { Descriptions, LogType } from '../types/app';
+import { log } from './log';
 
 /**
  * Query Wikipedia for game description
@@ -9,9 +10,14 @@ import { Descriptions } from '../types/app';
 export const get = async (title: string): Promise<Descriptions> => {
     let ret: Descriptions = {};
 
-    await new Promise((r) => setTimeout(r, 50));
+    await new Promise((r) => setTimeout(r, 50)); // Dummy timeout to help with wikipedia api
 
-    console.log('Querying Wikipedia for game description: ' + title);
+    log(
+        LogType.Info,
+        'Description',
+        'Querying Wikipedia for game description, summary',
+        { value: title }
+    );
 
     try {
         const page = await wiki.page(title),
@@ -23,9 +29,7 @@ export const get = async (title: string): Promise<Descriptions> => {
             ret.boxart = summary.originalimage.source;
         }
     } catch (err) {
-        console.error(
-            'Error getting game description: ' + (err as string).toString()
-        );
+        log(LogType.Error, 'Description', 'Error', { err });
     }
 
     return ret;

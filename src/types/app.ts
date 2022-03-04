@@ -48,3 +48,9 @@ export interface Descriptions {
     description?: string;
     boxart?: string;
 }
+
+export enum LogType {
+    Info = 'info',
+    Warn = 'warn',
+    Error = 'error',
+}

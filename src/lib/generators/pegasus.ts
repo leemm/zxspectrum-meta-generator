@@ -33,8 +33,8 @@ players: ${entry['players']}
 summary: ${decodeURIComponent(entry['summary'] as string)}
 description: ${decodeURIComponent(entry['description'] as string)}
 rating: ${entry['rating']}
-x-source: ${globalThis.version.APP_DISPLAY_NAME}
 assets.titlescreen: ${entry['assets.titlescreen.local']}
 assets.screenshot: ${entry['assets.screenshot.local']}
-assets.boxFront: ${entry['assets.boxFront.local'] || ''}`;
+assets.boxFront: ${entry['assets.boxFront.local'] || ''}
+x-source: ${globalThis.version.APP_DISPLAY_NAME}`;
 };

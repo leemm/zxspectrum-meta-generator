@@ -2,6 +2,8 @@ import axios from 'axios';
 import fs from 'fs';
 import * as APITypes from '../types/api.v3';
 import { Hits } from '../types/api.v3';
+import { LogType } from '../types/app';
+import { log } from './log';
 
 const rootUrl = 'https://api.zxinfo.dk/v3/';
 const _defaultHeaders = {
@@ -70,11 +72,13 @@ export const gameByID = async (id: string): Promise<APITypes.IDHit> => {
 /**
  * Return game from API, by MD5 Hash
  * @param {string | undefined} hash - MD5 Hash
+ * @param {string | undefined} name - Filename
  * @returns {Promise<APITypes.IDHit>}
  */
 export const gameByMD5 = async (
-    hash: string | undefined
-): Promise<APITypes.IDHit> => {
+    hash: string | undefined,
+    filename: string | undefined
+): Promise<APITypes.IDHit | Error> => {
     return axios({
         method: 'get',
         responseType: 'json',
@@ -82,7 +86,12 @@ export const gameByMD5 = async (
         headers: _defaultHeaders,
     })
         .then((res) => res?.data as APITypes.MD5Result)
-        .then((res) => gameByID(res.entry_id));
+        .then((res) => gameByID(res.entry_id))
+        .catch((err: Error) => {
+            return new Error(
+                `${err.message}, ${filename},  ${rootUrl}filecheck/${hash}`
+            );
+        });
 };
 
 /**
@@ -114,6 +123,8 @@ export const download = async (url: string, path: string): Promise<boolean> => {
                 writer.on('error', (err) => {
                     error = err;
                     writer.close();
+
+                    log(LogType.Error, 'Assets', 'Failed', { err });
                     reject(err);
                 });
 

@@ -2,6 +2,8 @@ import { Game } from '../types/api.v3';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
 import { pegasusEntry, pegasusHeader } from './generators/pegasus';
 import fs from 'fs';
+import { log } from './log';
+import { LogType } from '../types/app';
 
 /**
  * Parses API game json into a smaller object
@@ -15,6 +17,8 @@ export const embiggen = (game: Game): IIniObject => {
         runningScreen =
             game.screens?.find((screen) => screen.type === 'Running screen') ||
             {};
+
+    log(LogType.Info, 'Generate', 'Embiggen', { value: game.title });
 
     return {
         game: game.title || '',
@@ -37,7 +41,6 @@ export const embiggen = (game: Game): IIniObject => {
         ['assets.titlescreen.size']: loadingScreen?.size || 0,
         ['assets.screenshot']: runningScreen?.url || '',
         ['assets.screenshot.size']: runningScreen?.size || 0,
-        //['assets.boxFront']: '',
     };
 };
 
@@ -48,7 +51,10 @@ export const embiggen = (game: Game): IIniObject => {
  */
 export const save = (meta: string[]): boolean => {
     try {
-        console.log('globalThis.config.output', globalThis.config.output);
+        log(LogType.Info, 'Generate', 'Save', {
+            value: globalThis.config.output,
+        });
+
         if (globalThis.config.output) {
             if (fs.existsSync(globalThis.config.output)) {
                 fs.unlinkSync(globalThis.config.output);
@@ -60,6 +66,7 @@ export const save = (meta: string[]): boolean => {
         }
         return false;
     } catch (err) {
+        log(LogType.Error, 'Generate', 'Error', { err });
         return false;
     }
 };

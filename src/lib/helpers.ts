@@ -8,3 +8,16 @@ import { existsSync, statSync } from 'fs';
 export const directoryExists = (path: string): boolean => {
     return existsSync(path) && statSync(path).isDirectory();
 };
+
+/**
+ * Dummy Progress Bar (for verbose debugging)
+ */
+export const dummyProgress = {
+    Bar: () => {
+        return {
+            start: () => {},
+            update: () => {},
+            stop: () => {},
+        };
+    },
+};

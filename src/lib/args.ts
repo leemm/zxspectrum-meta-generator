@@ -2,7 +2,8 @@ import commandLineArgs from 'command-line-args';
 import commandLineUsage from 'command-line-usage';
 import chalk from 'chalk';
 import path from 'path';
-import { OptionDefinition, Config } from '../types/app';
+import { OptionDefinition, Config, LogType } from '../types/app';
+import { log } from './log';
 
 export const validPlatforms = ['pegasus'];
 
@@ -158,9 +159,9 @@ export const help = () => {
  * Display version
  */
 export const version = () => {
-    console.log(
-        `${globalThis.version.APP_DISPLAY_NAME} v${globalThis.version.APP_DISPLAY_VERSION}\n`
-    );
+    const display = `${globalThis.version.APP_DISPLAY_NAME} v${globalThis.version.APP_DISPLAY_VERSION}`;
+    log(LogType.Info, 'Version', 'Value', { value: display });
+    console.log(`${display}\n`);
 };
 
 /**
@@ -181,7 +182,6 @@ export const init = (): Config => {
             options['assets'] = path.dirname(options['output']);
         }
 
-        console.log('options', options);
         return options as Config;
     } catch (err) {
         console.error(

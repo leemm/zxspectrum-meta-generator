@@ -4,7 +4,8 @@ import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
 import { Game } from '../types/api.v3';
 import { download } from './request';
 import { directoryExists } from './helpers';
-import { Descriptions, MediaFolders } from '../types/app';
+import { Descriptions, LogType, MediaFolders } from '../types/app';
+import { log } from './log';
 
 const root = 'https://zxinfo.dk';
 
@@ -18,14 +19,17 @@ const _makeAssetDirectories = (): MediaFolders => {
         covers = path.join(globalThis.config.assets || '', 'assets/covers');
 
     if (!directoryExists(titles)) {
+        log(LogType.Info, 'Assets', 'Create directory', { value: titles });
         fs.mkdirSync(titles, { recursive: true });
     }
 
     if (!directoryExists(screens)) {
+        log(LogType.Info, 'Assets', 'Create directory', { value: screens });
         fs.mkdirSync(screens, { recursive: true });
     }
 
     if (!directoryExists(covers)) {
+        log(LogType.Info, 'Assets', 'Create directory', { value: covers });
         fs.mkdirSync(covers, { recursive: true });
     }
 
@@ -53,11 +57,10 @@ const _downloadSpecificFile = async (
         if (!url) {
             url = root + '/media' + cachedIniFile[key]?.toString();
         }
-        console.log(`Downloading: ${url}`);
 
-        if (!(await download(url, path))) {
-            console.error(`Failed to download: ${url}`);
-        } else {
+        log(LogType.Info, 'Assets', 'Download', { value: url });
+
+        if (await download(url, path)) {
             cachedIniFile[key + '.local'] = path;
         }
     } else {
