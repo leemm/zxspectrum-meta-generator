@@ -181,7 +181,10 @@ const start = async () => {
                     // @ts-ignore-line
                     meta.push(Generators[generateEntry](cachedIniFile));
                 } catch (err) {
-                    failedFiles.push(file.path || '');
+                    failedFiles.push(
+                        file.path?.replace(globalThis.config.src || '', '') ||
+                            ''
+                    );
                     log(LogType.Error, 'Process File', 'Fatal Error', { err });
                 }
             })
@@ -207,10 +210,22 @@ const start = async () => {
                 (meta.length - failedFiles.length !== 1 ? 's' : '')
             }\n`
         );
+        console.log(
+            `${chalk.red(
+                'Failed!'
+            )} These files have not been found, or are not valid spectrum dumps: ${failedFiles
+                .map((file) => chalk.italic.grey(file))
+                .join(', ')}\n`
+        );
     }
+
     log(LogType.Info, 'Complete', 'Generated', {
         value: globalThis.config.output,
     });
+    log(LogType.Error, 'Failed', 'Not found or invalid', {
+        value: failedFiles.join(', '),
+    });
+
     process.exit();
 };
 
