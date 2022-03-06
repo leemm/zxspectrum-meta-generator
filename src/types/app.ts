@@ -27,6 +27,7 @@ export interface Config {
     assets?: string;
     platform?: string;
     verbose?: boolean;
+    'verbose-save'?: boolean;
     version?: boolean;
     help?: boolean;
     clear?: boolean;

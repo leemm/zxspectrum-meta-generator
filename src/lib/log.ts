@@ -1,5 +1,6 @@
 import createLogger from 'logging';
 import chalk from 'chalk';
+import fs from 'fs';
 import { LogType } from '../types/app';
 
 const loggers: createLogger.Logger[] = [];
@@ -34,4 +35,32 @@ export const log = (
             func(feature, chalk.gray(message));
         }
     }
+};
+
+/**
+ * Ensure console.x is also sent to log file
+ * @param {string} path - Log file path
+ */
+export const attachFSLogger = (path: string) => {
+    const old = {
+        log: console.log,
+        info: console.info,
+        warn: console.warn,
+        error: console.error,
+    };
+
+    const fsLog = fs.createWriteStream(path, {
+        flags: 'a',
+    });
+
+    Object.keys(old).map((prop) => {
+        // @ts-ignore-line
+        console[prop] = (...messages) => {
+            // @ts-ignore-line
+            old[prop].apply(console, messages);
+            fsLog.write(
+                messages.join(' ').replace(/\033\[[0-9;]*m/g, '') + '\n'
+            );
+        };
+    });
 };

@@ -9,7 +9,7 @@ export const validPlatforms = ['pegasus'];
 
 const description =
     'Parse your tape/disk images and generate a metafile|for your emulator frontend using ZXInfo API';
-const usage = 'Usage: `zxgenerator [options ...]`';
+const usage = `Usage: ${chalk.italic('zxgenerator [options ...]')}`;
 
 const header = ` __________________________________________________
 | ___. __  _     __ . __                           |
@@ -69,58 +69,78 @@ const optionDefinitions: OptionDefinition[] = [
         type: String,
         default:
             '/opt/retropie/supplementary/runcommand/runcommand.sh 0 _SYS_ zxspectrum',
-        description:
-            'Emulator/Script launch path. Game path is automatically added to the end of the process.',
+        description: `${chalk.hex('#A9A9A9')(
+            'Emulator/Script launch path. Game path is automatically added to the end of the process.'
+        )}`,
     },
     {
         name: 'src',
         type: String,
-        description: 'Root directory of your spectrum tape/disk images.',
+        description: `${chalk.hex('#A9A9A9')(
+            'Root directory of your spectrum tape/disk images.'
+        )}`,
     },
     {
         name: 'output',
         type: String,
-        description: 'Destination directory and filename of your meta file.',
+        description: `${chalk.hex('#A9A9A9')(
+            'Destination directory and filename of your meta file.'
+        )}`,
     },
     {
         name: 'assets',
         type: String,
-        description:
-            'Destination directory of media assets. Defaults to same directory as --output',
+        description: `${chalk.hex('#A9A9A9')(
+            'Destination directory of media assets. Defaults to same directory as ' +
+                chalk.grey.italic('--output') +
+                '.'
+        )}`,
     },
     {
         name: 'platform',
         type: String,
         default: 'pegasus',
-        description: `Shows this help message. Supported values: ${validPlatforms.join(
-            ', '
-        )}.`,
+        description: chalk.hex('#A9A9A9')(
+            `Shows this help message. Supported values: ${chalk.italic(
+                validPlatforms.join(', ')
+            )}.`
+        ),
     },
     {
         name: 'clear',
         type: Boolean,
         defaultOption: false,
-        description: 'Clears the local api cache.',
+        description: `${chalk.hex('#A9A9A9')('Clears the local api cache.')}.`,
     },
     {
         name: 'verbose',
         alias: 'v',
         type: Boolean,
         defaultOption: false,
-        description: 'Turn on debugging output.',
+        description: `${chalk.hex('#A9A9A9')('Turn on debugging output.')}.`,
+    },
+    {
+        name: 'verbose-save',
+        type: Boolean,
+        defaultOption: false,
+        description: chalk.hex('#A9A9A9')(
+            `Saves the verbose log to the ${chalk.grey.italic(
+                '--output'
+            )} directory.`
+        ),
     },
     {
         name: 'version',
         type: Boolean,
         defaultOption: false,
-        description: 'Print version info.',
+        description: chalk.hex('#A9A9A9')('Print version info.'),
     },
     {
         name: 'help',
         alias: 'h',
         type: Boolean,
         defaultOption: false,
-        description: 'Shows this help message.',
+        description: chalk.hex('#A9A9A9')('Shows this help screen.'),
     },
 ];
 
@@ -145,7 +165,11 @@ export const help = () => {
                     description:
                         option.description +
                         (option.default
-                            ? ' Defaults to ' + option.default
+                            ? `${chalk.hex('#A9A9A9')(
+                                  ' Defaults to ' +
+                                      chalk.grey.italic(option.default) +
+                                      '.'
+                              )}`
                             : ''),
                 };
             }),

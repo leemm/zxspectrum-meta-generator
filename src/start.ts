@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import { init as initArgs, help, version } from './lib/args';
 import { Config, LogType, Version } from './types/app';
 import { init as initCache } from './lib/cache';
-import { log } from './lib/log';
+import { attachFSLogger, log } from './lib/log';
 
 import { findGames } from './lib/files';
 import { validate, tooling as toolingValidate } from './lib/validate';
@@ -15,10 +15,12 @@ import { save as saveAssets } from './lib/assets';
 import { get as descriptions } from './lib/description';
 
 import { version as versionInfo } from './version';
+import { logFileLocation } from './lib/helpers';
 
 declare global {
     var config: Config;
     var version: Version;
+    var logPath: string;
 }
 
 globalThis.version = versionInfo;
@@ -28,6 +30,13 @@ const start = async () => {
     globalThis.config = initArgs();
     if (Object.keys(globalThis.config).length === 0) {
         process.exit(1);
+    }
+
+    // console stdout also written to log file
+    if (globalThis.config['verbose-save']) {
+        global.logPath = logFileLocation();
+        log(LogType.Info, 'Log File', 'Created', { value: global.logPath });
+        attachFSLogger(global.logPath);
     }
 
     // Validate required tooling
@@ -72,18 +81,20 @@ const start = async () => {
 
     log(LogType.Info, 'Output', 'Header');
     // Header
-    console.log(
-        boxen(
-            `${chalk.magenta(globalThis.version.APP_DISPLAY_NAME)} ${chalk.cyan(
-                'v' + globalThis.version.APP_DISPLAY_VERSION
-            )}`,
-            {
-                padding: 1,
-                margin: 1,
-                borderStyle: 'round',
-            }
-        )
-    );
+    if (!globalThis.config.verbose) {
+        console.log(
+            boxen(
+                `${chalk.magenta(
+                    globalThis.version.APP_DISPLAY_NAME
+                )} ${chalk.cyan('v' + globalThis.version.APP_DISPLAY_VERSION)}`,
+                {
+                    padding: 1,
+                    margin: 1,
+                    borderStyle: 'round',
+                }
+            )
+        );
+    }
 
     // Validate arguments
     log(LogType.Info, 'Arguments', 'Validate');
@@ -225,6 +236,10 @@ const start = async () => {
     log(LogType.Error, 'Failed', 'Not found or invalid', {
         value: failedFiles.join(', '),
     });
+
+    if (globalThis.config['verbose-save']) {
+        log(LogType.Info, 'Log File', 'Saved to:', { value: global.logPath });
+    }
 
     process.exit();
 };
