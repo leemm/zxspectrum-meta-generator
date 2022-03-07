@@ -101,7 +101,7 @@ const optionDefinitions: OptionDefinition[] = [
         type: String,
         default: 'pegasus',
         description: chalk.hex('#A9A9A9')(
-            `Shows this help message. Supported values: ${chalk.italic(
+            `Generate meta files for your chosen platform. Supported values: ${chalk.italic(
                 validPlatforms.join(', ')
             )}.`
         ),

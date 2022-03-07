@@ -29,7 +29,11 @@ globalThis.version = versionInfo;
 const start = async () => {
     // Parse arguments
     globalThis.config = initArgs();
-    if (Object.keys(globalThis.config).length === 0) {
+    if (
+        Object.keys(globalThis.config).length === 2 &&
+        Object.keys(globalThis.config).includes('launch') &&
+        Object.keys(globalThis.config).includes('platform')
+    ) {
         process.exit(1);
     }
 
