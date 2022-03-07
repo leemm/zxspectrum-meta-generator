@@ -16,6 +16,7 @@ import { get as descriptions } from './lib/description';
 
 import { version as versionInfo } from './version';
 import { logFileLocation } from './lib/helpers';
+import { progress } from './lib/progress';
 
 declare global {
     var config: Config;
@@ -118,14 +119,19 @@ const start = async () => {
 
     // If files exist then let's find them in the api, via a cached version, and build the output!
     let meta: string[] = [];
+
     if (files) {
+        let bar = progress('2/2: Searching API');
+        bar.start(files.length, 0, { val: '' });
+
         const generateHeader: keyof Generators = ((globalThis.config.platform ||
             '') + 'Header') as keyof Generators;
         // @ts-ignore-line
         meta.push(Generators[generateHeader]());
 
         await Promise.all(
-            files.map(async (file) => {
+            files.map(async (file, idx) => {
+                bar.update(idx + 1, { val: file.base });
                 try {
                     let cachedIniFile = loadCache(
                         file.path || '',
@@ -200,6 +206,10 @@ const start = async () => {
                 }
             })
         );
+
+        bar.stop();
+
+        console.log('\n');
     }
 
     if (!saveMeta(meta)) {

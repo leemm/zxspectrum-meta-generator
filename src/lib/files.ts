@@ -7,10 +7,8 @@ import fs from 'fs';
 import { File, LogType } from '../types/app';
 import { nanoid } from 'nanoid';
 import md5 from 'md5';
-import chalk from 'chalk';
-import cliProgress from 'cli-progress';
 import { log } from './log';
-import { dummyProgress } from './helpers';
+import { progress } from './progress';
 
 const _archiveMimeTypes = [
     'application/zip',
@@ -110,23 +108,12 @@ export const findGames = async (
     }
 
     log(LogType.Info, 'Files', 'Progress bar init');
-    let progress = !globalThis.config.verbose
-        ? new cliProgress.Bar({
-              format: `Processing files | ${chalk.cyan(
-                  '{bar}'
-              )} | ${chalk.blueBright(
-                  '{filename}'
-              )} | {percentage}% | {value}/{total} File(s)`,
-              barCompleteChar: '\u2588',
-              barIncompleteChar: '\u2591',
-              hideCursor: true,
-          })
-        : dummyProgress.Bar();
+    let bar = progress('1/2: Processing files');
 
     log(LogType.Info, 'Files', 'Read source folder');
     const filesInFolder = getAllFilesSync(path);
     log(LogType.Info, 'Files', `${filesInFolder.toArray().length} files found`);
-    progress.start(filesInFolder.toArray().length, 0, { filename: '' });
+    bar.start(filesInFolder.toArray().length, 0, { val: '' });
 
     let games: File[] = [];
     let idx = 0;
@@ -146,7 +133,7 @@ export const findGames = async (
 
         log(LogType.Info, 'Files', `Value`, { value: file });
 
-        progress.update(idx, { filename: file.name });
+        bar.update(idx, { val: file.base });
 
         log(LogType.Info, 'Files', `Extract`, { value: file });
         file = _extractArchiveAndCheckForValidFile(file);
@@ -154,7 +141,7 @@ export const findGames = async (
         games.push(file);
     }
 
-    progress.stop();
+    bar.stop();
 
     console.log('\n');
 
