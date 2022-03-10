@@ -64,7 +64,7 @@ export const gameByID = async (id: string): Promise<APITypes.IDHit> => {
     return axios({
         method: 'get',
         responseType: 'json',
-        url: `${rootUrl}games/${id}?mode=compact`,
+        url: `${rootUrl}games/${id}?mode=full`,
         headers: _defaultHeaders,
     }).then((res) => res?.data as APITypes.IDHit);
 };

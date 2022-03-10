@@ -1,6 +1,6 @@
 {
     "name": "zxspectrum-frontend-meta-generator",
-    "version": "0.4.6",
+    "version": "0.4.7",
     "description": "ZXSpectrum Game Frontend Config Generator using ZXInfo API",
     "main": "./dist/start.js",
     "scripts": {

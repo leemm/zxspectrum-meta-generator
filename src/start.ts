@@ -1,5 +1,6 @@
 import boxen from 'boxen';
 import chalk from 'chalk';
+import fs from 'fs';
 import { init as initArgs, help, version } from './lib/args';
 import { Config, LogType, Version } from './types/app';
 import { init as initCache } from './lib/cache';
@@ -160,7 +161,8 @@ const start = async () => {
 
                         // Find a description (if available)
                         const desc = await descriptions(
-                            processedFile.title || ''
+                            processedFile.title || '',
+                            (cachedIniFile['wikipedia'] as string) || ''
                         );
                         cachedIniFile['summary'] = desc.summary || '';
                         cachedIniFile['description'] = desc.description || '';

@@ -2,6 +2,8 @@
  * Types/Interfaces for ZXInfo API
  */
 
+import { KeyValuePairNamed } from './app';
+
 export enum APISort {
     titleAsc = 'title_asc',
     titleDesc = 'title_desc',
@@ -77,9 +79,11 @@ export interface Screen {
 export interface Download {
     path?: string;
     size?: number;
+    type?: string;
     format?: string;
     language?: string;
-    type?: string;
+    origin?: string;
+    encodingScheme?: string;
 }
 
 export interface Note {
@@ -95,31 +99,145 @@ export interface Publisher {
     publisherSeq?: number;
 }
 
+export interface Magazine {
+    type?: string;
+    featureName?: string;
+    magazineName?: string;
+    page?: number;
+    issueId?: number;
+    dateYear?: number;
+    dateMonth?: number;
+    volume?: number;
+    number?: number;
+    score?: string;
+}
+
+export interface System {
+    name?: string;
+    url?: string;
+}
+
+export interface Site {
+    siteName?: string;
+    url?: string;
+}
+
+export interface Price {
+    amount?: string;
+    currency?: string;
+    prefix?: number;
+}
+
+export interface Hash {
+    filename: string;
+    md5?: string;
+    sha512?: string;
+}
+
+export interface Path {
+    path: string;
+}
+
+export interface Licence {
+    name: string;
+    country?: string;
+    type?: string;
+    originalName?: string;
+}
+
+export interface Compilation {
+    entry_id: number;
+    title: string;
+    publishers?: Publisher[];
+    machineType?: string;
+    type?: string;
+}
+
+export interface Release {
+    releaseSeq: number;
+    publishers?: Publisher[];
+    releaseTitles?: any[];
+    yearOfRelease?: number;
+    releasePrice?: Price;
+    code?: string;
+    barcode?: string;
+    dl?: string;
+    files?: Download[];
+}
+
 export interface Game {
-    originalDayOfRelease?: string;
-    isbn?: string;
-    zxinfoVersion?: string;
-    availability?: string;
-    title?: string;
-    releases?: {
-        publishers?: Publisher[];
-    }[];
-    originalMonthOfRelease?: null;
+    controls?: KeyValuePairNamed[];
+    authoring?: any[];
+    duplicateOf?: any[];
+    bookContents?: any[];
+    language?: string;
+    competition?: any[];
+    editBy?: any[];
+    numberOfPlayers?: string;
+    modificationOf?: any[];
     score?: {
         score?: number;
         votes?: number;
     };
-    genreType?: string;
+    features?: KeyValuePairNamed[];
     additionalDownloads?: Download[];
-    screens?: Screen[];
-    originalYearOfRelease?: number;
-    genre?: string;
+    bundledWith?: any[];
+    duplicatedBy?: any[];
+    magazineReferences?: Magazine[];
     publishers?: Publisher[];
-    genreSubType?: string;
+    otherSystems?: System[];
     contentType?: string;
-    machineType?: string;
+    runsWith?: any[];
+    originalPublication?: string;
+    requiredByHardware?: any[];
+    relatedSites?: Site[];
+    originalDayOfRelease?: string;
+    inspirationFor?: any[];
+    requiredToRun?: any[];
+    knownErrors?: any;
+    editorOf?: any[];
+    originOf?: any[];
+    originalYearOfRelease?: number;
+    addOnAvailable?: any[];
+    hardwareBlurb?: string;
+    requiresHardware?: any[];
     authors?: Author[];
-    numberOfPlayers?: string;
+    originalPrice?: Price;
+    authoredWith?: any[];
+    isbn?: string;
+    availability?: string;
+    inspiredBy?: any[];
+    md5hash?: Hash[];
+    title?: string;
+    originalMonthOfRelease?: number;
+    genreType?: string;
+    addOnDependsOn?: any[];
+    screens?: Screen[];
+    multiplayerMode?: string;
+    genre?: string;
+    derivedFrom?: any[];
+    modifiedBy?: any[];
+    youTubeLinks?: Site[];
+    machineType?: string;
+    tosec?: Path;
+    otherPlatform?: any[];
+    licensed?: Licence[];
+    bundleContent?: any[];
+    compilationContents?: any[];
+    zxinfoVersion?: string;
+    themedGroup?: KeyValuePairNamed[];
+    unsortedGroup?: any[];
+    relatedLinks?: Site[];
+    reviewAwards?: any[];
+    inCompilations?: Compilation[];
+    releases?: Release[];
+    inBook?: any[];
+    awards?: any[];
+    series?: Compilation[];
+    genreSubType?: string;
+    multiplayerType?: string;
+    remarks?: string;
+
     _localPath?: string | undefined;
     _md5: string | undefined;
 }

@@ -3,7 +3,7 @@ import fs from 'fs';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
 import { Game } from '../types/api.v3';
 import { download } from './request';
-import { directoryExists } from './helpers';
+import { directoryExists, thirdPartyDownloadUrl } from './helpers';
 import { Descriptions, LogType, MediaFolders } from '../types/app';
 import { log } from './log';
 
@@ -109,6 +109,7 @@ export const save = async (
         );
     }
 
+    // If boxart is missing try to get it from a different source
     if (desc.boxart) {
         const ext = path.extname(desc.boxart);
         const boxartPath = path.join(assets.covers || '', md5 + ext);
@@ -121,22 +122,23 @@ export const save = async (
         );
     }
 
-    return cachedIniFile;
-};
-
-/**
- * Download cover and stream to disk
- * @param {string} md5 - File hash
- * @param {IIniObject} cachedIniFile - Current cache meta for this game
- * @returns {Promise<IIniObject>}
- */
-export const saveCover = async (md5: string, cachedIniFile: IIniObject) => {
-    const assets = _makeAssetDirectories();
-
-    if (cachedIniFile['assets.titlescreen']) {
+    if (cachedIniFile['assets.boxFront'] && !desc.boxart) {
         const ext = path.extname(
-            cachedIniFile['assets.titlescreen']?.toString() || ''
+            cachedIniFile['assets.boxFront']?.toString() || ''
         );
-        const loadingScreenPath = path.join(assets.covers || '', md5 + ext);
+        const boxartPath = path.join(assets.covers || '', md5 + ext);
+
+        const url = thirdPartyDownloadUrl(
+            cachedIniFile['assets.boxFront'] as string
+        );
+
+        cachedIniFile = await _downloadSpecificFile(
+            cachedIniFile,
+            boxartPath,
+            'assets.boxFront',
+            url
+        );
     }
+
+    return cachedIniFile;
 };

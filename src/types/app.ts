@@ -55,3 +55,5 @@ export enum LogType {
     Warn = 'warn',
     Error = 'error',
 }
+
+export type KeyValuePairNamed = [key: string, value: string];

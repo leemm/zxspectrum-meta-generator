@@ -16,7 +16,19 @@ export const embiggen = (game: Game): IIniObject => {
             {},
         runningScreen =
             game.screens?.find((screen) => screen.type === 'Running screen') ||
-            {};
+            {},
+        boxArt =
+            game.additionalDownloads?.find(
+                (download) => download.type === 'Inlay - Front'
+            ) || {},
+        wikipedia =
+            game.relatedLinks?.find(
+                (link) => link.siteName?.toLowerCase() === 'wikipedia'
+            ) || {},
+        mobyGames =
+            game.relatedLinks?.find(
+                (link) => link.siteName?.toLowerCase() === 'mobygames'
+            ) || {};
 
     log(LogType.Info, 'Generate', 'Embiggen', { value: game.title });
 
@@ -37,10 +49,14 @@ export const embiggen = (game: Game): IIniObject => {
             .join(', '),
         genre: game.genre ?? '',
         players: game.numberOfPlayers ?? '',
+        wikipedia: wikipedia?.url || '',
+        mobygames: mobyGames?.url || '',
         ['assets.titlescreen']: loadingScreen?.url || '',
         ['assets.titlescreen.size']: loadingScreen?.size || 0,
         ['assets.screenshot']: runningScreen?.url || '',
         ['assets.screenshot.size']: runningScreen?.size || 0,
+        ['assets.boxFront']: boxArt?.path || '',
+        ['assets.boxFront.size']: boxArt?.size || 0,
     };
 };
 
