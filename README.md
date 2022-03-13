@@ -2,7 +2,7 @@
 
 <p align="center">Create your <b>metadata</b> for your favourite emulator <b>backend</b> using the ZXInfo API<br/><br/>Fast, efficient, modern... just like Windows 98<sup>tm</sup></p>
 
-[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.5.1-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
+[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.5.2-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
 
 ![Preview](https://i.imgur.com/rJj1i0n.gif)
 
@@ -46,7 +46,7 @@ sudo apt-get install p7zip-full
 ### Windows
 
 The easiest way is to visit https://www.7-zip.org/download.html and download the latest 7z-extra (https://www.7-zip.org/a/7z2107-extra.7z is the latest at the time of writing).
-Then extract and copy 7za.exe into your PATH.
+Then extract and copy _7za.exe_ into your **PATH**.
 
 ---
 
@@ -80,7 +80,7 @@ zxgenerator [OPTIONS]
 
 ## Examples
 
-This is the most _basic usage_. **--src** will be recursively scanned for valid spectrum tape/disk images, and the file **~/Downloads/meta.txt** will be generated.
+This is the most _basic usage_. **--src** will be recursively scanned for valid spectrum tape/disk images, and the file **~/Downloads/meta.txt** will be generated. If **~/Downloads/meta.txt** already exists it will be backed up in the format **~/Downloads/meta-_YYYYMMDDHHmmss_.txt**.
 Assets will be downloaded to the same directory as **--output**, where a new directory called _assets_ will be created.
 
 ```bash

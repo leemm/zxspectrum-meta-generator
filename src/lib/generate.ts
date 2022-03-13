@@ -1,6 +1,8 @@
 import { Game } from '../types/api.v3';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
 import fs from 'fs';
+import path from 'path';
+import timestamp from 'time-stamp';
 import { log } from './log.js';
 import { LogType } from '../types/app.js';
 
@@ -74,7 +76,16 @@ export const save = (meta: string[]): boolean => {
 
         if (globalThis.config.output) {
             if (fs.existsSync(globalThis.config.output)) {
-                fs.unlinkSync(globalThis.config.output);
+                const parts = path.parse(globalThis.config.output);
+                fs.renameSync(
+                    globalThis.config.output,
+                    path.join(
+                        parts.dir,
+                        `${parts.name}-${timestamp('YYYYMMDDHHmmss')}${
+                            parts.ext
+                        }`
+                    )
+                );
             }
             fs.writeFileSync(globalThis.config.output, meta.join('\n\n'), {
                 encoding: 'utf8',
