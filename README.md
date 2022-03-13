@@ -37,25 +37,26 @@ TBC
 zxgenerator [OPTIONS]
 ```
 
-| Option           | Description                                                                                   | Type      | Default                                                  | Required? |
-| ---------------- | --------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------- | --------- |
-| `--launch`       | Emulator/Script launch path. Game path is automatically added to the end of the process.      | `string`  | `<retropiepath>/runcommand.sh 0 _SYS_ zxspectrum <game>` | No        |
-| `--src`          | Root directory of your spectrum tape/disk images.                                             | `string`  |                                                          | Yes       |
-| `--output`       | Destination directory and filename of your meta file.                                         | `string`  |                                                          | Yes       |
-| `--assets`       | Destination directory of media assets.                                                        | `string`  | `same directory as --output`                             | No        |
-| `--platform`     | Generate meta files for your chosen platform. Supported values: pegasus. Defaults to pegasus. | `string`  | `pegasus`                                                | No        |
-| `--clear`        | Clears the local api cache.                                                                   | `boolean` | `false`                                                  | No        |
-| `-v, --verbose`  | Turn on debugging output.                                                                     | `boolean` | `false`                                                  | No        |
-| `--verbose-save` | Saves the verbose log to the --output directory.                                              | `boolean` | `false`                                                  | No        |
-| `--version`      | Print version info.                                                                           | `boolean` | `false`                                                  | No        |
-| `--help`         | Shows this help screen.                                                                       | `boolean` | `false`                                                  | No        |
+| Option           | Description                                                                                                                                                                                                                      | Type      | Default                                                  | Required? |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------- | --------- |
+| `--launch`       | Emulator/Script launch path. Game path is automatically added to the end of the process.                                                                                                                                         | `string`  | `<retropiepath>/runcommand.sh 0 _SYS_ zxspectrum <game>` | No        |
+| `--src`          | Root directory of your spectrum tape/disk images.                                                                                                                                                                                | `string`  |                                                          | Yes       |
+| `--output`       | Destination directory and filename of your meta file.                                                                                                                                                                            | `string`  |                                                          | Yes       |
+| `--assets`       | Destination directory of media assets.                                                                                                                                                                                           | `string`  | `same directory as --output`                             | No        |
+| `--platform`     | Generate meta files for your chosen platform. Supported values: pegasus. Defaults to pegasus.                                                                                                                                    | `string`  | `pegasus`                                                | No        |
+| `--clear`        | Clears the local api cache.                                                                                                                                                                                                      | `boolean` | `false`                                                  | No        |
+| `-v, --verbose`  | Turn on debugging output.                                                                                                                                                                                                        | `boolean` | `false`                                                  | No        |
+| `--verbose-save` | Saves the verbose log to the --output directory.                                                                                                                                                                                 | `boolean` | `false`                                                  | No        |
+| `--audit-assets` | Assets will be audited for missing files, incorrectly ratio'd covers. (Comma-separated) valid values are _titles_, _screens_, and _covers_. Assets will be same directory as **--output** or via value supplied in **--assets**. | `string`  |                                                          | No        |
+| `--version`      | Print version info.                                                                                                                                                                                                              | `boolean` | `false`                                                  | No        |
+| `--help`         | Shows this help screen.                                                                                                                                                                                                          | `boolean` | `false`                                                  | No        |
 
 ---
 
 ## Examples
 
 This is the most _basic usage_. **--src** will be recursively scanned for valid spectrum tape/disk images, and the file **~/Downloads/meta.txt** will be generated.
-Assets will be downloaded to the same directory as **--output**.
+Assets will be downloaded to the same directory as **--output**, where a new directory called _assets_ will be created.
 
 ```bash
 zxgenerator --src ~/Downloads/tapes --output '~/Downloads/meta.txt'
@@ -95,6 +96,12 @@ Same as _basic usage_ but with (very) verbose output **AND** the verbose output 
 
 ```bash
 zxgenerator --src ~/Downloads/tapes --output '~/Downloads/meta.txt' --verbose --verbose-save
+```
+
+Audit your covers and screenshots directories (_~/Desktop/assets'_). This will check the images for valid or missing values, including prompting to allow you to download a new cover.
+
+```bash
+zxgenerator --src ~/Downloads/tapes --output '~/Downloads/meta.txt' --assets '~/Desktop/assets' --audit-assets covers,screens
 ```
 
 ---

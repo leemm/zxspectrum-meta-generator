@@ -1,9 +1,11 @@
 import path from 'path';
 import chalk from 'chalk';
-import { which } from 'shelljs';
-import { Config } from '../types/app';
-import { validPlatforms } from './args';
-import { directoryExists } from './helpers';
+import shelljs from 'shelljs';
+import { Config } from '../types/app.js';
+import { validPlatforms } from './args.js';
+import { directoryExists } from './helpers.js';
+
+const { which } = shelljs;
 
 /**
  * Validate tools to ensure they're set up

@@ -1,9 +1,10 @@
 import { Game } from '../types/api.v3';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
-import { pegasusEntry, pegasusHeader } from './generators/pegasus';
 import fs from 'fs';
-import { log } from './log';
-import { LogType } from '../types/app';
+import { log } from './log.js';
+import { LogType } from '../types/app.js';
+
+import { pegasusEntry, pegasusHeader } from './generators/pegasus.js';
 
 /**
  * Parses API game json into a smaller object

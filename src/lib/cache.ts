@@ -4,10 +4,10 @@ import getAppDataPath from 'appdata-path';
 import { parse, stringify } from 'js-ini';
 import md5 from 'md5';
 import del from 'del';
-import { directoryExists } from './helpers';
+import { directoryExists } from './helpers.js';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
-import { log } from './log';
-import { LogType } from '../types/app';
+import { log } from './log.js';
+import { LogType } from '../types/app.js';
 
 let config: string;
 
@@ -30,13 +30,15 @@ export const init = () => {
  * Load ini cache for specific game
  * @param {string} gamePath - Path of tape/disk image
  * @param {string} hash - Md5 hash of tape/disk image
- * @returns {IIniObject}
+ * @returns {IIniObject | undefined}
  */
 export const load = (
     gamePath: string,
     hash: string
 ): IIniObject | undefined => {
-    const pathMd5 = md5(gamePath);
+    const pathMd5 = /^[a-f0-9]{32}$/gi.test(gamePath)
+        ? gamePath
+        : md5(gamePath);
     const gameConfigPath = path.join(config, `${pathMd5}-${hash}.ini`);
 
     if (fs.existsSync(gameConfigPath)) {
@@ -48,6 +50,23 @@ export const load = (
         } catch (err) {
             log(LogType.Error, 'Cache', 'Error', { err });
             return;
+        }
+    }
+    return;
+};
+
+/**
+ * Load ini cache for specific game, by the Game's MD5 hash
+ * @param {string} hash - Md5 hash of tape/disk image
+ * @returns {IIniObject | undefined}
+ */
+export const findCacheFileByGameMD5 = (
+    hash: string
+): IIniObject | undefined => {
+    const cacheFiles = fs.readdirSync(config);
+    for (let cache of cacheFiles) {
+        if (cache.includes(hash)) {
+            return load(cache.split('-')[0], hash);
         }
     }
     return;

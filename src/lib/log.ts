@@ -1,7 +1,7 @@
 import createLogger from 'logging';
 import chalk from 'chalk';
 import fs from 'fs';
-import { LogType } from '../types/app';
+import { LogType } from '../types/app.js';
 
 const loggers: createLogger.Logger[] = [];
 

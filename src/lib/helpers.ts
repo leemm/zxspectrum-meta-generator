@@ -1,5 +1,10 @@
+import chalk from 'chalk';
 import { existsSync, statSync } from 'fs';
-import { join, parse } from 'path';
+import { join, parse, ParsedPath } from 'path';
+import { FoundGame, LogType, PromptValidInput } from '../types/app.js';
+import { findCacheFileByGameMD5 } from './cache.js';
+import { log } from './log.js';
+import { gameByMD5 } from './request.js';
 
 /**
  * Check if directory exists and is a directory
@@ -41,6 +46,76 @@ export const thirdPartyDownloadUrl = (path: string) => {
     }
 
     return '';
+};
+
+/**
+ * Use asset on disk to find the game title
+ * @param {ParsedPath} file - Asset parsed path
+ * @returns {Promise<FoundGame | undefined>}
+ */
+export const gameTitleByAssetFile = async (
+    file: ParsedPath
+): Promise<FoundGame | undefined> => {
+    const cache = findCacheFileByGameMD5(file.name);
+    if (cache) {
+        return {
+            title: cache['game'] as string,
+            hash: file.name,
+            parsed: file,
+        };
+    } else {
+        const game = await gameByMD5(
+            file.name,
+            join(file.dir, file.base),
+            'tiny'
+        );
+        if (game instanceof Error) {
+            log(LogType.Error, 'Assets', 'Audit Failure', { game });
+        } else {
+            return {
+                title: game._source.title || '',
+                hash: file.name,
+                parsed: file,
+            };
+        }
+    }
+};
+
+/**
+ * Converts audit prompt array of objects into a string
+ * @param {PromptValidInput[]} validInput - Prompt input config array
+ * @returns {string}
+ */
+export const generateAuditPrompt = (validInput: PromptValidInput[]): string => {
+    return `${chalk.green(
+        'Based on the image preview, do you want to:'
+    )}${validInput
+        .map(
+            (input, idx) =>
+                `\n${chalk.cyan(
+                    '(' +
+                        input.letter +
+                        (input.extra ? ' ' + input.extra : '') +
+                        ')'
+                )} ${input.label + (idx === validInput.length - 1 ? '?' : '')}`
+        )
+        .join('')}`;
+};
+
+/**
+ * Checks if input exists in validInput array
+ * @param {PromptValidInput[]} validInput - Prompt input config array
+ * @param {string} value - Input value
+ * @returns {boolean}
+ */
+export const validInputValue = (
+    validInput: PromptValidInput[],
+    value: string
+): boolean => {
+    return !!validInput.find(
+        (input) =>
+            input.letter === value || input.letter === value.toLowerCase()
+    );
 };
 
 /**

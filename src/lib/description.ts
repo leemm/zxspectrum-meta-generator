@@ -1,6 +1,6 @@
 import wiki from 'wikipedia';
-import { Descriptions, LogType } from '../types/app';
-import { log } from './log';
+import { Descriptions, LogType } from '../types/app.js';
+import { log } from './log.js';
 
 /**
  * Query Wikipedia for game description

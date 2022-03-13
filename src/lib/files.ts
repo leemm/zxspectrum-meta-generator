@@ -1,14 +1,16 @@
 import { getAllFilesSync } from 'get-all-files';
-import { exec } from 'shelljs';
+import shelljs from 'shelljs';
 import { lookup } from 'mime-types';
 import { parse, join } from 'path';
 import os from 'os';
 import fs from 'fs';
-import { File, LogType } from '../types/app';
+import { File, LogType } from '../types/app.js';
 import { nanoid } from 'nanoid';
 import md5 from 'md5';
-import { log } from './log';
-import { progress } from './progress';
+import { log } from './log.js';
+import { progress } from './progress.js';
+
+const { exec } = shelljs;
 
 const _archiveMimeTypes = [
     'application/zip',

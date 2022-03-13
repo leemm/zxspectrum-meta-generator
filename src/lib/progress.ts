@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import cliProgress from 'cli-progress';
-import { dummyProgress } from './helpers';
+import { dummyProgress } from './helpers.js';
 
 /**
  * Loops each file in specified path and returns all spectrum games found

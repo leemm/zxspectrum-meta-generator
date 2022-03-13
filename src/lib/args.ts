@@ -2,8 +2,8 @@ import commandLineArgs from 'command-line-args';
 import commandLineUsage from 'command-line-usage';
 import chalk from 'chalk';
 import path from 'path';
-import { OptionDefinition, Config, LogType } from '../types/app';
-import { log } from './log';
+import { OptionDefinition, Config, LogType } from '../types/app.js';
+import { log } from './log.js';
 
 export const validPlatforms = ['pegasus'];
 
@@ -128,6 +128,17 @@ const optionDefinitions: OptionDefinition[] = [
                 '--output'
             )} directory.`
         ),
+    },
+    {
+        name: 'audit-assets',
+        type: String,
+        description: `${chalk.hex('#A9A9A9')(
+            `Assets will be audited for missing files, incorrectly ratio'd covers. (Comma-separated) valid values are ${chalk.italic(
+                'titles, screens, and covers'
+            )}. Assets will be same directory as ${chalk.grey.italic(
+                '--output'
+            )} or via ${chalk.grey.italic('--assets')}.`
+        )}`,
     },
     {
         name: 'version',

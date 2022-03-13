@@ -1,9 +1,9 @@
 import axios from 'axios';
 import fs from 'fs';
-import * as APITypes from '../types/api.v3';
-import { Hits } from '../types/api.v3';
-import { LogType } from '../types/app';
-import { log } from './log';
+import * as APITypes from '../types/api.v3.js';
+import { Hits } from '../types/api.v3.js';
+import { LogType } from '../types/app.js';
+import { log } from './log.js';
 
 const rootUrl = 'https://api.zxinfo.dk/v3/';
 const _defaultHeaders = {
@@ -58,13 +58,17 @@ export const search = async (
 /**
  * Return game from API, by ID
  * @param {string} id - API Entry ID
+ * @param {string} mode - API mode
  * @returns {Promise<APITypes.IDHit>}
  */
-export const gameByID = async (id: string): Promise<APITypes.IDHit> => {
+export const gameByID = async (
+    id: string,
+    mode: string = 'full'
+): Promise<APITypes.IDHit> => {
     return axios({
         method: 'get',
         responseType: 'json',
-        url: `${rootUrl}games/${id}?mode=full`,
+        url: `${rootUrl}games/${id}?mode=${mode}`,
         headers: _defaultHeaders,
     }).then((res) => res?.data as APITypes.IDHit);
 };
@@ -72,12 +76,14 @@ export const gameByID = async (id: string): Promise<APITypes.IDHit> => {
 /**
  * Return game from API, by MD5 Hash
  * @param {string | undefined} hash - MD5 Hash
- * @param {string | undefined} name - Filename
+ * @param {string | undefined} filename - Filename
+ * @param {string} mode - API mode
  * @returns {Promise<APITypes.IDHit>}
  */
 export const gameByMD5 = async (
     hash: string | undefined,
-    filename: string | undefined
+    filename: string | undefined,
+    mode: string = 'full'
 ): Promise<APITypes.IDHit | Error> => {
     return axios({
         method: 'get',
@@ -86,7 +92,7 @@ export const gameByMD5 = async (
         headers: _defaultHeaders,
     })
         .then((res) => res?.data as APITypes.MD5Result)
-        .then((res) => gameByID(res.entry_id))
+        .then((res) => gameByID(res.entry_id, mode))
         .catch((err: Error) => {
             return new Error(
                 `${err.message}, ${filename},  ${rootUrl}filecheck/${hash}`

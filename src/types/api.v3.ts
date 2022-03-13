@@ -2,7 +2,7 @@
  * Types/Interfaces for ZXInfo API
  */
 
-import { KeyValuePairNamed } from './app';
+import { KeyValuePairNamed } from './app.js';
 
 export enum APISort {
     titleAsc = 'title_asc',

@@ -1,3 +1,5 @@
+import { ParsedPath } from 'path';
+
 export interface File {
     root: string;
     dir: string;
@@ -28,6 +30,7 @@ export interface Config {
     platform?: string;
     verbose?: boolean;
     'verbose-save'?: boolean;
+    'audit-assets'?: string;
     version?: boolean;
     help?: boolean;
     clear?: boolean;
@@ -48,6 +51,24 @@ export interface Descriptions {
     summary?: string;
     description?: string;
     boxart?: string;
+}
+
+export interface FoundGame {
+    title: string;
+    hash: string;
+    parsed: ParsedPath;
+}
+
+export interface PromptValidInput {
+    letter: string;
+    extra?: string;
+    label: string;
+}
+
+export interface PromptNewImage {
+    value: string;
+    isUrl: boolean;
+    isFile: boolean;
 }
 
 export enum LogType {

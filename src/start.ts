@@ -1,23 +1,22 @@
 import boxen from 'boxen';
 import chalk from 'chalk';
-import fs from 'fs';
-import { init as initArgs, help, version } from './lib/args';
-import { Config, LogType, Version } from './types/app';
-import { init as initCache } from './lib/cache';
-import { attachFSLogger, log } from './lib/log';
+import { init as initArgs, help, version } from './lib/args.js';
+import { Config, LogType, Version } from './types/app.js';
+import { init as initCache } from './lib/cache.js';
+import { attachFSLogger, log } from './lib/log.js';
 
-import { findGames } from './lib/files';
-import { validate, tooling as toolingValidate } from './lib/validate';
-import { gameByMD5 } from './lib/request';
-import { Game } from './types/api.v3';
-import { clear, load as loadCache, save as saveCache } from './lib/cache';
-import { embiggen, save as saveMeta, Generators } from './lib/generate';
-import { save as saveAssets } from './lib/assets';
-import { get as descriptions } from './lib/description';
+import { findGames } from './lib/files.js';
+import { validate, tooling as toolingValidate } from './lib/validate.js';
+import { gameByMD5 } from './lib/request.js';
+import { Game } from './types/api.v3.js';
+import { clear, load as loadCache, save as saveCache } from './lib/cache.js';
+import { embiggen, save as saveMeta, Generators } from './lib/generate.js';
+import { audit, save as saveAssets } from './lib/assets.js';
+import { get as descriptions } from './lib/description.js';
 
-import { version as versionInfo } from './version';
-import { logFileLocation } from './lib/helpers';
-import { progress } from './lib/progress';
+import { version as versionInfo } from './lib/version.js';
+import { logFileLocation } from './lib/helpers.js';
+import { progress } from './lib/progress.js';
 
 declare global {
     var config: Config;
@@ -61,6 +60,12 @@ const start = async () => {
 
     log(LogType.Info, 'Cache', 'Init');
     initCache();
+
+    // Audit already downloaded assets
+    if (globalThis.config['audit-assets'] || ''.length > 0) {
+        await audit();
+        process.exit(1);
+    }
 
     log(LogType.Info, 'Config', 'Value', globalThis.config);
 
