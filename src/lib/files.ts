@@ -60,7 +60,7 @@ const _extractArchiveAndCheckForValidFile = (file: File): File => {
 
         // Extract archive via 7z command to temp folder
         const isWindoze = os.type().toLowerCase().includes('windows');
-        const command = `7z${isWindoze ? '.exe' : ''} e "${
+        const command = `7za${isWindoze ? '.exe' : ''} e "${
             file.path
         }" -o"${extractFolder}" -r -y > ${isWindoze ? 'NUL' : '/dev/null'}`;
         exec(command);

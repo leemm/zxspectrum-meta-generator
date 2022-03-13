@@ -12,8 +12,8 @@ const { which } = shelljs;
  * @returns {string | undefined}
  */
 export const tooling = (): string | undefined => {
-    if (!which('7z')) {
-        return '7z not found in PATH, please refer to README to install.';
+    if (!which('7za')) {
+        return '7za not found in PATH, please refer to README to install.';
     }
     return;
 };

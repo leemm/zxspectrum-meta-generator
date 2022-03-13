@@ -2,7 +2,7 @@
 
 <p align="center">Create your <b>metadata</b> for your favourite emulator <b>backend</b> using the ZXInfo API<br/><br/>Fast, efficient, modern... just like Windows 98<sup>tm</sup></p>
 
-[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.4.7-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
+[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.5.1-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
 
 ![Preview](https://i.imgur.com/rJj1i0n.gif)
 
@@ -22,6 +22,31 @@
 -   ~~Generates for multiple emulator frontends~~ (currently only supports [Pegasus](https://pegasus-frontend.org/))
 -   A lovely [48k Speccy ASCII art](https://github.com/redcode/ASCII-Art/) from https://github.com/redcode/ASCII-Art/
 -   Other features coming at some point in the future
+
+---
+
+## Prerequisites
+
+Several tools are required to open up all functionality. You can install everything or just those you need.
+
+**p7zip** - to install 7z command, required for archive based file support e.g. zip, 7z, rar
+
+### OSX
+
+```bash
+brew update && brew doctor && brew install p7zip
+```
+
+### Debian/Ubuntu
+
+```bash
+sudo apt-get install p7zip-full
+```
+
+### Windows
+
+The easiest way is to visit https://www.7-zip.org/download.html and download the latest 7z-extra (https://www.7-zip.org/a/7z2107-extra.7z is the latest at the time of writing).
+Then extract and copy 7za.exe into your PATH.
 
 ---
 
