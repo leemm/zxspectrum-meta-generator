@@ -15,6 +15,7 @@ import {
     FoundGame,
     LogType,
     MediaFolders,
+    MetaFile,
     PromptNewImage,
 } from '../types/app.js';
 import { log } from './log.js';
@@ -559,6 +560,8 @@ export const audit = async () => {
                                 break;
                         }
                     }
+
+                    saveMetaFile(metaFile);
                 }
             }
         }
