@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
 import { download } from './request.js';
+import { load as loadMetafile, saveMetaFile } from './generate.js';
 import {
     directoryExists,
     gameTitleByAssetFile,
@@ -22,6 +23,7 @@ import sizeOf from 'image-size';
 import terminalImage from 'terminal-image';
 import promptly from 'promptly';
 import open from 'open';
+import boxen from 'boxen';
 
 const root = 'https://zxinfo.dk';
 
@@ -161,40 +163,55 @@ export const save = async (
 
 /**
  * Replace local file
- * @param {FoundGame} foundGame - Existing game
+ * @param {FoundGame | string} foundGame - Existing game or just title
  * @param {PromptNewImage} value - File info
  * @param {string} imageFullPath - Path of existing image
  * @returns {Promise<PromptNewImage>}
  */
 const imageReplace = async (
-    foundGame: FoundGame,
+    foundGame: FoundGame | string,
     value: PromptNewImage,
     imageFullPath: string
-) => {
+): Promise<string> => {
+    const parts = path.parse(value.value);
+
+    let downloadPath = imageFullPath;
+    if (path.extname(imageFullPath).length === 0) {
+        downloadPath += path.extname(value.value);
+    }
+
     // If copying local file
     if (value.isFile) {
-        if (fs.existsSync(imageFullPath)) {
-            fs.rmSync(imageFullPath);
+        if (fs.existsSync(downloadPath)) {
+            fs.rmSync(downloadPath);
         }
 
-        fs.copyFileSync(value.value, imageFullPath);
+        fs.copyFileSync(value.value, downloadPath);
 
         log(LogType.Info, 'Assets', 'Audit Game cover replace', {
-            game: foundGame?.title,
-            hash: foundGame?.hash,
+            game: typeof foundGame === 'string' ? foundGame : foundGame?.title,
+            hash: typeof foundGame === 'string' ? parts.name : foundGame?.hash,
             value: value.value,
-            path: imageFullPath,
+            path: downloadPath,
         });
     } else if (value.isUrl) {
-        if (await download(value.value, imageFullPath)) {
+        if (await download(value.value, downloadPath)) {
             log(LogType.Info, 'Assets', 'Audit Game cover replace', {
-                game: foundGame?.title,
-                hash: foundGame?.hash,
+                game:
+                    typeof foundGame === 'string'
+                        ? foundGame
+                        : foundGame?.title,
+                hash:
+                    typeof foundGame === 'string'
+                        ? parts.name
+                        : foundGame?.hash,
                 value: value.value,
-                path: imageFullPath,
+                path: downloadPath,
             });
         }
     }
+
+    return downloadPath;
 };
 
 /**
@@ -284,17 +301,86 @@ const coverImagePrompt = async (
 };
 
 /**
+ * Prompt for missing asset
+ * @param {string} title - Game title
+ * @param {string} imageFullPath - Path of image
+ * @param {string} aud - Either covers, themes, or screens
+ * @returns {Promise<string>}
+ */
+const missingImagePrompt = async (
+    title: string,
+    imageFullPath: string,
+    aud: string
+): Promise<string> => {
+    console.log(
+        `\nThe ${aud.substring(0, aud.length - 1)} for ${chalk.cyan(
+            title
+        )} is missing.\n`
+    );
+
+    const validInput = [
+        { letter: 'a', label: 'Open browser and search for image' },
+        {
+            letter: 'b',
+            label: 'Replace image with local path or remote url',
+        },
+        {
+            letter: 'c',
+            extra: 'or return',
+            label: 'Ignore',
+        },
+    ];
+
+    return await promptly.prompt(
+        generateAuditPrompt(validInput, 'What do you want to?:'),
+        {
+            default: 'c',
+            validator: (value: string) => {
+                if (!validInputValue(validInput, value)) {
+                    throw new Error(chalk.red('\nInvalid selection!\n'));
+                } else {
+                    log(LogType.Info, 'Assets', 'Audit Game cover', {
+                        game: title,
+                        value: 'Ignoring file change',
+                        path: imageFullPath,
+                    });
+                }
+
+                return value.toLowerCase();
+            },
+        }
+    );
+};
+
+/**
  * Audit all assets using defined rules. Prompts for new files
  */
 export const audit = async () => {
     const assets = _makeAssetDirectories();
     const verbose = globalThis.config.verbose;
 
+    console.log(
+        boxen(
+            chalk.red(
+                `WARNING: AUDITING MAY ONLY WORK WITH META FILES CREATED WITH THIS TOOL\n\nIgnoring this warning could result in lost data`
+            ),
+            {
+                align: 'center',
+                padding: 1,
+                margin: 1,
+                borderStyle: 'double',
+                borderColor: 'red',
+            }
+        )
+    );
+
     const toAudit = (globalThis.config['audit-assets'] || '').split(',');
 
     const foundGames: FoundGame[] = [];
 
     for (let aud of toAudit) {
+        // Part 1. Check current images
+
         // @ts-ignore-line
         const current = assets[aud];
 
@@ -388,6 +474,89 @@ export const audit = async () => {
                                     readyToContinue = true;
                                     break;
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Part 2. Check Metafile for missing images
+
+        const metaFile = loadMetafile();
+        if (metaFile && metaFile.header && metaFile.entries) {
+            for (let entry of metaFile.entries) {
+                if (
+                    (entry['assets.boxFront'].length === 0 &&
+                        aud === 'covers') ||
+                    (entry['assets.titlescreen'].length === 0 &&
+                        aud === 'titles') ||
+                    (entry['assets.screenshot'].length === 0 &&
+                        aud === 'screens')
+                ) {
+                    log(
+                        LogType.Info,
+                        'Assets',
+                        `Audit Game ${aud.substring(
+                            0,
+                            aud.length - 1
+                        )} missing`,
+                        {
+                            game: entry.game,
+                            hash: entry['x-hash'],
+                        }
+                    );
+
+                    let imageFullPath = path.join(
+                        current || '',
+                        entry['x-hash']
+                    );
+
+                    let readyToContinue = false;
+
+                    while (!readyToContinue) {
+                        const imagePrompt = await missingImagePrompt(
+                            entry.game,
+                            imageFullPath,
+                            aud
+                        );
+
+                        // So, what do we do now we have a selection?
+                        switch (imagePrompt) {
+                            case 'a':
+                                console.log(
+                                    `Copy the _url_ of the image to the clipboard and chose ${chalk.cyan(
+                                        '(b)'
+                                    )}`
+                                );
+                                await open(
+                                    `https://www.google.com/search?q=zx+spectrum+game+${entry.game}&tbm=isch`
+                                );
+                                break;
+                            case 'b':
+                                const fileValue = await imageReplacePrompt();
+
+                                imageFullPath = await imageReplace(
+                                    entry.game,
+                                    fileValue,
+                                    imageFullPath
+                                );
+
+                                if (aud === 'covers') {
+                                    entry['assets.boxFront'] = imageFullPath;
+                                }
+                                if (aud === 'titles') {
+                                    entry['assets.titlescreen'] = imageFullPath;
+                                }
+                                if (aud === 'screens') {
+                                    entry['assets.screenshot'] = imageFullPath;
+                                }
+
+                                readyToContinue = true;
+
+                                break;
+                            case 'c':
+                                readyToContinue = true;
+                                break;
                         }
                     }
                 }

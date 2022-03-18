@@ -4,16 +4,22 @@ import fs from 'fs';
 import path from 'path';
 import timestamp from 'time-stamp';
 import { log } from './log.js';
-import { LogType } from '../types/app.js';
+import { LogType, MetaFile } from '../types/app.js';
 
-import { pegasusEntry, pegasusHeader } from './generators/pegasus.js';
+import {
+    pegasusEntry,
+    pegasusHeader,
+    pegasusMetaLoad,
+    pegasusMetaSaveToArray,
+} from './generators/pegasus.js';
 
 /**
  * Parses API game json into a smaller object
  * @param {Game} game - JSON result from API
+ * @param {string} hash - File MD5 hash
  * @returns {IIniObject}
  */
-export const embiggen = (game: Game): IIniObject => {
+export const embiggen = (game: Game, hash: string): IIniObject => {
     const loadingScreen =
             game.screens?.find((screen) => screen.type === 'Loading screen') ||
             {},
@@ -60,15 +66,84 @@ export const embiggen = (game: Game): IIniObject => {
         ['assets.screenshot.size']: runningScreen?.size || 0,
         ['assets.boxFront']: boxArt?.path || '',
         ['assets.boxFront.size']: boxArt?.size || 0,
+        hash: hash,
     };
+};
+
+/**
+ * Load meta file from disk
+ * @returns {MetaFile}
+ */
+export const load = (): MetaFile | undefined => {
+    let metaFile: MetaFile = {};
+
+    if (globalThis.config.platform === 'pegasus') {
+        const pegasusMeta = pegasusMetaLoad();
+
+        if (pegasusMeta && pegasusMeta?.entries) {
+            metaFile = {
+                header: pegasusMeta.header,
+                entries: pegasusMeta.entries,
+                images: {
+                    covers: [],
+                    screens: [],
+                    titles: [],
+                },
+            };
+
+            for (let entry of pegasusMeta?.entries) {
+                metaFile.images?.covers.push(
+                    entry['assets.boxFront'] as string
+                );
+                metaFile.images?.screens.push(
+                    entry['assets.screenshot'] as string
+                );
+                metaFile.images?.screens.push(
+                    entry['assets.titlescreen'] as string
+                );
+            }
+
+            return metaFile;
+        }
+    }
+
+    return;
+};
+
+/**
+ * Save MetaFile object back to disk
+ * @param {MetaFile} metaFile - Loaded Metafile
+ * @returns {boolean}
+ */
+export const saveMetaFile = (metaFile: MetaFile): boolean => {
+    try {
+        if (globalThis.config.platform === 'pegasus') {
+            log(LogType.Info, 'Generate', 'Save', {
+                value: globalThis.config.output,
+            });
+
+            const meta = pegasusMetaSaveToArray({
+                header: metaFile.header,
+                entries: metaFile.entries,
+            });
+
+            return save(meta, true);
+        }
+
+        return false;
+    } catch (err) {
+        log(LogType.Error, 'Generate', 'Error', { err });
+        return false;
+    }
 };
 
 /**
  * Save meta file to disk
  * @param {string[]} meta - Array of meta data ready to building meta file
+ * @param {boolean} withBackup - Create a backup before replacement
  * @returns {boolean}
  */
-export const save = (meta: string[]): boolean => {
+export const save = (meta: string[], withBackup: boolean): boolean => {
     try {
         log(LogType.Info, 'Generate', 'Save', {
             value: globalThis.config.output,
@@ -76,16 +151,20 @@ export const save = (meta: string[]): boolean => {
 
         if (globalThis.config.output) {
             if (fs.existsSync(globalThis.config.output)) {
-                const parts = path.parse(globalThis.config.output);
-                fs.renameSync(
-                    globalThis.config.output,
-                    path.join(
-                        parts.dir,
-                        `${parts.name}-${timestamp('YYYYMMDDHHmmss')}${
-                            parts.ext
-                        }`
-                    )
-                );
+                if (withBackup) {
+                    const parts = path.parse(globalThis.config.output);
+                    fs.renameSync(
+                        globalThis.config.output,
+                        path.join(
+                            parts.dir,
+                            `${parts.name}-${timestamp('YYYYMMDDHHmmss')}${
+                                parts.ext
+                            }`
+                        )
+                    );
+                } else {
+                    fs.rmSync(globalThis.config.output);
+                }
             }
             fs.writeFileSync(globalThis.config.output, meta.join('\n\n'), {
                 encoding: 'utf8',

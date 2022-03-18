@@ -162,7 +162,7 @@ const start = async () => {
                         let processedFile: Game = result._source;
                         processedFile._localPath = file.path;
 
-                        cachedIniFile = embiggen(processedFile);
+                        cachedIniFile = embiggen(processedFile, file.md5 || '');
 
                         // Find a description (if available)
                         const desc = await descriptions(
@@ -223,7 +223,7 @@ const start = async () => {
         console.log('\n');
     }
 
-    if (!saveMeta(meta)) {
+    if (!saveMeta(meta, true)) {
         if (!globalThis.config.verbose) {
             console.error(
                 'Error saving meta file, check you have permission to write to the directory.'

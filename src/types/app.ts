@@ -71,6 +71,16 @@ export interface PromptNewImage {
     isFile: boolean;
 }
 
+export interface MetaFile {
+    header?: any;
+    entries?: any[];
+    images?: {
+        covers: string[];
+        screens: string[];
+        titles: string[];
+    };
+}
+
 export enum LogType {
     Info = 'info',
     Warn = 'warn',

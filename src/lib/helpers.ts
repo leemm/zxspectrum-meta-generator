@@ -84,11 +84,15 @@ export const gameTitleByAssetFile = async (
 /**
  * Converts audit prompt array of objects into a string
  * @param {PromptValidInput[]} validInput - Prompt input config array
+ * @param {string} promptText - Question prompt
  * @returns {string}
  */
-export const generateAuditPrompt = (validInput: PromptValidInput[]): string => {
+export const generateAuditPrompt = (
+    validInput: PromptValidInput[],
+    promptText?: string
+): string => {
     return `${chalk.green(
-        'Based on the image preview, do you want to:'
+        promptText ? promptText : 'Based on the image preview, do you want to:'
     )}${validInput
         .map(
             (input, idx) =>

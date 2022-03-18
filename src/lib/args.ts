@@ -213,6 +213,7 @@ export const init = (): Config => {
             })
         );
 
+        // If assets directory not supplied default to --output directory
         if (!options['assets'] && options['output']) {
             options['assets'] = path.dirname(options['output']);
         }
