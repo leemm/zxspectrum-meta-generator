@@ -484,6 +484,7 @@ export const audit = async () => {
         // Part 2. Check Metafile for missing images
 
         const metaFile = loadMetafile();
+
         if (metaFile && metaFile.header && metaFile.entries) {
             for (let entry of metaFile.entries) {
                 if (

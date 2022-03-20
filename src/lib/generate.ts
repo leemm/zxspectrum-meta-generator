@@ -12,6 +12,29 @@ import {
     pegasusMetaLoad,
     pegasusMetaSaveToArray,
 } from './generators/pegasus.js';
+import { PegasusEntry } from '../types/generators/pegasus';
+
+const validKeys = [
+    'game',
+    'file',
+    'rating',
+    'summary',
+    'description',
+    'release',
+    'developers',
+    'publishers',
+    'genre',
+    'players',
+    'wikipedia',
+    'mobygames',
+    'assets.titlescreen',
+    'assets.titlescreen.size',
+    'assets.screenshot',
+    'assets.screenshot.size',
+    'assets.boxFront',
+    'assets.boxFront.size',
+    'hash',
+];
 
 /**
  * Parses API game json into a smaller object
@@ -71,6 +94,27 @@ export const embiggen = (game: Game, hash: string): IIniObject => {
 };
 
 /**
+ * Description can run across multiple lines, and function fixes it
+ * @param {PegasusEntry[]} entries - Meta file entries
+ */
+const _fixDescription = (entries: PegasusEntry[]) => {
+    entries.map((entry) => {
+        let found = false;
+
+        Object.keys(entry).forEach((key) => {
+            if (found) {
+                if (!validKeys.includes(key)) {
+                    entry.description += '\n' + key;
+                }
+            }
+            if (key === 'description' && (entry[key] as string).length > 0) {
+                found = true;
+            }
+        });
+    });
+};
+
+/**
  * Load meta file from disk
  * @returns {MetaFile}
  */
@@ -81,6 +125,9 @@ export const load = (): MetaFile | undefined => {
         const pegasusMeta = pegasusMetaLoad();
 
         if (pegasusMeta && pegasusMeta?.entries) {
+            //console.log('pegasusMeta', JSON.stringify(pegasusMeta, null, 4));
+            _fixDescription(pegasusMeta?.entries);
+
             metaFile = {
                 header: pegasusMeta.header,
                 entries: pegasusMeta.entries,

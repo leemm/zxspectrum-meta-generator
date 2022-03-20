@@ -194,7 +194,7 @@ export const help = () => {
  * Display version
  */
 export const version = () => {
-    const display = `${globalThis.version.APP_DISPLAY_NAME} v${globalThis.version.APP_DISPLAY_VERSION}`;
+    const display = `${globalThis.version.APP_DISPLAY_VERSION}`;
     log(LogType.Info, 'Version', 'Value', { value: display });
     console.log(`${display}\n`);
 };
