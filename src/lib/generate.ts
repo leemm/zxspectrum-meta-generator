@@ -11,30 +11,9 @@ import {
     pegasusHeader,
     pegasusMetaLoad,
     pegasusMetaSaveToArray,
+    validKeys,
 } from './generators/pegasus.js';
 import { PegasusEntry } from '../types/generators/pegasus';
-
-const validKeys = [
-    'game',
-    'file',
-    'rating',
-    'summary',
-    'description',
-    'release',
-    'developers',
-    'publishers',
-    'genre',
-    'players',
-    'wikipedia',
-    'mobygames',
-    'assets.titlescreen',
-    'assets.titlescreen.size',
-    'assets.screenshot',
-    'assets.screenshot.size',
-    'assets.boxFront',
-    'assets.boxFront.size',
-    'hash',
-];
 
 /**
  * Parses API game json into a smaller object
@@ -125,7 +104,6 @@ export const load = (): MetaFile | undefined => {
         const pegasusMeta = pegasusMetaLoad();
 
         if (pegasusMeta && pegasusMeta?.entries) {
-            //console.log('pegasusMeta', JSON.stringify(pegasusMeta, null, 4));
             _fixDescription(pegasusMeta?.entries);
 
             metaFile = {
@@ -180,6 +158,9 @@ export const saveMetaFile = (metaFile: MetaFile): boolean => {
         return false;
     } catch (err) {
         log(LogType.Error, 'Generate', 'Error', { err });
+        if (!globalThis.config.verbose) {
+            console.error(err);
+        }
         return false;
     }
 };

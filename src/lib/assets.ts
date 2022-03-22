@@ -560,9 +560,9 @@ export const audit = async () => {
                                 readyToContinue = true;
                                 break;
                         }
-                    }
 
-                    saveMetaFile(metaFile);
+                        saveMetaFile(metaFile);
+                    }
                 }
             }
         }

@@ -1,13 +1,39 @@
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
 import fs from 'fs';
-import path from 'path';
 import {
     PegasusEntry,
     PegasusHeader,
     PegasusKeyValue,
     PegasusMetaFile,
 } from '../../types/generators/pegasus';
-import timestamp from 'time-stamp';
+
+export const validKeys = [
+    'collection',
+    'shortname',
+    'command',
+    'game',
+    'file',
+    'rating',
+    'summary',
+    'description',
+    'release',
+    'developers',
+    'publishers',
+    'genre',
+    'players',
+    'wikipedia',
+    'mobygames',
+    'assets.titlescreen',
+    'assets.titlescreen.size',
+    'assets.screenshot',
+    'assets.screenshot.size',
+    'assets.boxFront',
+    'assets.boxFront.size',
+    'hash',
+    'source',
+    'x-hash',
+    'x-source',
+];
 
 /**
  * Build Pegasus meta file header
@@ -105,7 +131,7 @@ export const pegasusMetaSaveToArray = (metaFile: PegasusMetaFile): string[] => {
         // @ts-ignore-line
         header += `${key}: ${metaFile.header[key]}\n`;
     }
-    meta.push(header.substring(0, header.length - 2));
+    meta.push(header.substring(0, header.length - 1));
 
     // Entries
     for (let entry of metaFile.entries || []) {
@@ -121,7 +147,7 @@ export const pegasusMetaSaveToArray = (metaFile: PegasusMetaFile): string[] => {
             });
         }
 
-        meta.push(pegasusEntry(entryObject));
+        meta.push(pegasusEntry(entryObject, false));
     }
 
     return meta;
@@ -165,7 +191,7 @@ const keyValue = (idx: number, lines: string[]): PegasusKeyValue => {
     if (line?.trim().length > 0 && !_isSubValue(line)) {
         const parts = line.split(':');
 
-        const key = parts[0];
+        let key = parts[0];
         let value = '';
         if (parts?.[1]?.trim().length > 0) {
             value = parts
@@ -183,6 +209,11 @@ const keyValue = (idx: number, lines: string[]): PegasusKeyValue => {
                 subIdx++;
                 hasValue = _isSubValue(lines[subIdx]);
             }
+        }
+
+        // If key not in allowed list combine
+        if (!validKeys.includes(key)) {
+            key += value.trim().length > 0 ? ': ' + value : '';
         }
 
         return { key, value };
