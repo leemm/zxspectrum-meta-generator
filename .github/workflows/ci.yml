@@ -1,5 +1,4 @@
 name: 'Build and release'
-description: 'Build, package, and release'
 
 on:
   push:
