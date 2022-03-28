@@ -5,14 +5,14 @@ on:
     branches: [ master ]
 
 jobs:
-  nodejstest:
+  release:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
       with:
         node-version: '16'
         cache: npm
-    - uses: actions/checkout@v2
     - run: npm i
     - run: npm run build
     - run: npm run package
