@@ -3,7 +3,7 @@ description: 'Build, package, and release'
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   nodejstest:
