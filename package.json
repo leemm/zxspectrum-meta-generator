@@ -1,6 +1,6 @@
 {
     "name": "zxspectrum-frontend-meta-generator",
-    "version": "0.5.5",
+    "version": "0.5.6",
     "description": "ZXSpectrum Game Frontend Config Generator using ZXInfo API",
     "exports": "./dist/start.js",
     "type": "module",
@@ -10,7 +10,7 @@
         "package": "npm run build && npx pkg ./dist/bundle.js -o ./dist/zxgenerator",
         "install-package": "sudo cp ./dist/zxgenerator /usr/local/bin && sudo chmod +x /usr/local/bin/zxgenerator",
         "cleanup": "rm -rf ./dist && sudo rm -f /usr/local/bin/zxgenerator",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "version": "node ./version-bump.js"
     },
     "keywords": [
         "spectrum",

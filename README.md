@@ -2,9 +2,22 @@
 
 <p align="center">Create your <b>metadata</b> for your favourite emulator <b>backend</b> using the ZXInfo API<br/><br/>Fast, efficient, modern... just like Windows 98<sup>tm</sup></p>
 
-[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.5.5-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
+[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.5.6-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
 
 ![Preview](https://i.imgur.com/rJj1i0n.gif)
+
+---
+
+## Table of contents
+
+-   [Features](#features)
+-   Build & Install
+    -   [Prerequisites](#prerequisites)
+    -   [Build](#build)
+    -   [Install](#install)
+-   [Usage](#usage)
+-   [Examples](#examples)
+-   [License](#license)
 
 ---
 
@@ -27,7 +40,7 @@
 
 ## Prerequisites
 
-Several tools are required to open up all functionality. You can install everything or just those you need.
+Tools are required for the application to function.
 
 **p7zip** - to install 7z command, required for archive based file support e.g. zip, 7z, rar
 
@@ -47,6 +60,53 @@ sudo apt-get install p7zip-full
 
 The easiest way is to visit https://www.7-zip.org/download.html and download the latest 7z-extra (https://www.7-zip.org/a/7z2107-extra.7z is the latest at the time of writing).
 Then extract and copy _7za.exe_ into your **PATH**.
+
+---
+
+## Build
+
+NodeJS is required so please install according to their [documentation](https://nodejs.org/en/download/package-manager/) for your system. It should be fully backwards compatible this version was written with NodeJS v16+.
+
+The final complicated executable is build using [pkg](https://www.npmjs.com/package/pkg). Their documentation outlines other options you can use when building.
+
+To build locally:
+
+```bash
+git clone https://github.com/leemm/zxspectrum-meta-generator.git
+npm i
+npm run build
+```
+
+To start locally:
+
+```bash
+npm start -- <switches>
+
+// For example
+npm start -- --src ~/Downloads/Games/roms --output '~/Downloads/Games/metadata.pegasus.txt'
+```
+
+To package locally:
+
+```bash
+npm run package
+```
+
+To deploy your build there is a script. It will install to _/usr/local/bin_.
+
+```bash
+npm run install-package
+```
+
+The packaged version can then run as normal from the _./dist_ directory e.g. _./dist/zxgenerator_. See [Examples](#examples).
+
+If developing there is a helper script increase the version number, as it's in 3 different places. Simply run this to increase the version but keep them in sync:
+
+```bash
+npm run version -- --type major, minor, or patch
+```
+
+If you wish to add functionality feel free to PR.
 
 ---
 
@@ -128,12 +188,6 @@ Audit your covers and screenshots directories (_~/Desktop/assets'_). This will c
 ```bash
 zxgenerator --src ~/Downloads/tapes --output '~/Downloads/meta.txt' --assets '~/Desktop/assets' --audit-assets covers,screens
 ```
-
----
-
-## Build
-
-TBC
 
 ---
 
