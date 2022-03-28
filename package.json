@@ -7,7 +7,7 @@
     "scripts": {
         "start": "node --no-warnings --loader ts-node/esm ./src/start.ts",
         "build": "npm run cleanup && npx tsc -p ./tsconfig.build.json && npx rollup --config rollup.config.js",
-        "package": "npm run build && npx pkg ./dist/bundle.js -o ./dist/zxgenerator",
+        "package": "npm run build && npx pkg ./dist/zxgenerator.js -t node16-macos-x64,node16-linux,node16-win --out-path ./dist && cp ./dist/zxgenerator-linux ./dist/zxgenerator && gzip ./dist/zxgenerator-linux && gzip ./dist/zxgenerator-macos",
         "install-package": "sudo cp ./dist/zxgenerator /usr/local/bin && sudo chmod +x /usr/local/bin/zxgenerator",
         "cleanup": "rm -rf ./dist && sudo rm -f /usr/local/bin/zxgenerator",
         "version": "node ./version-bump.js"

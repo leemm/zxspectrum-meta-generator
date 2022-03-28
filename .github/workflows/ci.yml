@@ -13,14 +13,22 @@ jobs:
       with:
         node-version: '16'
         cache: npm
+
     - run: npm i
     - run: npm run build
     - run: npm run package
+
+    - name: get-npm-version
+      id: package-version
+      uses: martinbeentjes/npm-get-version-action@master
+
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
+        automatic_release_tag: "${{ steps.package-version.outputs.current-version}}"
         prerelease: true
         title: "Development Build"
         files: |
-          dist/zxgenerator
+          dist/zxgenerator-linux.gz
+          dist/zxgenerator-macos.gz
+          dist/zxgenerator-win.exe
