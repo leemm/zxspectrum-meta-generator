@@ -120,10 +120,10 @@ Copy the download to your prefered location. For example:
 
 ```bash
 gzip -d ~/Downloads/zxgenerator-linux.gz
-cp ~/Downloads/zxgenerator-linux /usr/local/bin/zxgenerator
+cp ~/Downloads/zxgenerator-linux /usr/local/bin/zxgenerator && chmod +x /usr/local/bin/zxgenerator
 ```
 
-ARM users, it's recommended you [prerequisites](#build). Tested on Pi400.
+ARM users, it's recommended you [build](#build). Tested on Pi400.
 
 ---
 
