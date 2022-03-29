@@ -2,7 +2,7 @@
 
 <p align="center">Create your <b>metadata</b> for your favourite emulator <b>backend</b> using the ZXInfo API<br/><br/>Fast, efficient, modern... just like Windows 98<sup>tm</sup></p>
 
-[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.5.6-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
+[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.5.7-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
 
 ![Preview](https://i.imgur.com/rJj1i0n.gif)
 
@@ -112,7 +112,18 @@ If you wish to add functionality feel free to PR.
 
 ## Install
 
-TBC
+Ensure you have the tooling you need from [prerequisites](#prerequisites).
+
+Then download your binary from [releases](https://github.com/leemm/zxspectrum-meta-generator/releases). There are builds for linux (tested on debian based distro), MacOS, and Windows.
+
+Copy the download to your prefered location. For example:
+
+```bash
+gzip -d ~/Downloads/zxgenerator-linux.gz
+cp ~/Downloads/zxgenerator-linux /usr/local/bin/zxgenerator
+```
+
+ARM users, it's recommended you [prerequisites](#build). Tested on Pi400.
 
 ---
 

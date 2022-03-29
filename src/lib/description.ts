@@ -33,7 +33,14 @@ export const get = async (name: string, url: string): Promise<Descriptions> => {
         const page = await wiki.page(title),
             summary = await page.summary();
 
-        if (!summary.extract.substring(0, 50).includes('may refer to')) {
+        const titleIsVideoGames = summary.description
+            ?.toLowerCase()
+            .includes('video game');
+        const isWikipediaLinksPage = summary.extract
+            .substring(0, 50)
+            .includes('may refer to');
+
+        if (!isWikipediaLinksPage && titleIsVideoGames) {
             ret.summary = encodeURIComponent(summary.extract);
             ret.description = encodeURIComponent(await page.intro());
             ret.boxart = summary.originalimage.source;
