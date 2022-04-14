@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import timestamp from 'time-stamp';
 import { log } from './log.js';
-import { LogType, MetaFile } from '../types/app.js';
+import { FailedFile, LogType, MetaFile } from '../types/app.js';
 
 import {
     pegasusEntry,
@@ -203,6 +203,39 @@ export const save = (meta: string[], withBackup: boolean): boolean => {
     } catch (err) {
         log(LogType.Error, 'Generate', 'Error', { err });
         return false;
+    }
+};
+
+/**
+ * Failed files log generation
+ * @param {FailedFile[]} failedFiles - Array of failed files
+ * @returns {boolean}
+ */
+export const saveFailedFilesLog = (failedFiles: FailedFile[]): void => {
+    try {
+        if (globalThis.config.output) {
+            const outputPath = path.parse(globalThis.config.output),
+                outputLogFile = path.join(
+                    outputPath.dir,
+                    `${outputPath.name}.failed.log`
+                );
+
+            fs.writeFileSync(
+                outputLogFile,
+                failedFiles
+                    .map((file) => `${file.path}\n${file.md5}`)
+                    .join('\n\n'),
+                {
+                    encoding: 'utf8',
+                }
+            );
+
+            log(LogType.Info, 'Failed Files Log', 'Save', {
+                value: outputLogFile,
+            });
+        }
+    } catch (err) {
+        log(LogType.Error, 'Failed Files Log Generate', 'Error', { err });
     }
 };
 

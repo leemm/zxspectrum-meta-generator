@@ -1,7 +1,7 @@
 import boxen from 'boxen';
 import chalk from 'chalk';
 import { init as initArgs, help, version } from './lib/args.js';
-import { Config, LogType, Version } from './types/app.js';
+import { Config, FailedFile, LogType, Version } from './types/app.js';
 import { init as initCache } from './lib/cache.js';
 import { attachFSLogger, log } from './lib/log.js';
 
@@ -10,7 +10,12 @@ import { validate, tooling as toolingValidate } from './lib/validate.js';
 import { gameByMD5 } from './lib/request.js';
 import { Game } from './types/api.v3.js';
 import { clear, load as loadCache, save as saveCache } from './lib/cache.js';
-import { embiggen, save as saveMeta, Generators } from './lib/generate.js';
+import {
+    embiggen,
+    save as saveMeta,
+    Generators,
+    saveFailedFilesLog,
+} from './lib/generate.js';
 import { audit, save as saveAssets } from './lib/assets.js';
 import { get as descriptions } from './lib/description.js';
 
@@ -125,7 +130,7 @@ const start = async () => {
     const files = await findGames(globalThis.config.src);
 
     // Track files that can't be found
-    const failedFiles: string[] = [];
+    const failedFiles: FailedFile[] = [];
 
     // If files exist then let's find them in the api, via a cached version, and build the output!
     let meta: string[] = [];
@@ -209,10 +214,14 @@ const start = async () => {
                     // @ts-ignore-line
                     meta.push(Generators[generateEntry](cachedIniFile));
                 } catch (err) {
-                    failedFiles.push(
-                        file.path?.replace(globalThis.config.src || '', '') ||
-                            ''
-                    );
+                    failedFiles.push({
+                        path:
+                            file.path?.replace(
+                                globalThis.config.src || '',
+                                ''
+                            ) || '',
+                        md5: file.md5 ?? '',
+                    });
                     log(LogType.Error, 'Process File', 'Fatal Error', { err });
                 }
             })
@@ -246,7 +255,7 @@ const start = async () => {
             `${chalk.red(
                 'Failed!'
             )} These files have not been found, or are not valid spectrum dumps: ${failedFiles
-                .map((file) => chalk.italic.grey(file))
+                .map((file) => chalk.italic.grey(file.path))
                 .join(', ')}\n`
         );
     }
@@ -255,8 +264,10 @@ const start = async () => {
         value: globalThis.config.output,
     });
     log(LogType.Error, 'Failed', 'Not found or invalid', {
-        value: failedFiles.join(', '),
+        value: failedFiles.map((file) => file.path).join(', '),
     });
+
+    saveFailedFilesLog(failedFiles);
 
     if (globalThis.config['verbose-save']) {
         log(LogType.Info, 'Log File', 'Saved to:', { value: global.logPath });

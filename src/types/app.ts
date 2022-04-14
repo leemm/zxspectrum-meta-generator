@@ -59,6 +59,11 @@ export interface FoundGame {
     parsed: ParsedPath;
 }
 
+export interface FailedFile {
+    path: string;
+    md5: string;
+}
+
 export interface PromptValidInput {
     letter: string;
     extra?: string;
