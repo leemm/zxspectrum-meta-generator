@@ -5,7 +5,7 @@ import { Config, FailedFile, LogType, Version } from './types/app.js';
 import { init as initCache } from './lib/cache.js';
 import { attachFSLogger, log } from './lib/log.js';
 
-import { findGames } from './lib/files.js';
+import { findGames, moveUnfound } from './lib/files.js';
 import { validate, tooling as toolingValidate } from './lib/validate.js';
 import { gameByMD5 } from './lib/request.js';
 import { Game } from './types/api.v3.js';
@@ -268,6 +268,7 @@ const start = async () => {
     });
 
     saveFailedFilesLog(failedFiles);
+    moveUnfound(failedFiles);
 
     if (globalThis.config['verbose-save']) {
         log(LogType.Info, 'Log File', 'Saved to:', { value: global.logPath });

@@ -379,7 +379,7 @@ export const audit = async () => {
 
     const foundGames: FoundGame[] = [];
 
-    for (let aud of toAudit) {
+    for await (let aud of toAudit) {
         // Part 1. Check current images
 
         // @ts-ignore-line
@@ -395,11 +395,12 @@ export const audit = async () => {
                 .readdirSync(current)
                 .map((file) => path.parse(path.join(current, file)));
 
-            for (const file of files) {
+            for await (const file of files) {
                 // If game is not known by foundGames then search for a local
                 // cache. If local cache not found search via api
                 let foundGame = foundGames.find(
-                    (game) => game.hash === file.name
+                    (game) =>
+                        game.hash === file.name && game.parsed.dir === current
                 );
                 if (!foundGame) {
                     foundGame = await gameTitleByAssetFile(file);

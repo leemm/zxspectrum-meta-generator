@@ -2,7 +2,7 @@
 
 <p align="center">Create your <b>metadata</b> for your favourite emulator <b>backend</b> using the ZXInfo API<br/><br/>Fast, efficient, modern... just like Windows 98<sup>tm</sup></p>
 
-[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.5.7-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
+[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.5.8-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
 
 ![Preview](https://i.imgur.com/rJj1i0n.gif)
 
@@ -15,6 +15,7 @@
     -   [Prerequisites](#prerequisites)
     -   [Build](#build)
     -   [Install](#install)
+    -   [Arm (RaspberryPi)](#raspberrypi)
 -   [Usage](#usage)
 -   [Examples](#examples)
 -   [License](#license)
@@ -110,6 +111,20 @@ If you wish to add functionality feel free to PR.
 
 ---
 
+## RaspberryPi
+
+The build and install process is slightly different, but is easy to do.
+
+```bash
+git clone https://github.com/leemm/zxspectrum-meta-generator.git
+npm i
+npm run build
+npx pkg ./dist/zxgenerator.js --out-path ./dist
+npm run install-package
+```
+
+This will build and deploy to _/usr/local/bin/zxgenerator_.
+
 ## Install
 
 Ensure you have the tooling you need from [prerequisites](#prerequisites).
@@ -144,6 +159,7 @@ zxgenerator [OPTIONS]
 | `-v, --verbose`  | Turn on debugging output.                                                                                                                                                                                                        | `boolean` | `false`                                                  | No        |
 | `--verbose-save` | Saves the verbose log to the --output directory.                                                                                                                                                                                 | `boolean` | `false`                                                  | No        |
 | `--audit-assets` | Assets will be audited for missing files, incorrectly ratio'd covers. (Comma-separated) valid values are _titles_, _screens_, and _covers_. Assets will be same directory as **--output** or via value supplied in **--assets**. | `string`  |                                                          | No        |
+| `--move-failed`  | Specify a directory to move files that have not been found via the API                                                                                                                                                           | `string`  |                                                          | No        |
 | `--version`      | Print version info.                                                                                                                                                                                                              | `boolean` | `false`                                                  | No        |
 | `--help`         | Shows this help screen.                                                                                                                                                                                                          | `boolean` | `false`                                                  | No        |
 

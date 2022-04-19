@@ -4,7 +4,7 @@ import { lookup } from 'mime-types';
 import { parse, join } from 'path';
 import os from 'os';
 import fs from 'fs';
-import { File, LogType } from '../types/app.js';
+import { FailedFile, File, LogType } from '../types/app.js';
 import { nanoid } from 'nanoid';
 import md5 from 'md5';
 import { log } from './log.js';
@@ -148,4 +148,19 @@ export const findGames = async (
     console.log('\n');
 
     return games;
+};
+
+/**
+ * Move files that were not found in API to own folder
+ * @param {FailedFile[]} failedFiles
+ */
+export const moveUnfound = async (failedFiles: FailedFile[]) => {
+    if ((globalThis.config['move-failed'] as string).length > 0) {
+        failedFiles.map((file) => {
+            fs.renameSync(
+                file.path,
+                globalThis.config['move-failed'] as string
+            );
+        });
+    }
 };

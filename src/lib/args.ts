@@ -141,6 +141,13 @@ const optionDefinitions: OptionDefinition[] = [
         )}`,
     },
     {
+        name: 'move-failed',
+        type: String,
+        description: chalk.hex('#A9A9A9')(
+            'Move failed files to specified folder.'
+        ),
+    },
+    {
         name: 'version',
         type: Boolean,
         defaultOption: false,

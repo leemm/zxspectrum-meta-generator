@@ -49,5 +49,11 @@ export const validate = (config: Config): string | undefined => {
         )} does not exist or is not a directory.`;
     }
 
+    if (config['move-failed'] && !directoryExists(config['move-failed'])) {
+        return `Supplied ${chalk.italic(
+            'move-failed'
+        )} does not exist or is not a directory.`;
+    }
+
     return;
 };

@@ -31,6 +31,7 @@ export interface Config {
     verbose?: boolean;
     'verbose-save'?: boolean;
     'audit-assets'?: string;
+    'move-failed'?: string;
     version?: boolean;
     help?: boolean;
     clear?: boolean;
