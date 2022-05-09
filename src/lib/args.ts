@@ -5,7 +5,7 @@ import path from 'path';
 import { OptionDefinition, Config, LogType } from '../types/app.js';
 import { log } from './log.js';
 
-export const validPlatforms = ['pegasus'];
+export const validPlatforms = ['pegasus', 'launchbox'];
 
 const description =
     'Parse your tape/disk images and generate a metafile|for your emulator frontend using ZXInfo API';

@@ -46,6 +46,14 @@ command: ${globalThis.config.launch} "{file.path}"`;
 };
 
 /**
+ * Build Pegasus meta file footer
+ * @returns {string}
+ */
+export const pegasusFooter = (): string => {
+    return ``;
+};
+
+/**
  * Converts IIniObject to a pegasus meta config
  * @param {IIniObject} entry - Final object
  * @param {boolean} decodeUri - Decode Summary and Description
@@ -70,14 +78,18 @@ ${(entry['publishers'] as string)
 genre: ${entry['genre']}
 players: ${entry['players']}
 summary: ${
-        decodeUri
-            ? decodeURIComponent(entry['summary'] as string)
-            : (entry['summary'] as string)
+        entry['summary']
+            ? decodeUri
+                ? decodeURIComponent(entry['summary'] as string)
+                : (entry['summary'] as string)
+            : ''
     }
 description: ${
-        decodeUri
-            ? decodeURIComponent(entry['description'] as string)
-            : (entry['description'] as string)
+        entry['description']
+            ? decodeUri
+                ? decodeURIComponent(entry['description'] as string)
+                : (entry['description'] as string)
+            : ''
     }
 rating: ${entry['rating']}
 assets.titlescreen: ${
@@ -147,7 +159,7 @@ export const pegasusMetaSaveToArray = (metaFile: PegasusMetaFile): string[] => {
             });
         }
 
-        meta.push(pegasusEntry(entryObject, false));
+        meta.push(pegasusEntry(entryObject, false) + '\n');
     }
 
     return meta;

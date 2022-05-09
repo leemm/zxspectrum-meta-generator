@@ -142,7 +142,10 @@ const start = async () => {
         const generateHeader: keyof Generators = ((globalThis.config.platform ||
             '') + 'Header') as keyof Generators;
         // @ts-ignore-line
-        meta.push(Generators[generateHeader]());
+        const header = Generators[generateHeader]();
+        if (header?.length > 0) {
+            meta.push(header);
+        }
 
         await Promise.all(
             files.map(async (file, idx) => {
@@ -228,6 +231,14 @@ const start = async () => {
         );
 
         bar.stop();
+
+        const generateFooter: keyof Generators = ((globalThis.config.platform ||
+            '') + 'Footer') as keyof Generators;
+        // @ts-ignore-line
+        const footer = Generators[generateFooter]();
+        if (footer?.length > 0) {
+            meta.push(footer);
+        }
 
         console.log('\n');
     }

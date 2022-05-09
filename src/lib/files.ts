@@ -161,6 +161,11 @@ export const moveUnfound = async (failedFiles: FailedFile[]) => {
                 file.path,
                 globalThis.config['move-failed'] as string
             );
+
+            log(LogType.Info, 'Unfound File', 'Moved', {
+                value: file.path,
+                dest: globalThis.config['move-failed'],
+            });
         });
     }
 };

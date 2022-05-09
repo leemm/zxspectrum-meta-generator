@@ -9,11 +9,18 @@ import { FailedFile, LogType, MetaFile } from '../types/app.js';
 import {
     pegasusEntry,
     pegasusHeader,
+    pegasusFooter,
     pegasusMetaLoad,
     pegasusMetaSaveToArray,
     validKeys,
 } from './generators/pegasus.js';
 import { PegasusEntry } from '../types/generators/pegasus';
+
+import {
+    launchboxHeader,
+    launchboxEntry,
+    launchboxFooter,
+} from './generators/launchbox.js';
 
 /**
  * Parses API game json into a smaller object
@@ -142,17 +149,23 @@ export const load = (): MetaFile | undefined => {
  */
 export const saveMetaFile = (metaFile: MetaFile): boolean => {
     try {
-        if (globalThis.config.platform === 'pegasus') {
-            log(LogType.Info, 'Generate', 'Save', {
-                value: globalThis.config.output,
-            });
+        switch (globalThis.config.platform) {
+            case 'pegasus':
+                log(LogType.Info, 'Generate', 'Save', {
+                    value: globalThis.config.output,
+                });
 
-            const meta = pegasusMetaSaveToArray({
-                header: metaFile.header,
-                entries: metaFile.entries,
-            });
+                const meta = pegasusMetaSaveToArray({
+                    header: metaFile.header,
+                    entries: metaFile.entries,
+                });
 
-            return save(meta, true);
+                return save(meta, true);
+                break;
+
+            case 'launchbox':
+                console.log('SAVE LAUNCHBOX');
+                break;
         }
 
         return false;
@@ -194,7 +207,7 @@ export const save = (meta: string[], withBackup: boolean): boolean => {
                     fs.rmSync(globalThis.config.output);
                 }
             }
-            fs.writeFileSync(globalThis.config.output, meta.join('\n\n'), {
+            fs.writeFileSync(globalThis.config.output, meta.join('\n'), {
                 encoding: 'utf8',
             });
             return true;
@@ -242,9 +255,19 @@ export const saveFailedFilesLog = (failedFiles: FailedFile[]): void => {
 export interface Generators {
     pegasusEntry: Function;
     pegasusHeader: Function;
+    pegasusFooter: Function;
+
+    launchboxEntry: Function;
+    launchboxHeader: Function;
+    launchboxFooter: Function;
 }
 
 export const Generators = {
     pegasusEntry,
     pegasusHeader,
+    pegasusFooter,
+
+    launchboxEntry,
+    launchboxHeader,
+    launchboxFooter,
 };
