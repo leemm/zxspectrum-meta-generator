@@ -2,7 +2,7 @@
 
 <p align="center">Create your <b>metadata</b> for your favourite emulator <b>backend</b> using the ZXInfo API<br/><br/>Fast, efficient, modern... just like Windows 98<sup>tm</sup></p>
 
-[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.6.0-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
+[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.6.1-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
 
 ![Preview](https://i.imgur.com/rJj1i0n.gif)
 
@@ -33,7 +33,7 @@
 -   Supports arm, so can be used on RaspberryPI (under linux e.h. RaspOS)
 -   Supports image assets such as screenshots and box art
 -   Uses Wikipedia API to find synopsis for game, if available
--   ~~Generates for multiple emulator frontends~~ (currently only supports [Pegasus](https://pegasus-frontend.org/))
+-   Generates for multiple emulator frontends (currently only supports [Pegasus](https://pegasus-frontend.org/), and partial support for [LaunchBox](https://www.launchbox-app.com/))
 -   A lovely [48k Speccy ASCII art](https://github.com/redcode/ASCII-Art/) from https://github.com/redcode/ASCII-Art/
 -   Other features coming at some point in the future
 
@@ -154,7 +154,7 @@ zxgenerator [OPTIONS]
 | `--src`          | Root directory of your spectrum tape/disk images.                                                                                                                                                                                | `string`  |                                                          | Yes       |
 | `--output`       | Destination directory and filename of your meta file.                                                                                                                                                                            | `string`  |                                                          | Yes       |
 | `--assets`       | Destination directory of media assets.                                                                                                                                                                                           | `string`  | `same directory as --output`                             | No        |
-| `--platform`     | Generate meta files for your chosen platform. Supported values: pegasus. Defaults to pegasus.                                                                                                                                    | `string`  | `pegasus`                                                | No        |
+| `--platform`     | Generate meta files for your chosen platform. Supported values: _pegasus_, _launchbox_. Defaults to pegasus.                                                                                                                     | `string`  | `pegasus`                                                | No        |
 | `--clear`        | Clears the local api cache.                                                                                                                                                                                                      | `boolean` | `false`                                                  | No        |
 | `-v, --verbose`  | Turn on debugging output.                                                                                                                                                                                                        | `boolean` | `false`                                                  | No        |
 | `--verbose-save` | Saves the verbose log to the --output directory.                                                                                                                                                                                 | `boolean` | `false`                                                  | No        |

@@ -42,7 +42,9 @@ export const validKeys = [
 export const pegasusHeader = (): string => {
     return `collection: ZX Spectrum
 shortname: zxspectrum
-command: ${globalThis.config.launch} "{file.path}"`;
+command: ${globalThis.config.launch} "{file.path}"
+
+`;
 };
 
 /**
