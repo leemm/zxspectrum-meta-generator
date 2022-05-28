@@ -43,7 +43,6 @@ export const pegasusHeader = (): string => {
     return `collection: ZX Spectrum
 shortname: zxspectrum
 command: ${globalThis.config.launch} "{file.path}"
-
 `;
 };
 
@@ -104,7 +103,8 @@ assets.boxFront: ${
         entry['assets.boxFront.local'] || entry['assets.boxFront'] || ''
     }
 x-hash: ${entry['hash'] || entry['x-hash'] || ''}
-x-source: ${globalThis.version.APP_DISPLAY_NAME}`;
+x-source: ${globalThis.version.APP_DISPLAY_NAME}
+`;
 };
 
 /**
@@ -145,6 +145,7 @@ export const pegasusMetaSaveToArray = (metaFile: PegasusMetaFile): string[] => {
         // @ts-ignore-line
         header += `${key}: ${metaFile.header[key]}\n`;
     }
+    header += '\n';
     meta.push(header.substring(0, header.length - 1));
 
     // Entries
@@ -161,7 +162,7 @@ export const pegasusMetaSaveToArray = (metaFile: PegasusMetaFile): string[] => {
             });
         }
 
-        meta.push(pegasusEntry(entryObject, false) + '\n');
+        meta.push(pegasusEntry(entryObject, false));
     }
 
     return meta;

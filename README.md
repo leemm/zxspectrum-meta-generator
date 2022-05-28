@@ -2,7 +2,7 @@
 
 <p align="center">Create your <b>metadata</b> for your favourite emulator <b>backend</b> using the ZXInfo API<br/><br/>Fast, efficient, modern... just like Windows 98<sup>tm</sup></p>
 
-[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.6.1-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
+[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.6.2-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
 
 ![Preview](https://i.imgur.com/rJj1i0n.gif)
 

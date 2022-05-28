@@ -185,7 +185,6 @@ export const saveMetaFile = (metaFile: MetaFile): boolean => {
  * @returns {boolean}
  */
 export const save = (meta: string[], withBackup: boolean): boolean => {
-    //console.log(meta);
     try {
         log(LogType.Info, 'Generate', 'Save', {
             value: globalThis.config.output,

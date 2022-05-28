@@ -25,6 +25,7 @@ import terminalImage from 'terminal-image';
 import promptly from 'promptly';
 import open from 'open';
 import boxen from 'boxen';
+import { findCacheFileByGameMD5, save as saveCache } from './cache.js';
 
 const root = 'https://zxinfo.dk';
 
@@ -216,6 +217,42 @@ const imageReplace = async (
 };
 
 /**
+ * Update the new image in the games' local cache file
+ */
+const updateImageInCacheFile = async (
+    hash: string,
+    imageFullPath: string,
+    currentImageType: string
+) => {
+    const cache = findCacheFileByGameMD5(hash);
+
+    let updateKey = '';
+    switch (currentImageType) {
+        case 'covers':
+            updateKey = 'assets.boxFront.local';
+            break;
+        case 'titles':
+            updateKey = 'assets.titlescreen.local';
+            break;
+        case 'screens':
+            updateKey = 'assets.screenshot.local';
+            break;
+    }
+
+    log(LogType.Info, 'Cache', 'Save', {
+        key: updateKey,
+        value: imageFullPath,
+    });
+
+    if (cache) {
+        cache[updateKey] = imageFullPath;
+
+        // Save cached data to disk
+        await saveCache(cache, cache['file'] as string, hash, true);
+    }
+};
+
+/**
  * Prompt for replace of asset, by either local path or remote url
  * @returns {Promise<PromptNewImage>}
  */
@@ -363,7 +400,7 @@ export const audit = async () => {
     console.log(
         boxen(
             chalk.red(
-                `WARNING: AUDITING MAY ONLY WORK WITH META FILES CREATED WITH THIS TOOL\n\nIgnoring this warning could result in lost data`
+                `WARNING: AUDITING MAY ONLY WORK WITH META FILES CREATED WITH THIS TOOL\n\nIgnoring this warning could result in lost data\n\nA backup of the metafile will be made`
             ),
             {
                 align: 'center',
@@ -553,6 +590,12 @@ export const audit = async () => {
                                 if (aud === 'screens') {
                                     entry['assets.screenshot'] = imageFullPath;
                                 }
+
+                                await updateImageInCacheFile(
+                                    entry['x-hash'],
+                                    imageFullPath,
+                                    aud
+                                );
 
                                 readyToContinue = true;
 

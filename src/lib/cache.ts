@@ -4,7 +4,7 @@ import getAppDataPath from 'appdata-path';
 import { parse, stringify } from 'js-ini';
 import md5 from 'md5';
 import del from 'del';
-import { directoryExists } from './helpers.js';
+import { directoryExists, replaceUndefined } from './helpers.js';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
 import { log } from './log.js';
 import { LogType } from '../types/app.js';
@@ -80,21 +80,27 @@ export const findCacheFileByGameMD5 = (
 export const save = async (
     entry: IIniObject,
     gamePath: string,
-    hash: string
+    hash: string,
+    deleteIndividualFile: boolean = false
 ): Promise<boolean> => {
     const gameConfigPath = path.join(config, `${md5(gamePath)}-${hash}.ini`);
 
     if (fs.existsSync(gameConfigPath)) {
-        await del(config, { force: true });
-        fs.mkdirSync(config, { recursive: true });
+        if (deleteIndividualFile) {
+            fs.rmSync(gameConfigPath, { force: true });
+        } else {
+            await del(config, { force: true });
+            fs.mkdirSync(config, { recursive: true });
+        }
     }
 
     try {
-        fs.writeFileSync(gameConfigPath, stringify(entry), {
+        fs.writeFileSync(gameConfigPath, stringify(replaceUndefined(entry)), {
             encoding: 'utf8',
         });
 
         log(LogType.Info, 'Cache', 'Save', { value: gameConfigPath });
+
         return true;
     } catch (err) {
         log(LogType.Error, 'Cache', 'Save failed', err);

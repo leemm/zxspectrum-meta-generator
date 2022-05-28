@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { existsSync, statSync } from 'fs';
+import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
 import { join, parse, ParsedPath } from 'path';
 import { FoundGame, LogType, PromptValidInput } from '../types/app.js';
 import { findCacheFileByGameMD5 } from './cache.js';
@@ -120,6 +121,19 @@ export const validInputValue = (
         (input) =>
             input.letter === value || input.letter === value.toLowerCase()
     );
+};
+
+/**
+ * Replaces any null/undefined values in cache object
+ * @param {IIniObject} entry - Cache object
+ * @returns {IIniObject}
+ */
+export const replaceUndefined = (entry: IIniObject): IIniObject => {
+    for (const prop in entry) {
+        entry[prop] = entry[prop] || '';
+    }
+
+    return entry;
 };
 
 /**
