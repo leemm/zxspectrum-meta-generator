@@ -1,7 +1,7 @@
 import boxen from 'boxen';
 import chalk from 'chalk';
 import { init as initArgs, help, version } from './lib/args.js';
-import { Config, FailedFile, LogType, Version } from './types/app.js';
+import { Config, GenericFile, LogType, Version } from './types/app.js';
 import { init as initCache } from './lib/cache.js';
 import { attachFSLogger, log } from './lib/log.js';
 
@@ -129,8 +129,9 @@ const start = async () => {
     // Parse files in supplied src directory
     const files = await findGames(globalThis.config.src);
 
-    // Track files that can't be found
-    const failedFiles: FailedFile[] = [];
+    // Track success of files
+    const successFiles: GenericFile[] = [];
+    const failedFiles: GenericFile[] = [];
 
     // If files exist then let's find them in the api, via a cached version, and build the output!
     let meta: string[] = [];
@@ -216,6 +217,15 @@ const start = async () => {
                         .platform || '') + 'Entry') as keyof Generators;
                     // @ts-ignore-line
                     meta.push(Generators[generateEntry](cachedIniFile));
+
+                    successFiles.push({
+                        path:
+                            file.path?.replace(
+                                globalThis.config.src || '',
+                                ''
+                            ) || '',
+                        md5: file.md5 ?? '',
+                    });
                 } catch (err) {
                     failedFiles.push({
                         path:
@@ -253,22 +263,26 @@ const start = async () => {
     }
 
     if (!globalThis.config.verbose) {
-        console.log(
-            `${chalk.green('Success!')} File created at ${chalk.gray.italic(
-                globalThis.config.output
-            )}, containing ${
-                chalk.green(meta.length - failedFiles.length) +
-                ' file' +
-                (meta.length - failedFiles.length !== 1 ? 's' : '')
-            }\n`
-        );
-        console.log(
-            `${chalk.red(
-                'Failed!'
-            )} These files have not been found, or are not valid spectrum dumps: ${failedFiles
-                .map((file) => chalk.italic.grey(file.path))
-                .join(', ')}\n`
-        );
+        if (successFiles.length > 0) {
+            console.log(
+                `${chalk.green('Success!')} File created at ${chalk.gray.italic(
+                    globalThis.config.output
+                )}, containing ${
+                    chalk.green(successFiles.length) +
+                    ' file' +
+                    (successFiles.length !== 1 ? 's' : '')
+                }\n`
+            );
+        }
+        if (failedFiles.length > 0) {
+            console.log(
+                `${chalk.red(
+                    'Failed!'
+                )} These files have not been found, or are not valid spectrum dumps: ${failedFiles
+                    .map((file) => chalk.italic.grey(file.path))
+                    .join(', ')}\n`
+            );
+        }
     }
 
     log(LogType.Info, 'Complete', 'Generated', {

@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import timestamp from 'time-stamp';
 import { log } from './log.js';
-import { FailedFile, LogType, MetaFile } from '../types/app.js';
+import { GenericFile, LogType, MetaFile } from '../types/app.js';
 
 import {
     pegasusEntry,
@@ -221,10 +221,10 @@ export const save = (meta: string[], withBackup: boolean): boolean => {
 
 /**
  * Failed files log generation
- * @param {FailedFile[]} failedFiles - Array of failed files
+ * @param {GenericFile[]} failedFiles - Array of failed files
  * @returns {boolean}
  */
-export const saveFailedFilesLog = (failedFiles: FailedFile[]): void => {
+export const saveFailedFilesLog = (failedFiles: GenericFile[]): void => {
     try {
         if (globalThis.config.output) {
             const outputPath = path.parse(globalThis.config.output),

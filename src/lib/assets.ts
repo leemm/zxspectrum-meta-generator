@@ -475,44 +475,53 @@ export const audit = async () => {
 
                         let readyToContinue = false;
 
-                        while (!readyToContinue) {
-                            const imagePrompt = await coverImagePrompt(
-                                foundGame,
-                                imageFullPath
-                            );
+                        try {
+                            while (!readyToContinue) {
+                                const imagePrompt = await coverImagePrompt(
+                                    foundGame,
+                                    imageFullPath
+                                );
 
-                            // So, what do we do now we have a selection?
-                            switch (imagePrompt) {
-                                case 'a':
-                                    await open(imageFullPath, { wait: true });
-                                    break;
-                                case 'b':
-                                    console.log(
-                                        `Copy the _url_ of the image to the clipboard and chose ${chalk.cyan(
-                                            '(c)'
-                                        )}`
-                                    );
-                                    await open(
-                                        `https://www.google.com/search?q=zx+spectrum+game+cover+${foundGame.title}&tbm=isch`
-                                    );
-                                    break;
-                                case 'c':
-                                    const fileValue =
-                                        await imageReplacePrompt();
+                                // So, what do we do now we have a selection?
+                                switch (imagePrompt) {
+                                    case 'a':
+                                        await open(imageFullPath, {
+                                            wait: true,
+                                        });
+                                        break;
+                                    case 'b':
+                                        console.log(
+                                            `Copy the _url_ of the image to the clipboard and chose ${chalk.cyan(
+                                                '(c)'
+                                            )}`
+                                        );
+                                        await open(
+                                            `https://www.google.com/search?q=zx+spectrum+game+cover+${foundGame.title}&tbm=isch`
+                                        );
+                                        break;
+                                    case 'c':
+                                        const fileValue =
+                                            await imageReplacePrompt();
 
-                                    await imageReplace(
-                                        foundGame,
-                                        fileValue,
-                                        imageFullPath
-                                    );
+                                        await imageReplace(
+                                            foundGame,
+                                            fileValue,
+                                            imageFullPath
+                                        );
 
-                                    readyToContinue = true;
+                                        readyToContinue = true;
 
-                                    break;
-                                case 'd':
-                                    readyToContinue = true;
-                                    break;
+                                        break;
+                                    case 'd':
+                                        readyToContinue = true;
+                                        break;
+                                }
                             }
+                        } catch (err) {
+                            console.log(
+                                '\n\nOh no! You bailed out or there was a massive problem! You could always start the process again...\n'
+                            );
+                            process.exit(0);
                         }
                     }
                 }
@@ -553,59 +562,70 @@ export const audit = async () => {
 
                     let readyToContinue = false;
 
-                    while (!readyToContinue) {
-                        const imagePrompt = await missingImagePrompt(
-                            entry.game,
-                            imageFullPath,
-                            aud
-                        );
+                    try {
+                        while (!readyToContinue) {
+                            const imagePrompt = await missingImagePrompt(
+                                entry.game,
+                                imageFullPath,
+                                aud
+                            );
 
-                        // So, what do we do now we have a selection?
-                        switch (imagePrompt) {
-                            case 'a':
-                                console.log(
-                                    `Copy the _url_ of the image to the clipboard and chose ${chalk.cyan(
-                                        '(b)'
-                                    )}`
-                                );
-                                await open(
-                                    `https://www.google.com/search?q=zx+spectrum+game+${entry.game}&tbm=isch`
-                                );
-                                break;
-                            case 'b':
-                                const fileValue = await imageReplacePrompt();
+                            // So, what do we do now we have a selection?
+                            switch (imagePrompt) {
+                                case 'a':
+                                    console.log(
+                                        `Copy the _url_ of the image to the clipboard and chose ${chalk.cyan(
+                                            '(b)'
+                                        )}`
+                                    );
+                                    await open(
+                                        `https://www.google.com/search?q=zx+spectrum+game+${entry.game}&tbm=isch`
+                                    );
+                                    break;
+                                case 'b':
+                                    const fileValue =
+                                        await imageReplacePrompt();
 
-                                imageFullPath = await imageReplace(
-                                    entry.game,
-                                    fileValue,
-                                    imageFullPath
-                                );
+                                    imageFullPath = await imageReplace(
+                                        entry.game,
+                                        fileValue,
+                                        imageFullPath
+                                    );
 
-                                if (aud === 'covers') {
-                                    entry['assets.boxFront'] = imageFullPath;
-                                }
-                                if (aud === 'titles') {
-                                    entry['assets.titlescreen'] = imageFullPath;
-                                }
-                                if (aud === 'screens') {
-                                    entry['assets.screenshot'] = imageFullPath;
-                                }
+                                    if (aud === 'covers') {
+                                        entry['assets.boxFront'] =
+                                            imageFullPath;
+                                    }
+                                    if (aud === 'titles') {
+                                        entry['assets.titlescreen'] =
+                                            imageFullPath;
+                                    }
+                                    if (aud === 'screens') {
+                                        entry['assets.screenshot'] =
+                                            imageFullPath;
+                                    }
 
-                                await updateImageInCacheFile(
-                                    entry['x-hash'],
-                                    imageFullPath,
-                                    aud
-                                );
+                                    await updateImageInCacheFile(
+                                        entry['x-hash'],
+                                        imageFullPath,
+                                        aud
+                                    );
 
-                                readyToContinue = true;
+                                    readyToContinue = true;
 
-                                break;
-                            case 'c':
-                                readyToContinue = true;
-                                break;
+                                    break;
+                                case 'c':
+                                    readyToContinue = true;
+                                    break;
+                            }
+
+                            saveMetaFile(metaFile);
                         }
-
-                        saveMetaFile(metaFile);
+                    } catch (err) {
+                        console.log(
+                            '\n\nOh no! You bailed out or there was a massive problem! You could always start the process again...\n'
+                        );
+                        process.exit(0);
                     }
                 }
             }

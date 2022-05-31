@@ -60,7 +60,7 @@ export interface FoundGame {
     parsed: ParsedPath;
 }
 
-export interface FailedFile {
+export interface GenericFile {
     path: string;
     md5: string;
 }
