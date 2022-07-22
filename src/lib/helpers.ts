@@ -1,11 +1,8 @@
 import chalk from 'chalk';
 import { existsSync, statSync } from 'fs';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object';
-import { join, parse, ParsedPath } from 'path';
-import { FoundGame, LogType, PromptValidInput } from '../types/app.js';
-import { findCacheFileByGameMD5 } from './cache.js';
-import { log } from './log.js';
-import { gameByMD5 } from './request.js';
+import { join, parse } from 'path';
+import { PromptValidInput } from '../types/app.js';
 
 /**
  * Check if directory exists and is a directory
@@ -47,39 +44,6 @@ export const thirdPartyDownloadUrl = (path: string) => {
     }
 
     return '';
-};
-
-/**
- * Use asset on disk to find the game title
- * @param {ParsedPath} file - Asset parsed path
- * @returns {Promise<FoundGame | undefined>}
- */
-export const gameTitleByAssetFile = async (
-    file: ParsedPath
-): Promise<FoundGame | undefined> => {
-    const cache = findCacheFileByGameMD5(file.name);
-    if (cache) {
-        return {
-            title: cache['game'] as string,
-            hash: file.name,
-            parsed: file,
-        };
-    } else {
-        const game = await gameByMD5(
-            file.name,
-            join(file.dir, file.base),
-            'tiny'
-        );
-        if (game instanceof Error) {
-            log(LogType.Error, 'Assets', 'Audit Failure', { game });
-        } else {
-            return {
-                title: game._source.title || '',
-                hash: file.name,
-                parsed: file,
-            };
-        }
-    }
 };
 
 /**
@@ -134,6 +98,26 @@ export const replaceUndefined = (entry: IIniObject): IIniObject => {
     }
 
     return entry;
+};
+
+/**
+ * Replaces any null/undefined values in cache object
+ * @param {string} file - Local file
+ * @returns {string | undefined}
+ */
+export const imageFileToUndefined = (file: string): string | undefined => {
+    if (file?.length === 0) return undefined;
+    return file;
+};
+
+/**
+ * Artificial sleep
+ * @param {string} time Sleep time in seconds
+ */
+export const sleep = (time: number) => {
+    return new Promise((resolve) =>
+        setTimeout(resolve, Math.ceil(time * 1000))
+    );
 };
 
 /**

@@ -21,6 +21,8 @@ import {
     launchboxEntry,
     launchboxFooter,
 } from './generators/launchbox.js';
+import { imageFileToUndefined } from './helpers.js';
+import { IniValue } from 'js-ini/lib/types/ini-value';
 
 /**
  * Parses API game json into a smaller object
@@ -29,6 +31,11 @@ import {
  * @returns {IIniObject}
  */
 export const embiggen = (game: Game, hash: string): IIniObject => {
+    // Check existing meta file for record
+    const existingRecord = globalThis.existingData?.entries?.find(
+        (entry) => entry['x-hash'].toLowerCase() === hash
+    );
+
     const loadingScreen =
             game.screens?.find((screen) => screen.type === 'Loading screen') ||
             {},
@@ -51,29 +58,42 @@ export const embiggen = (game: Game, hash: string): IIniObject => {
     log(LogType.Info, 'Generate', 'Embiggen', { value: game.title });
 
     return {
-        game: game.title || '',
-        file: game._localPath || '',
-        rating: ((game.score?.score || 0) * 10).toFixed() + '%',
-        summary: '',
-        description: '',
-        release: game.originalYearOfRelease?.toString() || '',
-        developers: (game.authors ?? [])
-            .filter((author) => author.type === 'Creator')
-            .map((author) => author.name as string)
-            .join(', '),
-        publishers: (game.publishers ?? [])
-            .filter((publisher) => publisher.publisherSeq === 1)
-            .map((publisher) => publisher.name)
-            .join(', '),
-        genre: game.genre ?? '',
-        players: game.numberOfPlayers ?? '',
+        game: game.title || existingRecord.game || '',
+        file: game._localPath || existingRecord.file || '',
+        rating:
+            ((game.score?.score || 0) * 10).toFixed() + '%' ||
+            existingRecord.rating,
+        summary: existingRecord.summary,
+        description: existingRecord.description,
+        release:
+            game.originalYearOfRelease?.toString() ||
+            existingRecord.release ||
+            '',
+        developers:
+            (game.authors ?? [])
+                .filter((author) => author.type === 'Creator')
+                .map((author) => author.name as string)
+                .join(', ') || existingRecord.developers.join(', '),
+        publishers:
+            (game.publishers ?? [])
+                .filter((publisher) => publisher.publisherSeq === 1)
+                .map((publisher) => publisher.name)
+                .join(', ') || existingRecord.publishers.join(', '),
+        genre: game.genre ?? existingRecord.genre ?? '',
+        players: game.numberOfPlayers ?? existingRecord.players ?? '',
         wikipedia: wikipedia?.url || '',
         mobygames: mobyGames?.url || '',
-        ['assets.titlescreen']: loadingScreen?.url || '',
+        ['assets.titlescreen']: imageFileToUndefined(
+            loadingScreen?.url || existingRecord['assets.titlescreen'] || ''
+        ) as IniValue,
         ['assets.titlescreen.size']: loadingScreen?.size || 0,
-        ['assets.screenshot']: runningScreen?.url || '',
+        ['assets.screenshot']: imageFileToUndefined(
+            runningScreen?.url || existingRecord['assets.screenshot'] || ''
+        ) as IniValue,
         ['assets.screenshot.size']: runningScreen?.size || 0,
-        ['assets.boxFront']: boxArt?.path || '',
+        ['assets.boxFront']: imageFileToUndefined(
+            boxArt?.path || existingRecord['assets.boxFront'] || ''
+        ) as IniValue,
         ['assets.boxFront.size']: boxArt?.size || 0,
         hash: hash,
     };

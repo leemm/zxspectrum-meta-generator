@@ -107,12 +107,6 @@ const optionDefinitions: OptionDefinition[] = [
         ),
     },
     {
-        name: 'clear',
-        type: Boolean,
-        defaultOption: false,
-        description: `${chalk.hex('#A9A9A9')('Clears the local api cache.')}.`,
-    },
-    {
         name: 'verbose',
         alias: 'v',
         type: Boolean,
@@ -170,7 +164,7 @@ export const help = () => {
         {
             content: header.replace(
                 'APP_DISPLAY_NAME',
-                globalThis.version.APP_DISPLAY_NAME
+                `${globalThis.version.APP_DISPLAY_NAME} v${globalThis.version.APP_DISPLAY_VERSION}`
             ),
             raw: true,
         },

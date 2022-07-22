@@ -40,10 +40,21 @@ export const validKeys = [
  * @returns {string}
  */
 export const pegasusHeader = (): string => {
-    return `collection: ZX Spectrum
-shortname: zxspectrum
-command: ${globalThis.config.launch} "{file.path}"
-`;
+    let newHeader = '';
+    newHeader +=
+        globalThis.existingData?.header?.collection?.length > 0
+            ? `collection: ${globalThis.existingData?.header?.collection}\n`
+            : 'collection: ZX Spectrum\n';
+    newHeader +=
+        globalThis.existingData?.header?.shortname?.length > 0
+            ? `shortname: ${globalThis.existingData?.header?.shortname}\n`
+            : 'shortname: zxspectrum\n';
+    newHeader +=
+        globalThis.existingData?.header?.command?.length > 0
+            ? `command: ${globalThis.existingData?.header?.command}\n`
+            : `command: ${globalThis.config.launch} "{file.path}"\n`;
+
+    return newHeader;
 };
 
 /**

@@ -1,15 +1,20 @@
 import boxen from 'boxen';
 import chalk from 'chalk';
 import { init as initArgs, help, version } from './lib/args.js';
-import { Config, GenericFile, LogType, Version } from './types/app.js';
-import { init as initCache } from './lib/cache.js';
+import {
+    Config,
+    GenericFile,
+    LogType,
+    MetaFile,
+    Version,
+} from './types/app.js';
 import { attachFSLogger, log } from './lib/log.js';
 
 import { findGames, moveUnfound } from './lib/files.js';
 import { validate, tooling as toolingValidate } from './lib/validate.js';
 import { gameByMD5 } from './lib/request.js';
+import { load as loadMetafile } from './lib/generate.js';
 import { Game } from './types/api.v3.js';
-import { clear, load as loadCache, save as saveCache } from './lib/cache.js';
 import {
     embiggen,
     save as saveMeta,
@@ -22,11 +27,13 @@ import { get as descriptions } from './lib/description.js';
 import { version as versionInfo } from './lib/version.js';
 import { logFileLocation } from './lib/helpers.js';
 import { progress } from './lib/progress.js';
+import { IIniObject } from 'js-ini/lib/interfaces/ini-object.js';
 
 declare global {
     var config: Config;
     var version: Version;
     var logPath: string;
+    var existingData: MetaFile | undefined;
 }
 
 globalThis.version = versionInfo;
@@ -63,9 +70,6 @@ const start = async () => {
         process.exit(1);
     }
 
-    log(LogType.Info, 'Cache', 'Init');
-    initCache();
-
     // Audit already downloaded assets
     if (globalThis.config['audit-assets'] || ''.length > 0) {
         await audit();
@@ -78,13 +82,6 @@ const start = async () => {
     if (globalThis.config.help) {
         log(LogType.Info, 'Help', 'Display');
         help();
-        process.exit();
-    }
-
-    // Clear local cache if requested
-    if (globalThis.config.clear) {
-        log(LogType.Warn, 'Cache', 'Local cache now cleared');
-        await clear();
         process.exit();
     }
 
@@ -133,12 +130,15 @@ const start = async () => {
     const successFiles: GenericFile[] = [];
     const failedFiles: GenericFile[] = [];
 
-    // If files exist then let's find them in the api, via a cached version, and build the output!
+    // If files exist then let's find them in the api and build the output!
     let meta: string[] = [];
 
     if (files) {
         let bar = progress('2/2: Searching API');
         bar.start(files.length, 0, { val: '' });
+
+        // Load existing metafile (if exists)
+        globalThis.existingData = loadMetafile();
 
         const generateHeader: keyof Generators = ((globalThis.config.platform ||
             '') + 'Header') as keyof Generators;
@@ -148,99 +148,84 @@ const start = async () => {
             meta.push(header);
         }
 
-        await Promise.all(
-            files.map(async (file, idx) => {
-                bar.update(idx + 1, { val: file.base });
-                try {
-                    let cachedIniFile = loadCache(
-                        file.path || '',
-                        file.md5 || ''
-                    );
-
-                    if (!cachedIniFile) {
-                        log(LogType.Info, 'Cache', 'No cache available');
-
-                        const result = await gameByMD5(
-                            file.md5,
-                            file.name + file.ext
-                        );
-                        if (result instanceof Error) {
-                            throw result;
-                        }
-
-                        let processedFile: Game = result._source;
-                        processedFile._localPath = file.path;
-
-                        cachedIniFile = embiggen(processedFile, file.md5 || '');
-
-                        // Find a description (if available)
-                        const desc = await descriptions(
-                            processedFile.title || '',
-                            (cachedIniFile['wikipedia'] as string) || ''
-                        );
-                        cachedIniFile['summary'] = desc.summary || '';
-                        cachedIniFile['description'] = desc.description || '';
-
-                        if (desc.description?.length || 0 > 0) {
-                            log(
-                                LogType.Info,
-                                'Description',
-                                'Description found',
-                                desc
-                            );
-                        } else {
-                            log(
-                                LogType.Info,
-                                'Description',
-                                'Description not found'
-                            );
-                        }
-
-                        // Download remote assets
-                        cachedIniFile = await saveAssets(
-                            file.md5 || '',
-                            cachedIniFile,
-                            desc
-                        );
-
-                        // Save cached data to disk
-                        await saveCache(
-                            cachedIniFile,
-                            file.path || '',
-                            file.md5 || ''
-                        );
-                    } else {
-                        log(LogType.Info, 'Cache', 'Loaded', cachedIniFile);
-                    }
-
-                    const generateEntry: keyof Generators = ((globalThis.config
-                        .platform || '') + 'Entry') as keyof Generators;
-                    // @ts-ignore-line
-                    meta.push(Generators[generateEntry](cachedIniFile));
-
-                    successFiles.push({
-                        path:
-                            file.path?.replace(
-                                globalThis.config.src || '',
-                                ''
-                            ) || '',
-                        md5: file.md5 ?? '',
-                    });
-                } catch (err) {
-                    failedFiles.push({
-                        path:
-                            file.path?.replace(
-                                globalThis.config.src || '',
-                                ''
-                            ) || '',
-                        md5: file.md5 ?? '',
-                    });
-                    log(LogType.Error, 'Process File', 'Fatal Error', { err });
+        let unsortedFiles: IIniObject[] = [];
+        let idx = -1;
+        for (const file of files) {
+            idx++;
+            bar.update(idx + 1, { val: file.base });
+            try {
+                const result = await gameByMD5(file.md5, file.name + file.ext);
+                if (result instanceof Error) {
+                    throw result;
                 }
-            })
-        );
+
+                let processedFile: Game = result._source;
+                processedFile._localPath = file.path;
+
+                let iniFile = embiggen(processedFile, file.md5 || '');
+
+                // Find a description (if available)
+                const desc = await descriptions(
+                    processedFile.title || '',
+                    (iniFile['wikipedia'] as string) || ''
+                );
+                iniFile['summary'] = desc.summary || iniFile['summary'] || '';
+                iniFile['description'] =
+                    desc.description || iniFile['description'] || '';
+
+                if (desc.description?.length || 0 > 0) {
+                    log(LogType.Info, 'Description', 'Description found', desc);
+                } else {
+                    log(LogType.Info, 'Description', 'Description not found');
+                }
+
+                // Download remote assets
+                iniFile = await saveAssets(file.md5 || '', iniFile, desc);
+
+                unsortedFiles.push(iniFile);
+
+                successFiles.push({
+                    path:
+                        file.path?.replace(globalThis.config.src || '', '') ||
+                        '',
+                    md5: file.md5 ?? '',
+                });
+            } catch (err) {
+                failedFiles.push({
+                    path:
+                        file.path?.replace(globalThis.config.src || '', '') ||
+                        '',
+                    md5: file.md5 ?? '',
+                });
+                log(LogType.Error, 'Process File', 'Fatal Error', { err });
+            }
+        }
 
         bar.stop();
+
+        // Sort by game title
+        unsortedFiles = unsortedFiles.sort((file1, file2) => {
+            if (
+                file1['game']?.toString().toLowerCase().replace('the ', '') >
+                file2['game']?.toString().toLowerCase().replace('the ', '')
+            )
+                return 1;
+            if (
+                file1['game']?.toString().toLowerCase().replace('the ', '') <
+                file2['game']?.toString().toLowerCase().replace('the ', '')
+            )
+                return -1;
+            return 0;
+        });
+
+        // Add files to meta ready for saving
+        for (const iniFile of unsortedFiles) {
+            const generateEntry: keyof Generators = ((globalThis.config
+                .platform || '') + 'Entry') as keyof Generators;
+
+            //@ts-ignore-line
+            meta.push(Generators[generateEntry](iniFile));
+        }
 
         const generateFooter: keyof Generators = ((globalThis.config.platform ||
             '') + 'Footer') as keyof Generators;

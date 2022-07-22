@@ -2,7 +2,7 @@
 
 <p align="center">Create your <b>metadata</b> for your favourite emulator <b>backend</b> using the ZXInfo API<br/><br/>Fast, efficient, modern... just like Windows 98<sup>tm</sup></p>
 
-[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.6.3-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
+[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.7.0-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
 
 ![Preview](https://i.imgur.com/rJj1i0n.gif)
 
@@ -155,7 +155,6 @@ zxgenerator [OPTIONS]
 | `--output`       | Destination directory and filename of your meta file.                                                                                                                                                                            | `string`  |                                                          | Yes       |
 | `--assets`       | Destination directory of media assets.                                                                                                                                                                                           | `string`  | `same directory as --output`                             | No        |
 | `--platform`     | Generate meta files for your chosen platform. Supported values: _pegasus_, _launchbox_. Defaults to pegasus.                                                                                                                     | `string`  | `pegasus`                                                | No        |
-| `--clear`        | Clears the local api cache.                                                                                                                                                                                                      | `boolean` | `false`                                                  | No        |
 | `-v, --verbose`  | Turn on debugging output.                                                                                                                                                                                                        | `boolean` | `false`                                                  | No        |
 | `--verbose-save` | Saves the verbose log to the --output directory.                                                                                                                                                                                 | `boolean` | `false`                                                  | No        |
 | `--audit-assets` | Assets will be audited for missing files, incorrectly ratio'd covers. (Comma-separated) valid values are _titles_, _screens_, and _covers_. Assets will be same directory as **--output** or via value supplied in **--assets**. | `string`  |                                                          | No        |
@@ -190,12 +189,6 @@ Same as _basic usage_ but the generated metafile will be structured for usage in
 
 ```bash
 zxgenerator --src ~/Downloads/tapes --output '~/Downloads/meta.txt' --platform 'launchbox'
-```
-
-A cache exists to prevent calling the APIs repeatedly on subsequent runs of the app. If you want to ensure the next time you run _zxgenerator_ uses the apis then run **--clear** first.
-
-```bash
-zxgenerator --clear
 ```
 
 Same as _basic usage_ but with (very) verbose output.

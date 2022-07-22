@@ -5,7 +5,6 @@ import { download } from './request.js';
 import { load as loadMetafile, saveMetaFile } from './generate.js';
 import {
     directoryExists,
-    gameTitleByAssetFile,
     generateAuditPrompt,
     thirdPartyDownloadUrl,
     validInputValue,
@@ -15,7 +14,6 @@ import {
     FoundGame,
     LogType,
     MediaFolders,
-    MetaFile,
     PromptNewImage,
 } from '../types/app.js';
 import { log } from './log.js';
@@ -25,7 +23,6 @@ import terminalImage from 'terminal-image';
 import promptly from 'promptly';
 import open from 'open';
 import boxen from 'boxen';
-import { findCacheFileByGameMD5, save as saveCache } from './cache.js';
 
 const root = 'https://zxinfo.dk';
 
@@ -217,42 +214,6 @@ const imageReplace = async (
 };
 
 /**
- * Update the new image in the games' local cache file
- */
-const updateImageInCacheFile = async (
-    hash: string,
-    imageFullPath: string,
-    currentImageType: string
-) => {
-    const cache = findCacheFileByGameMD5(hash);
-
-    let updateKey = '';
-    switch (currentImageType) {
-        case 'covers':
-            updateKey = 'assets.boxFront.local';
-            break;
-        case 'titles':
-            updateKey = 'assets.titlescreen.local';
-            break;
-        case 'screens':
-            updateKey = 'assets.screenshot.local';
-            break;
-    }
-
-    log(LogType.Info, 'Cache', 'Save', {
-        key: updateKey,
-        value: imageFullPath,
-    });
-
-    if (cache) {
-        cache[updateKey] = imageFullPath;
-
-        // Save cached data to disk
-        await saveCache(cache, cache['file'] as string, hash, true);
-    }
-};
-
-/**
  * Prompt for replace of asset, by either local path or remote url
  * @returns {Promise<PromptNewImage>}
  */
@@ -439,13 +400,6 @@ export const audit = async () => {
                     (game) =>
                         game.hash === file.name && game.parsed.dir === current
                 );
-                if (!foundGame) {
-                    foundGame = await gameTitleByAssetFile(file);
-                    if (foundGame) {
-                        log(LogType.Info, 'Assets', 'Audit Game', foundGame);
-                        foundGames.push(foundGame as FoundGame);
-                    }
-                }
 
                 // Now that game is found
                 if (foundGame) {
@@ -604,12 +558,6 @@ export const audit = async () => {
                                         entry['assets.screenshot'] =
                                             imageFullPath;
                                     }
-
-                                    await updateImageInCacheFile(
-                                        entry['x-hash'],
-                                        imageFullPath,
-                                        aud
-                                    );
 
                                     readyToContinue = true;
 
