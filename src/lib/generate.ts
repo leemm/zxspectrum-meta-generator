@@ -63,8 +63,8 @@ export const embiggen = (game: Game, hash: string): IIniObject => {
         rating:
             ((game.score?.score || 0) * 10).toFixed() + '%' ||
             existingRecord.rating,
-        summary: existingRecord.summary,
-        description: existingRecord.description,
+        summary: existingRecord?.summary,
+        description: existingRecord?.description,
         release:
             game.originalYearOfRelease?.toString() ||
             existingRecord.release ||

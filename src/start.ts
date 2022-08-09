@@ -28,12 +28,14 @@ import { version as versionInfo } from './lib/version.js';
 import { logFileLocation } from './lib/helpers.js';
 import { progress } from './lib/progress.js';
 import { IIniObject } from 'js-ini/lib/interfaces/ini-object.js';
+import { IGDB } from './types/igdb.js';
 
 declare global {
     var config: Config;
     var version: Version;
     var logPath: string;
     var existingData: MetaFile | undefined;
+    var igdb: IGDB;
 }
 
 globalThis.version = versionInfo;
@@ -55,6 +57,12 @@ const start = async () => {
         log(LogType.Info, 'Log File', 'Created', { value: global.logPath });
         attachFSLogger(global.logPath);
     }
+
+    // console stdout also written to log file
+    globalThis.igdb = {
+        clientId: globalThis.config['twitch-client-id'] ?? '',
+        clientSecret: globalThis.config['twitch-client-secret'] ?? '',
+    };
 
     // Validate required tooling
     log(LogType.Info, 'Tools', 'Validate');
@@ -90,23 +98,6 @@ const start = async () => {
         log(LogType.Info, 'Version', 'Display');
         version();
         process.exit();
-    }
-
-    log(LogType.Info, 'Output', 'Header');
-    // Header
-    if (!globalThis.config.verbose) {
-        console.log(
-            boxen(
-                `${chalk.magenta(
-                    globalThis.version.APP_DISPLAY_NAME
-                )} ${chalk.cyan('v' + globalThis.version.APP_DISPLAY_VERSION)}`,
-                {
-                    padding: 1,
-                    margin: 1,
-                    borderStyle: 'round',
-                }
-            )
-        );
     }
 
     // Validate arguments

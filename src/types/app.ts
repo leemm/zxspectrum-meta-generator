@@ -32,6 +32,8 @@ export interface Config {
     'verbose-save'?: boolean;
     'audit-assets'?: string;
     'move-failed'?: string;
+    'twitch-client-id'?: string;
+    'twitch-client-secret'?: string;
     version?: boolean;
     help?: boolean;
     clear?: boolean;

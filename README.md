@@ -2,7 +2,7 @@
 
 <p align="center">Create your <b>metadata</b> for your favourite emulator <b>backend</b> using the ZXInfo API<br/><br/>Fast, efficient, modern... just like Windows 98<sup>tm</sup></p>
 
-[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.7.0-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
+[![GitHub Issues](https://img.shields.io/github/issues/leemm/zxspectrum-meta-generator.svg)](https://github.com/leemm/zxspectrum-meta-generator/issues) [![Current Version](https://img.shields.io/badge/version-0.7.1-green.svg)](https://github.com/leemm/zxspectrum-meta-generator)
 
 ![Preview](https://i.imgur.com/rJj1i0n.gif)
 
@@ -18,6 +18,7 @@
     -   [Arm (RaspberryPi)](#raspberrypi)
 -   [Usage](#usage)
 -   [Examples](#examples)
+-   [Game Description/Synopsis](#game-description)
 -   [License](#license)
 
 ---
@@ -32,7 +33,7 @@
 -   Supports Linux, MacOS, and Windows
 -   Supports arm, so can be used on RaspberryPI (under linux e.h. RaspOS)
 -   Supports image assets such as screenshots and box art
--   Uses Wikipedia API to find synopsis for game, if available
+-   Uses Wikipedia API and IGDB API to find game synopsis, if available
 -   Generates for multiple emulator frontends (currently only supports [Pegasus](https://pegasus-frontend.org/), and partial support for [LaunchBox](https://www.launchbox-app.com/))
 -   A lovely [48k Speccy ASCII art](https://github.com/redcode/ASCII-Art/) from https://github.com/redcode/ASCII-Art/
 -   Other features coming at some point in the future
@@ -148,19 +149,39 @@ ARM users, it's recommended you [build](#build). Tested on Pi400.
 zxgenerator [OPTIONS]
 ```
 
-| Option           | Description                                                                                                                                                                                                                      | Type      | Default                                                  | Required? |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------- | --------- |
-| `--launch`       | Emulator/Script launch path. Game path is automatically added to the end of the process.                                                                                                                                         | `string`  | `<retropiepath>/runcommand.sh 0 _SYS_ zxspectrum <game>` | No        |
-| `--src`          | Root directory of your spectrum tape/disk images.                                                                                                                                                                                | `string`  |                                                          | Yes       |
-| `--output`       | Destination directory and filename of your meta file.                                                                                                                                                                            | `string`  |                                                          | Yes       |
-| `--assets`       | Destination directory of media assets.                                                                                                                                                                                           | `string`  | `same directory as --output`                             | No        |
-| `--platform`     | Generate meta files for your chosen platform. Supported values: _pegasus_, _launchbox_. Defaults to pegasus.                                                                                                                     | `string`  | `pegasus`                                                | No        |
-| `-v, --verbose`  | Turn on debugging output.                                                                                                                                                                                                        | `boolean` | `false`                                                  | No        |
-| `--verbose-save` | Saves the verbose log to the --output directory.                                                                                                                                                                                 | `boolean` | `false`                                                  | No        |
-| `--audit-assets` | Assets will be audited for missing files, incorrectly ratio'd covers. (Comma-separated) valid values are _titles_, _screens_, and _covers_. Assets will be same directory as **--output** or via value supplied in **--assets**. | `string`  |                                                          | No        |
-| `--move-failed`  | Specify a directory to move files that have not been found via the API                                                                                                                                                           | `string`  |                                                          | No        |
-| `--version`      | Print version info.                                                                                                                                                                                                              | `boolean` | `false`                                                  | No        |
-| `--help`         | Shows this help screen.                                                                                                                                                                                                          | `boolean` | `false`                                                  | No        |
+| Option                   | Description                                                                                                                                                                                                                      | Type      | Default                                                  | Required? |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------- | --------- |
+| `--launch`               | Emulator/Script launch path. Game path is automatically added to the end of the process.                                                                                                                                         | `string`  | `<retropiepath>/runcommand.sh 0 _SYS_ zxspectrum <game>` | No        |
+| `--src`                  | Root directory of your spectrum tape/disk images.                                                                                                                                                                                | `string`  |                                                          | Yes       |
+| `--output`               | Destination directory and filename of your meta file.                                                                                                                                                                            | `string`  |                                                          | Yes       |
+| `--assets`               | Destination directory of media assets.                                                                                                                                                                                           | `string`  | `same directory as --output`                             | No        |
+| `--platform`             | Generate meta files for your chosen platform. Supported values: _pegasus_, _launchbox_. Defaults to pegasus.                                                                                                                     | `string`  | `pegasus`                                                | No        |
+| `-v, --verbose`          | Turn on debugging output.                                                                                                                                                                                                        | `boolean` | `false`                                                  | No        |
+| `--verbose-save`         | Saves the verbose log to the --output directory.                                                                                                                                                                                 | `boolean` | `false`                                                  | No        |
+| `--audit-assets`         | Assets will be audited for missing files, incorrectly ratio'd covers. (Comma-separated) valid values are _titles_, _screens_, and _covers_. Assets will be same directory as **--output** or via value supplied in **--assets**. | `string`  |                                                          | No        |
+| `--move-failed`          | Specify a directory to move files that have not been found via the API                                                                                                                                                           | `string`  |                                                          | No        |
+| `--twitch-client-id`     | Your Twitch app client id (Used for [Game Description/Synopsis](#game-description) optional)                                                                                                                                     | `string`  |                                                          | No        |
+| `--twitch-client-secret` | Your Twitch app client secret (Used for [Game Description/Synopsis](#game-description) optional)                                                                                                                                 | `string`  |                                                          | No        |
+| `--version`              | Print version info.                                                                                                                                                                                                              | `boolean` | `false`                                                  | No        |
+| `--help`                 | Shows this help screen.                                                                                                                                                                                                          | `boolean` | `false`                                                  | No        |
+
+---
+
+## Game Description
+
+The app can scrape game intro and description from various sources. Wikipedia is used first but the optional [IGDB.com API](https://api-docs.igdb.com/#about) can also be used.
+
+In order to use the [IGDB.com API](https://api-docs.igdb.com/#about), you must have a Twitch Account.
+
+The [IGDB.com API](https://api-docs.igdb.com/#about) is free for non-commercial usage under the terms of the [Twitch Developer Service Agreement](https://www.twitch.tv/p/legal/developer-agreement/).
+
+-   Sign Up with [Twitch](https://dev.twitch.tv/login) for a free account
+-   Ensure you have Two Factor Authentication [enabled](https://www.twitch.tv/settings/security)
+-   [Register](https://dev.twitch.tv/console/apps/create) your application
+-   [Manage](https://dev.twitch.tv/console/apps) your newly created application
+-   Generate a Client Secret by pressing [New Secret]
+-   Take note of the _Client ID_ and _Client Secret_
+-   Pass these keys as parameters (See [Usage](#usage))
 
 ---
 

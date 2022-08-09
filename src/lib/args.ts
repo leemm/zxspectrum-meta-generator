@@ -142,6 +142,20 @@ const optionDefinitions: OptionDefinition[] = [
         ),
     },
     {
+        name: 'twitch-client-id',
+        type: String,
+        description: chalk.hex('#A9A9A9')(
+            'Your twitch app client id (see README.md).'
+        ),
+    },
+    {
+        name: 'twitch-client-secret',
+        type: String,
+        description: chalk.hex('#A9A9A9')(
+            'Your twitch app client secret (see README.md).'
+        ),
+    },
+    {
         name: 'version',
         type: Boolean,
         defaultOption: false,
@@ -205,6 +219,19 @@ export const version = () => {
  * @returns {Config}
  */
 export const init = (): Config => {
+    console.log(
+        commandLineUsage([
+            {
+                content:
+                    header.replace(
+                        'APP_DISPLAY_NAME',
+                        `${globalThis.version.APP_DISPLAY_NAME} v${globalThis.version.APP_DISPLAY_VERSION}`
+                    ) + '\n\n',
+                raw: true,
+            },
+        ])
+    );
+
     try {
         const options = commandLineArgs(
             optionDefinitions.map((def) => {
